@@ -28,15 +28,19 @@ namespace CrudWindowsForm
 
         private void BtnCadastrar_Click(object sender, EventArgs e)
         {
-            if (BtnCadastrar.Text != "Cadastrar")
+            if (ValidaCampos(txtNomeUsuario.Text, txtSenhaUsuario.Text, txtEmailUsuario.Text) == false)
             {
-                RealizaAtualizacaoUsuario();
-            } else
-            {
-                RealizaCadastro();
+                if (BtnCadastrar.Text != "Cadastrar")
+                {
+                    RealizaAtualizacaoUsuario();
+                }
+                else
+                {
+                    RealizaCadastro();
+                }
+
+                this.Close();
             }
-            
-            this.Close();
         }
 
         public void PopularCampos(Usuario usuario)
@@ -54,6 +58,34 @@ namespace CrudWindowsForm
         private void Cancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        public bool ValidaCampos(string nome, string senha, string email)
+        {
+            string mensagem = "";
+
+            if (nome.Length <= 0)
+            {
+                mensagem += "Campo nome vazio \n";
+            } 
+            
+            if (senha.Length <= 0)
+            {
+                mensagem += "Campo senha vazio \n";
+            } 
+            if (email.Length <= 0)
+            {
+                mensagem += "Campo email vazio\n";
+            }
+
+            if (mensagem.Length > 0)
+            {
+                MessageBox.Show(mensagem, "Campo vazio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return true;            
+            } else
+            {
+                return false;
+            }
         }
 
         public void RealizaCadastro()

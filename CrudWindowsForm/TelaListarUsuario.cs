@@ -36,9 +36,16 @@ namespace CrudWindowsForm
 
         private void DeletarUsuario_Click(object sender, EventArgs e)
         {
-            crudUsuario.DeletarUsuario(Id);
-            MessageBox.Show("Usuário deletado com sucesso", "Deleta usuário");
-            ListaUsuarios();
+            Usuario usuario = crudUsuario.ObterId(Id);
+            if (usuario != null)
+            {
+                crudUsuario.DeletarUsuario(Id);
+                MessageBox.Show("Usuário deletado com sucesso", "Deleta usuário");
+                ListaUsuarios();
+            } else
+            {
+                MessageBox.Show("Nenhum usuário selecionado", "Seleciona usuário");
+            }
         }
 
         private void dataGridUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)
