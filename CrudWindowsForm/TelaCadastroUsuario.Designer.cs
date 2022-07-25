@@ -109,9 +109,12 @@
             // 
             this.dataNascimentoUsuario.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dataNascimentoUsuario.Location = new System.Drawing.Point(149, 289);
+            this.dataNascimentoUsuario.MaxDate = new System.DateTime(2022, 7, 1, 0, 0, 0, 0);
+            this.dataNascimentoUsuario.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
             this.dataNascimentoUsuario.Name = "dataNascimentoUsuario";
             this.dataNascimentoUsuario.Size = new System.Drawing.Size(100, 23);
             this.dataNascimentoUsuario.TabIndex = 9;
+            this.dataNascimentoUsuario.Value = new System.DateTime(2022, 7, 1, 0, 0, 0, 0);
             // 
             // label6
             // 

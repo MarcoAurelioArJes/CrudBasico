@@ -1,4 +1,5 @@
 ﻿using ModeloUsuarios;
+using System.Text.RegularExpressions;
 
 namespace CrudWindowsForm
 {
@@ -13,6 +14,7 @@ namespace CrudWindowsForm
             txtSenhaUsuario.PasswordChar = '*';
 
             dataCriacaoUsuario.Value = DateTime.Today;
+            dataNascimentoUsuario.Value = DateTime.Parse("01/01/1997");
         }
 
         public TelaCadastroUsuario(bool editar) {
@@ -28,7 +30,8 @@ namespace CrudWindowsForm
 
         private void BtnCadastrar_Click(object sender, EventArgs e)
         {
-            if (ValidaCampos(txtNomeUsuario.Text, txtSenhaUsuario.Text, txtEmailUsuario.Text) == false)
+            bool validaCampos = ValidaCampos(txtNomeUsuario.Text, txtSenhaUsuario.Text, txtEmailUsuario.Text, dataNascimentoUsuario.Value.Date);
+            if (validaCampos == false)
             {
                 if (BtnCadastrar.Text != "Cadastrar")
                 {
@@ -60,10 +63,10 @@ namespace CrudWindowsForm
             this.Close();
         }
 
-        public bool ValidaCampos(string nome, string senha, string email)
+        public bool ValidaCampos(string nome, string senha, string email, DateTime dataNascimento)
         {
             string mensagem = "";
-
+            
             if (nome.Length <= 0)
             {
                 mensagem += "Campo nome vazio \n";
@@ -75,7 +78,20 @@ namespace CrudWindowsForm
             } 
             if (email.Length <= 0)
             {
-                mensagem += "Campo email vazio\n";
+                mensagem += "Campo email vazio \n";
+            }
+
+
+            Regex regex = new Regex(@"\w+\w+@\w+\.com");
+            Match match = regex.Match(nome);
+            if (match.Success == false)
+            {
+                mensagem += "Por favor insira um email válido \n";
+            }
+
+            if (dataNascimento > DateTime.Today)
+            {
+                mensagem += "Por favor informe uma data de nascimento válida \n";
             }
 
             if (mensagem.Length > 0)
