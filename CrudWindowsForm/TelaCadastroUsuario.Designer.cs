@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.dataNascimentoUsuario = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -35,7 +36,6 @@
             this.txtSenhaUsuario = new System.Windows.Forms.TextBox();
             this.txtEmailUsuario = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.dataNascimentoUsuario = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.dataCriacaoUsuario = new System.Windows.Forms.DateTimePicker();
             this.BtnCadastrar = new System.Windows.Forms.Button();
@@ -43,6 +43,18 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtId = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
+            // 
+            // dataNascimentoUsuario
+            // 
+            this.dataNascimentoUsuario.CustomFormat = "";
+            this.dataNascimentoUsuario.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dataNascimentoUsuario.Location = new System.Drawing.Point(149, 289);
+            this.dataNascimentoUsuario.MaxDate = new System.DateTime(2022, 12, 31, 0, 0, 0, 0);
+            this.dataNascimentoUsuario.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
+            this.dataNascimentoUsuario.Name = "dataNascimentoUsuario";
+            this.dataNascimentoUsuario.Size = new System.Drawing.Size(100, 23);
+            this.dataNascimentoUsuario.TabIndex = 9;
+            this.dataNascimentoUsuario.Value = new System.DateTime(2022, 1, 27, 13, 49, 0, 0);
             // 
             // label2
             // 
@@ -104,17 +116,6 @@
             this.label5.Size = new System.Drawing.Size(123, 19);
             this.label5.TabIndex = 8;
             this.label5.Text = "Data Nascimento";
-            // 
-            // dataNascimentoUsuario
-            // 
-            this.dataNascimentoUsuario.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dataNascimentoUsuario.Location = new System.Drawing.Point(149, 289);
-            this.dataNascimentoUsuario.MaxDate = new System.DateTime(2022, 7, 1, 0, 0, 0, 0);
-            this.dataNascimentoUsuario.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
-            this.dataNascimentoUsuario.Name = "dataNascimentoUsuario";
-            this.dataNascimentoUsuario.Size = new System.Drawing.Size(100, 23);
-            this.dataNascimentoUsuario.TabIndex = 9;
-            this.dataNascimentoUsuario.Value = new System.DateTime(2022, 7, 1, 0, 0, 0, 0);
             // 
             // label6
             // 

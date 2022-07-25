@@ -19,6 +19,19 @@
             return 1;
         }
 
+        public bool VerificaEmailExistente(string email)
+        {
+            foreach(Usuario lista in listaUsuarios)
+            {
+                if (lista.Email == email)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public List<Usuario> ListarUsuarios()
         {
             return listaUsuarios;

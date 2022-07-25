@@ -14,7 +14,6 @@ namespace CrudWindowsForm
             txtSenhaUsuario.PasswordChar = '*';
 
             dataCriacaoUsuario.Value = DateTime.Today;
-            dataNascimentoUsuario.Value = DateTime.Parse("01/01/1997");
         }
 
         public TelaCadastroUsuario(bool editar) {
@@ -30,8 +29,10 @@ namespace CrudWindowsForm
 
         private void BtnCadastrar_Click(object sender, EventArgs e)
         {
-            bool validaCampos = ValidaCampos(txtNomeUsuario.Text, txtSenhaUsuario.Text, txtEmailUsuario.Text, dataNascimentoUsuario.Value.Date);
-            if (validaCampos == false)
+            bool validaCampos = ValidaCampos(txtNomeUsuario.Text, txtSenhaUsuario.Text, txtEmailUsuario.Text);
+            CrudUsuario crudUsuario = new CrudUsuario();
+            bool emailExiste = crudUsuario.VerificaEmailExistente(txtEmailUsuario.Text);
+            if (validaCampos == false && emailExiste == false)
             {
                 if (BtnCadastrar.Text != "Cadastrar")
                 {
@@ -43,6 +44,9 @@ namespace CrudWindowsForm
                 }
 
                 this.Close();
+            } else if (emailExiste)
+            {
+                MessageBox.Show("Existe email");
             }
         }
 
@@ -63,7 +67,7 @@ namespace CrudWindowsForm
             this.Close();
         }
 
-        public bool ValidaCampos(string nome, string senha, string email, DateTime dataNascimento)
+        public bool ValidaCampos(string nome, string senha, string email)
         {
             string mensagem = "";
             
@@ -81,18 +85,16 @@ namespace CrudWindowsForm
                 mensagem += "Campo email vazio \n";
             }
 
-
-            Regex regex = new Regex(@"\w+\w+@\w+\.com");
-            Match match = regex.Match(nome);
-            if (match.Success == false)
+            Regex regex = new Regex(@"\w+.*@\w+\.com");
+            if (!regex.IsMatch(email))
             {
                 mensagem += "Por favor insira um email válido \n";
             }
 
-            if (dataNascimento > DateTime.Today)
-            {
-                mensagem += "Por favor informe uma data de nascimento válida \n";
-            }
+            //if (dataNascimento > DateTime.Today)
+            //{
+            //    mensagem += "Por favor informe uma data de nascimento válida \n";
+            //}
 
             if (mensagem.Length > 0)
             {
