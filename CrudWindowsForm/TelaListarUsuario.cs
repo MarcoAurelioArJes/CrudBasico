@@ -19,32 +19,44 @@ namespace CrudWindowsForm
         public TelaListarUsuario()
         {
             InitializeComponent();
+            ListaUsuarios();
         }
 
         private void CadastrarUsuario_Click(object sender, EventArgs e)
         {
-            TelaCadastroUsuario cadastrarUsuarios = new TelaCadastroUsuario();
-            cadastrarUsuarios.ShowDialog();
-            ListaUsuarios();
+            try
+            {
+                TelaCadastroUsuario cadastrarUsuarios = new TelaCadastroUsuario();
+                cadastrarUsuarios.ShowDialog();
+                ListaUsuarios();
+            } catch (Exception error)
+            {
+                MessageBox.Show(error.Message);
+            }
         }
 
         public List<Usuario> ListaUsuarios()
         {
             dataGridUsuarios.DataSource = crudUsuario.ListarUsuarios().ToList();
+            dataGridUsuarios.Columns["Senha"].Visible = false;
             return crudUsuario.ListarUsuarios();
         }
 
         private void DeletarUsuario_Click(object sender, EventArgs e)
         {
-            Usuario usuario = crudUsuario.ObterId(Id);
-            if (usuario != null)
+            try
             {
+                if (Id == decimal.Zero)
+                {
+                    throw new Exception("Nenhum usuário foi selecionado");
+                }
+
                 crudUsuario.DeletarUsuario(Id);
                 MessageBox.Show("Usuário deletado com sucesso", "Deleta usuário");
                 ListaUsuarios();
-            } else
+            } catch (Exception error)
             {
-                MessageBox.Show("Nenhum usuário selecionado", "Seleciona usuário");
+                MessageBox.Show(error.Message);
             }
         }
 
@@ -55,21 +67,21 @@ namespace CrudWindowsForm
 
         private void EditarUsuario_Click(object sender, EventArgs e)
         {
-            Usuario usuario = crudUsuario.ObterId(Id);
-
-            if (usuario != null)
+            try
             {
-                TelaCadastroUsuario telaCadastroUsuario = new TelaCadastroUsuario(true);
+                if (Id == decimal.Zero)
+                {
+                    throw new Exception("Nenhum usuário foi selecionado");
+                }
 
-                telaCadastroUsuario.PopularCampos(usuario);
+                Usuario usuario = crudUsuario.ObterUsuario(Id);
+
+                TelaCadastroUsuario telaCadastroUsuario = new TelaCadastroUsuario(usuario);
                 telaCadastroUsuario.ShowDialog();
                 ListaUsuarios();
-            } else if (usuario == null)
+            } catch (Exception error)
             {
-                MessageBox.Show("Nenhum usuário cadastrado", "Não existe usuário");
-            } else
-            {
-                MessageBox.Show("Nenhum usuário selecionado", "Seleciona usuário");
+                MessageBox.Show(error.Message);
             }
         }
     }

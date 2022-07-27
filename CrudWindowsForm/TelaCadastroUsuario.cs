@@ -5,7 +5,7 @@ namespace CrudWindowsForm
 {
     public partial class TelaCadastroUsuario : Form
     {
-        Usuario usuario;
+        private Usuario usuario;
 
         public TelaCadastroUsuario()
         {
@@ -16,25 +16,35 @@ namespace CrudWindowsForm
             dataCriacaoUsuario.Value = DateTime.Today;
         }
 
-        public TelaCadastroUsuario(bool editar) {
-            InitializeComponent();
+        public TelaCadastroUsuario(Usuario usuario) : this()
+        {
+            PopularCampos(usuario);
 
-            dataCriacaoUsuario.Value = DateTime.Today;
-
-            if (editar)
-            {
-                BtnCadastrar.Text = "Atualizar";
-            }
+            BtnCadastrar.Text = "Atualizar";
         }
 
         private void BtnCadastrar_Click(object sender, EventArgs e)
         {
-            bool validaCampos = ValidaCampos(txtNomeUsuario.Text, txtSenhaUsuario.Text, txtEmailUsuario.Text);
-            CrudUsuario crudUsuario = new CrudUsuario();
-            bool emailExiste = crudUsuario.VerificaEmailExistente(txtEmailUsuario.Text);
-            if (validaCampos == false && emailExiste == false)
+            try
             {
-                if (BtnCadastrar.Text != "Cadastrar")
+                CrudUsuario crudUsuario = new CrudUsuario();
+
+                bool validaCampos = ValidaCampos(txtNomeUsuario.Text,
+                                            txtSenhaUsuario.Text,
+                                            txtEmailUsuario.Text,
+                                            dataNascimentoUsuario);
+                if (validaCampos)
+                {
+                    return;
+                }
+
+                bool emailExiste = crudUsuario.EmailEstaDuplicado(txtEmailUsuario.Text, this.usuario);
+                if (emailExiste)
+                {
+                    throw new Exception("Email já existe escolha outro");
+                }
+
+                if (this.usuario != null)
                 {
                     RealizaAtualizacaoUsuario();
                 }
@@ -44,9 +54,10 @@ namespace CrudWindowsForm
                 }
 
                 this.Close();
-            } else if (emailExiste)
+            }
+            catch (Exception error)
             {
-                MessageBox.Show("Existe email");
+                MessageBox.Show(error.Message);
             }
         }
 
@@ -67,88 +78,82 @@ namespace CrudWindowsForm
             this.Close();
         }
 
-        public bool ValidaCampos(string nome, string senha, string email)
+        public bool MensagemErros(Label campo, string mensagem)
         {
-            string mensagem = "";
-            
-            if (nome.Length <= 0)
-            {
-                mensagem += "Campo nome vazio \n";
-            } 
-            
-            if (senha.Length <= 0)
-            {
-                mensagem += "Campo senha vazio \n";
-            } 
-            if (email.Length <= 0)
-            {
-                mensagem += "Campo email vazio \n";
-            }
-
-            Regex regex = new Regex(@"\w+.*@\w+\.com");
-            if (!regex.IsMatch(email))
-            {
-                mensagem += "Por favor insira um email válido \n";
-            }
-
-            //if (dataNascimento > DateTime.Today)
-            //{
-            //    mensagem += "Por favor informe uma data de nascimento válida \n";
-            //}
-
-            if (mensagem.Length > 0)
-            {
-                MessageBox.Show(mensagem, "Campo vazio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return true;            
-            } else
-            {
-                return false;
-            }
+            campo.Visible = true;
+            campo.Text = mensagem;
+            campo.Focus();
+            return true;
         }
 
-        public void RealizaCadastro()
+        public bool ValidaCampos(string nome, string senha, string email, DateTimePicker dataNascimento)
         {
-            BtnCadastrar.Visible = true;
-            CrudUsuario cadastrarUsuarios = new CrudUsuario();
-            Usuario usuario = new Usuario();
+            bool validaTodos = false;
+
+            avisoNome.Text = "";
+            avisoSenha.Text = "";
+            avisoEmail.Text = "";
+            avisoDataNascimento.Text = "";
+
+            Regex regex = new Regex(@"\w+.*@\w+\.com");
+            if (email.Length <= 0)
+            {
+                validaTodos = MensagemErros(avisoEmail, "Informe um email");
+            }
+            else if (!regex.IsMatch(email))
+            {
+                validaTodos = MensagemErros(avisoEmail, "Por favor insira um email válido");
+            }
+
+            if (senha.Length <= 0)
+            {
+                validaTodos = MensagemErros(avisoSenha, "Informe a senha");
+            }
+
+            if (nome.Length <= 0)
+            {
+                validaTodos = MensagemErros(avisoNome, "Informe um nome");
+            }
+
+            if ((dataNascimento.Value > DateTime.Today || dataNascimento.Value < new DateTime(1930, 01, 01)) && dataNascimento.Checked)
+            {
+                validaTodos = MensagemErros(avisoDataNascimento, "Data de nascimento inválida");
+            }
+
+            return validaTodos;
+        }
+
+        public Usuario InsereValoresCampos(Usuario usuario)
+        {
             usuario.Nome = txtNomeUsuario.Text;
             usuario.Senha = txtSenhaUsuario.Text;
             usuario.Email = txtEmailUsuario.Text;
             usuario.DataNascimento = dataNascimentoUsuario.Value.Date;
             usuario.DataCriacao = dataCriacaoUsuario.Value.Date;
-
-            int retorno = cadastrarUsuarios.CadastrarUsuario(usuario);
-
-            if (retorno == 1)
+            if (dataNascimentoUsuario.Checked == false)
             {
-                MessageBox.Show("Usuário cadastrado com sucesso", "Cadastro usuário");
+                usuario.DataNascimento = null;
             }
-            else
-            {
-                MessageBox.Show("Usuário não cadastrado", "Erro");
-            }
+
+            return usuario;
+        }
+        public void RealizaCadastro()
+        {
+            CrudUsuario cadastrarUsuarios = new CrudUsuario();
+            Usuario usuario = new Usuario();
+            cadastrarUsuarios.CadastrarUsuario(InsereValoresCampos(usuario));
+            MessageBox.Show("Usuário cadastrado com sucesso", "Cadastro usuário");
         }
 
         public void RealizaAtualizacaoUsuario()
         {
             CrudUsuario crudUsuario = new CrudUsuario();
 
-            usuario.Nome = txtNomeUsuario.Text;
-            usuario.Email = txtEmailUsuario.Text;
-            usuario.Senha = txtSenhaUsuario.Text;
-            usuario.DataNascimento = dataNascimentoUsuario.Value.Date;
-            usuario.DataNascimento = dataNascimentoUsuario.Value.Date;
+            Usuario usuario = InsereValoresCampos(this.usuario);
 
-            int retorno = crudUsuario.AtualizarUsuario(usuario.Id, usuario);
+            crudUsuario.AtualizarUsuario(usuario.Id, usuario);
 
-            if (retorno == 1)
-            {
-                MessageBox.Show("Informações atualizadas", "Editar usuário");
-            }
-            else
-            {
-                MessageBox.Show("Informações não foram atualizadas", "Erro");
-            }
+            MessageBox.Show("Informações atualizadas", "Editar usuário");
         }
     }
 }

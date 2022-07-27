@@ -4,10 +4,14 @@
     {
         private static List<Usuario> listaUsuarios = new List<Usuario>();
 
-        public int CadastrarUsuario(Usuario usuario)
+        public void CadastrarUsuario(Usuario usuario)
         {
-            listaUsuarios.Add(new Usuario()
+            if (usuario == null)
             {
+                throw new Exception("Não foi informado nenhum usuário");
+            }
+
+            listaUsuarios.Add(new Usuario() {
                 Id = usuario.IncrementaId(),
                 Nome = usuario.Nome,
                 Senha = usuario.Senha,
@@ -15,21 +19,14 @@
                 DataNascimento = usuario.DataNascimento,
                 DataCriacao = usuario.DataCriacao
             });
-
-            return 1;
         }
 
-        public bool VerificaEmailExistente(string email)
+        public bool EmailEstaDuplicado(string email, Usuario usuario)
         {
-            foreach(Usuario lista in listaUsuarios)
-            {
-                if (lista.Email == email)
-                {
-                    return true;
-                }
-            }
+            var encontrado = listaUsuarios
+                .FirstOrDefault(usuarioLista => usuarioLista.Email == email && usuarioLista.Id != usuario.Id);
 
-            return false;
+            return encontrado != null;
         }
 
         public List<Usuario> ListarUsuarios()
@@ -37,51 +34,29 @@
             return listaUsuarios;
         }
 
-        public Usuario ObterId(int Id)
+        public Usuario ObterUsuario(int id)
         {
-            int retorno = PercorrerLista(Id);
-
-            if (retorno >= 0)
-            {
-                return listaUsuarios[retorno];
-            } else
-            {
-                return null;
-            }
-
+            return listaUsuarios
+                .FirstOrDefault(usuario => usuario.Id == id) ??
+                throw new Exception($"Não foi encontrado usuário com o Id {id}");
         }
 
         public void DeletarUsuario(int Id)
         {
-            int retornoLista = PercorrerLista(Id);
-            if (retornoLista != -1)
-            {
-                CrudUsuario.listaUsuarios.RemoveAt(retornoLista);
-            }
+            Usuario retornoLista = ObterUsuario(Id);
+            CrudUsuario.listaUsuarios.Remove(retornoLista);
         }
 
-        public int AtualizarUsuario(int Id, Usuario usuario)
+        public void AtualizarUsuario(int id, Usuario usuario)
         {
-            int posicaoUsuario = PercorrerLista(Id);
-            listaUsuarios[posicaoUsuario] = usuario;
-
-            return 1;
-        }
-
-        public int PercorrerLista(int Id)
-        {
-            if (listaUsuarios != null)
+            var indice = listaUsuarios.FindIndex(usuario => usuario.Id == id);
+            
+            if (indice == -1)
             {
-                for (int i = 0; i < listaUsuarios.Count; i++)
-                {
-                    if (listaUsuarios[i].Id == Id)
-                    {
-                        return i;
-                    }
-                }
+                throw new Exception($"Não foi encontrado usuário com o Id {id}");
             }
-            return -1;
+            
+            listaUsuarios[indice] = usuario;
         }
-    
     }
 }

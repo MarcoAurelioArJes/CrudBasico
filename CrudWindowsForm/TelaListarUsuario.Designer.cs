@@ -39,7 +39,7 @@ namespace CrudWindowsForm
             // 
             // CadastrarUsuario
             // 
-            this.CadastrarUsuario.Location = new System.Drawing.Point(300, 369);
+            this.CadastrarUsuario.Location = new System.Drawing.Point(211, 369);
             this.CadastrarUsuario.Name = "CadastrarUsuario";
             this.CadastrarUsuario.Size = new System.Drawing.Size(111, 32);
             this.CadastrarUsuario.TabIndex = 1;
@@ -49,7 +49,7 @@ namespace CrudWindowsForm
             // 
             // EditarUsuario
             // 
-            this.EditarUsuario.Location = new System.Drawing.Point(417, 369);
+            this.EditarUsuario.Location = new System.Drawing.Point(328, 369);
             this.EditarUsuario.Name = "EditarUsuario";
             this.EditarUsuario.Size = new System.Drawing.Size(111, 32);
             this.EditarUsuario.TabIndex = 2;
@@ -59,7 +59,7 @@ namespace CrudWindowsForm
             // 
             // DeletarUsuario
             // 
-            this.DeletarUsuario.Location = new System.Drawing.Point(534, 369);
+            this.DeletarUsuario.Location = new System.Drawing.Point(445, 369);
             this.DeletarUsuario.Name = "DeletarUsuario";
             this.DeletarUsuario.Size = new System.Drawing.Size(111, 32);
             this.DeletarUsuario.TabIndex = 3;
@@ -74,7 +74,7 @@ namespace CrudWindowsForm
             this.dataGridUsuarios.MultiSelect = false;
             this.dataGridUsuarios.Name = "dataGridUsuarios";
             this.dataGridUsuarios.RowTemplate.Height = 25;
-            this.dataGridUsuarios.Size = new System.Drawing.Size(633, 351);
+            this.dataGridUsuarios.Size = new System.Drawing.Size(543, 351);
             this.dataGridUsuarios.TabIndex = 4;
             this.dataGridUsuarios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridUsuarios_CellClick);
             // 
@@ -82,7 +82,7 @@ namespace CrudWindowsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(657, 420);
+            this.ClientSize = new System.Drawing.Size(568, 420);
             this.Controls.Add(this.dataGridUsuarios);
             this.Controls.Add(this.DeletarUsuario);
             this.Controls.Add(this.EditarUsuario);

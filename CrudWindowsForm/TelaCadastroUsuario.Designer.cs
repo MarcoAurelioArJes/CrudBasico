@@ -32,7 +32,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtNomeUsuario = new System.Windows.Forms.TextBox();
             this.txtSenhaUsuario = new System.Windows.Forms.TextBox();
             this.txtEmailUsuario = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -42,16 +41,22 @@
             this.Cancelar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtId = new System.Windows.Forms.TextBox();
+            this.txtNomeUsuario = new System.Windows.Forms.TextBox();
+            this.avisoNome = new System.Windows.Forms.Label();
+            this.avisoSenha = new System.Windows.Forms.Label();
+            this.avisoEmail = new System.Windows.Forms.Label();
+            this.avisoDataNascimento = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // dataNascimentoUsuario
             // 
             this.dataNascimentoUsuario.CustomFormat = "";
-            this.dataNascimentoUsuario.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dataNascimentoUsuario.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dataNascimentoUsuario.Location = new System.Drawing.Point(149, 289);
             this.dataNascimentoUsuario.MaxDate = new System.DateTime(2022, 12, 31, 0, 0, 0, 0);
-            this.dataNascimentoUsuario.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
+            this.dataNascimentoUsuario.MinDate = new System.DateTime(1930, 1, 1, 0, 0, 0, 0);
             this.dataNascimentoUsuario.Name = "dataNascimentoUsuario";
+            this.dataNascimentoUsuario.ShowCheckBox = true;
             this.dataNascimentoUsuario.Size = new System.Drawing.Size(100, 23);
             this.dataNascimentoUsuario.TabIndex = 9;
             this.dataNascimentoUsuario.Value = new System.DateTime(2022, 1, 27, 13, 49, 0, 0);
@@ -85,13 +90,6 @@
             this.label4.Size = new System.Drawing.Size(56, 19);
             this.label4.TabIndex = 3;
             this.label4.Text = "E-MAIL";
-            // 
-            // txtNomeUsuario
-            // 
-            this.txtNomeUsuario.Location = new System.Drawing.Point(149, 98);
-            this.txtNomeUsuario.Name = "txtNomeUsuario";
-            this.txtNomeUsuario.Size = new System.Drawing.Size(288, 23);
-            this.txtNomeUsuario.TabIndex = 5;
             // 
             // txtSenhaUsuario
             // 
@@ -178,11 +176,67 @@
             this.txtId.Size = new System.Drawing.Size(65, 23);
             this.txtId.TabIndex = 16;
             // 
+            // txtNomeUsuario
+            // 
+            this.txtNomeUsuario.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtNomeUsuario.Location = new System.Drawing.Point(149, 98);
+            this.txtNomeUsuario.Name = "txtNomeUsuario";
+            this.txtNomeUsuario.Size = new System.Drawing.Size(288, 23);
+            this.txtNomeUsuario.TabIndex = 5;
+            // 
+            // avisoNome
+            // 
+            this.avisoNome.AutoSize = true;
+            this.avisoNome.ForeColor = System.Drawing.Color.Red;
+            this.avisoNome.Location = new System.Drawing.Point(149, 123);
+            this.avisoNome.Name = "avisoNome";
+            this.avisoNome.Size = new System.Drawing.Size(38, 15);
+            this.avisoNome.TabIndex = 17;
+            this.avisoNome.Text = "label7";
+            this.avisoNome.Visible = false;
+            // 
+            // avisoSenha
+            // 
+            this.avisoSenha.AutoSize = true;
+            this.avisoSenha.ForeColor = System.Drawing.Color.Red;
+            this.avisoSenha.Location = new System.Drawing.Point(149, 188);
+            this.avisoSenha.Name = "avisoSenha";
+            this.avisoSenha.Size = new System.Drawing.Size(38, 15);
+            this.avisoSenha.TabIndex = 18;
+            this.avisoSenha.Text = "label7";
+            this.avisoSenha.Visible = false;
+            // 
+            // avisoEmail
+            // 
+            this.avisoEmail.AutoSize = true;
+            this.avisoEmail.ForeColor = System.Drawing.Color.Red;
+            this.avisoEmail.Location = new System.Drawing.Point(149, 252);
+            this.avisoEmail.Name = "avisoEmail";
+            this.avisoEmail.Size = new System.Drawing.Size(38, 15);
+            this.avisoEmail.TabIndex = 19;
+            this.avisoEmail.Text = "label7";
+            this.avisoEmail.Visible = false;
+            // 
+            // avisoDataNascimento
+            // 
+            this.avisoDataNascimento.AutoSize = true;
+            this.avisoDataNascimento.ForeColor = System.Drawing.Color.Red;
+            this.avisoDataNascimento.Location = new System.Drawing.Point(255, 293);
+            this.avisoDataNascimento.Name = "avisoDataNascimento";
+            this.avisoDataNascimento.Size = new System.Drawing.Size(38, 15);
+            this.avisoDataNascimento.TabIndex = 20;
+            this.avisoDataNascimento.Text = "label7";
+            this.avisoDataNascimento.Visible = false;
+            // 
             // TelaCadastroUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(450, 452);
+            this.Controls.Add(this.avisoDataNascimento);
+            this.Controls.Add(this.avisoEmail);
+            this.Controls.Add(this.avisoSenha);
+            this.Controls.Add(this.avisoNome);
             this.Controls.Add(this.txtId);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Cancelar);
@@ -208,7 +262,6 @@
         private Label label2;
         private Label label3;
         private Label label4;
-        private TextBox txtNomeUsuario;
         private TextBox txtSenhaUsuario;
         private TextBox txtEmailUsuario;
         private Label label5;
@@ -219,5 +272,10 @@
         private Button Cancelar;
         private Label label1;
         private TextBox txtId;
+        private TextBox txtNomeUsuario;
+        private Label avisoNome;
+        private Label avisoSenha;
+        private Label avisoEmail;
+        private Label avisoDataNascimento;
     }
 }
