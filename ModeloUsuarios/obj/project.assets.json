@@ -1,33 +1,11 @@
 {
   "version": 3,
   "targets": {
-    "net6.0-windows7.0": {
-      "ModeloUsuarios/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "compile": {
-          "bin/placeholder/ModeloUsuarios.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ModeloUsuarios.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.WindowsDesktop.App.WindowsForms"
-        ]
-      }
-    }
+    "net6.0-windows7.0": {}
   },
-  "libraries": {
-    "ModeloUsuarios/1.0.0": {
-      "type": "project",
-      "path": "../ModeloUsuarios/ModeloUsuarios.csproj",
-      "msbuildProject": "../ModeloUsuarios/ModeloUsuarios.csproj"
-    }
-  },
+  "libraries": {},
   "projectFileDependencyGroups": {
-    "net6.0-windows7.0": [
-      "ModeloUsuarios >= 1.0.0"
-    ]
+    "net6.0-windows7.0": []
   },
   "packageFolders": {
     "C:\\Users\\Usuario\\.nuget\\packages\\": {}
@@ -35,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm\\CrudWindowsForm.csproj",
-      "projectName": "CrudWindowsForm",
-      "projectPath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm\\CrudWindowsForm.csproj",
+      "projectUniqueName": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\ModeloUsuarios\\ModeloUsuarios.csproj",
+      "projectName": "ModeloUsuarios",
+      "projectPath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\ModeloUsuarios\\ModeloUsuarios.csproj",
       "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm\\obj\\",
+      "outputPath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\ModeloUsuarios\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -55,11 +33,7 @@
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
-          "projectReferences": {
-            "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\ModeloUsuarios\\ModeloUsuarios.csproj": {
-              "projectPath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\ModeloUsuarios\\ModeloUsuarios.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
