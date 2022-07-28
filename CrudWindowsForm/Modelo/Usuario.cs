@@ -1,4 +1,4 @@
-﻿namespace ModeloUsuarios
+﻿namespace CrudWindowsForm.Modelo
 {
     public class Usuario
     {

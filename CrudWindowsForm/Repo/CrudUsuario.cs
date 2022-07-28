@@ -1,4 +1,6 @@
-﻿namespace ModeloUsuarios
+﻿using CrudWindowsForm.Modelo;
+
+namespace CrudWindowsForm.Repo
 {
     public class CrudUsuario
     {

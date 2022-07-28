@@ -5,8 +5,6 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudWindowsForm", "CrudWindowsForm\CrudWindowsForm.csproj", "{C90294EA-FD62-4821-ACEC-40103007F63B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModeloUsuarios", "ModeloUsuarios\ModeloUsuarios.csproj", "{3B99C272-3733-4AD0-A994-EB94F1A228D9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{C90294EA-FD62-4821-ACEC-40103007F63B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C90294EA-FD62-4821-ACEC-40103007F63B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C90294EA-FD62-4821-ACEC-40103007F63B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3B99C272-3733-4AD0-A994-EB94F1A228D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3B99C272-3733-4AD0-A994-EB94F1A228D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3B99C272-3733-4AD0-A994-EB94F1A228D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3B99C272-3733-4AD0-A994-EB94F1A228D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
