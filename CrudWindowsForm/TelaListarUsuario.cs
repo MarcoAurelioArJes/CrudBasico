@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ModeloUsuarios;
+﻿using CrudWindowsForm.Modelo;
+using CrudWindowsForm.Repo;
 
 namespace CrudWindowsForm
 {
@@ -15,19 +7,20 @@ namespace CrudWindowsForm
     {
         private int Id;
 
-        CrudUsuario crudUsuario = new CrudUsuario();
+        CrudUsuario crudUsuario = new();
+
         public TelaListarUsuario()
         {
             InitializeComponent();
             ListaUsuarios();
         }
 
-        private void CadastrarUsuario_Click(object sender, EventArgs e)
+        private void AoClicarEmUsuario(object sender, EventArgs e)
         {
             try
             {
-                TelaCadastroUsuario cadastrarUsuarios = new TelaCadastroUsuario();
-                cadastrarUsuarios.ShowDialog();
+                TelaCadastroUsuario telaDeCadastro = new();
+                telaDeCadastro.ShowDialog();
                 ListaUsuarios();
             } catch (Exception error)
             {
@@ -42,27 +35,32 @@ namespace CrudWindowsForm
             return crudUsuario.ListarUsuarios();
         }
 
-        private void DeletarUsuario_Click(object sender, EventArgs e)
+        private void AoClicarEmDeletar(object enviar, EventArgs e)
         {
             try
             {
                 if (Id == decimal.Zero) throw new Exception("Nenhum usuário foi selecionado");
+                DialogResult result = MessageBox.Show($"Deseja realmente excluir o usuário {crudUsuario.ObterUsuario(Id).Nome} ?\n" +
+                                                      "Essa ação não poderá ser desfeita",
+                                                      "Deleta usuário", MessageBoxButtons.YesNo);
 
-                crudUsuario.DeletarUsuario(Id);
-                MessageBox.Show("Usuário deletado com sucesso", "Deleta usuário");
-                ListaUsuarios();
+                if (result == DialogResult.Yes) { 
+                    crudUsuario.DeletarUsuario(Id);
+                    MessageBox.Show("Usuário deletado com sucesso", "Deleta usuário");
+                    ListaUsuarios();
+                }
             } catch (Exception error)
             {
                 MessageBox.Show(error.Message);
             }
         }
 
-        private void dataGridUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void AoClicarNaLinhaDaGrid(object sender, DataGridViewCellEventArgs e)
         {
             Id = int.Parse(dataGridUsuarios.CurrentRow.Cells[0].Value.ToString());
         }
 
-        private void EditarUsuario_Click(object sender, EventArgs e)
+        private void AoClicarEmEditar(object sender, EventArgs e)
         {
             try
             {
