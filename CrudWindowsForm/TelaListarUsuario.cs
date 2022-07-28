@@ -46,10 +46,7 @@ namespace CrudWindowsForm
         {
             try
             {
-                if (Id == decimal.Zero)
-                {
-                    throw new Exception("Nenhum usuário foi selecionado");
-                }
+                if (Id == decimal.Zero) throw new Exception("Nenhum usuário foi selecionado");
 
                 crudUsuario.DeletarUsuario(Id);
                 MessageBox.Show("Usuário deletado com sucesso", "Deleta usuário");
@@ -69,10 +66,7 @@ namespace CrudWindowsForm
         {
             try
             {
-                if (Id == decimal.Zero)
-                {
-                    throw new Exception("Nenhum usuário foi selecionado");
-                }
+                if (Id == decimal.Zero) throw new Exception("Nenhum usuário foi selecionado");
 
                 Usuario usuario = crudUsuario.ObterUsuario(Id);
 

@@ -21,10 +21,10 @@
             });
         }
 
-        public bool EmailEstaDuplicado(string email, Usuario usuario)
+        public bool EmailEstaDuplicado(string email, string id)
         {
             var encontrado = listaUsuarios
-                .FirstOrDefault(usuarioLista => usuarioLista.Email == email && usuarioLista.Id != usuario.Id);
+                .FirstOrDefault(usuarioLista => usuarioLista.Email == email && usuarioLista.Id.ToString() != id);
 
             return encontrado != null;
         }
@@ -33,6 +33,7 @@
         {
             return listaUsuarios;
         }
+
 
         public Usuario ObterUsuario(int id)
         {

@@ -10,16 +10,13 @@ namespace CrudWindowsForm
         public TelaCadastroUsuario()
         {
             InitializeComponent();
-
             txtSenhaUsuario.PasswordChar = '*';
-
             dataCriacaoUsuario.Value = DateTime.Today;
         }
 
         public TelaCadastroUsuario(Usuario usuario) : this()
         {
             PopularCampos(usuario);
-
             BtnCadastrar.Text = "Atualizar";
         }
 
@@ -33,25 +30,13 @@ namespace CrudWindowsForm
                                             txtSenhaUsuario.Text,
                                             txtEmailUsuario.Text,
                                             dataNascimentoUsuario);
-                if (validaCampos)
-                {
-                    return;
-                }
+                if (validaCampos) return;
 
-                bool emailExiste = crudUsuario.EmailEstaDuplicado(txtEmailUsuario.Text, this.usuario);
-                if (emailExiste)
-                {
-                    throw new Exception("Email já existe escolha outro");
-                }
+                bool emailExiste = crudUsuario.EmailEstaDuplicado(txtEmailUsuario.Text, txtId.Text);
+                if (emailExiste) throw new Exception("Email já existe escolha outro");
 
-                if (this.usuario != null)
-                {
-                    RealizaAtualizacaoUsuario();
-                }
-                else
-                {
-                    RealizaCadastro();
-                }
+                if (this.usuario != null) RealizaAtualizacaoUsuario();
+                else RealizaCadastro();
 
                 this.Close();
             }
@@ -68,7 +53,7 @@ namespace CrudWindowsForm
             txtEmailUsuario.Text = usuario.Email;
             txtSenhaUsuario.Text = usuario.Senha;
             dataNascimentoUsuario.Text = usuario.DataNascimento.ToString();
-            dataNascimentoUsuario.Text = usuario.DataNascimento.ToString();
+            dataCriacaoUsuario.Text = usuario.DataCriacao.ToString();
 
             this.usuario = usuario;
         }
@@ -96,29 +81,15 @@ namespace CrudWindowsForm
             avisoDataNascimento.Text = "";
 
             Regex regex = new Regex(@"\w+.*@\w+\.com");
-            if (email.Length <= 0)
-            {
-                validaTodos = MensagemErros(avisoEmail, "Informe um email");
-            }
-            else if (!regex.IsMatch(email))
-            {
-                validaTodos = MensagemErros(avisoEmail, "Por favor insira um email válido");
-            }
+            if (email.Length <= 0) validaTodos = MensagemErros(avisoEmail, "Informe um email");
+            else if (!regex.IsMatch(email)) validaTodos = MensagemErros(avisoEmail, "Por favor insira um email válido");
 
-            if (senha.Length <= 0)
-            {
-                validaTodos = MensagemErros(avisoSenha, "Informe a senha");
-            }
+            if (senha.Length <= 0) validaTodos = MensagemErros(avisoSenha, "Informe a senha");
 
-            if (nome.Length <= 0)
-            {
-                validaTodos = MensagemErros(avisoNome, "Informe um nome");
-            }
+            if (nome.Length <= 0) validaTodos = MensagemErros(avisoNome, "Informe um nome");
 
             if ((dataNascimento.Value > DateTime.Today || dataNascimento.Value < new DateTime(1930, 01, 01)) && dataNascimento.Checked)
-            {
                 validaTodos = MensagemErros(avisoDataNascimento, "Data de nascimento inválida");
-            }
 
             return validaTodos;
         }
@@ -130,10 +101,7 @@ namespace CrudWindowsForm
             usuario.Email = txtEmailUsuario.Text;
             usuario.DataNascimento = dataNascimentoUsuario.Value.Date;
             usuario.DataCriacao = dataCriacaoUsuario.Value.Date;
-            if (dataNascimentoUsuario.Checked == false)
-            {
-                usuario.DataNascimento = null;
-            }
+            if (dataNascimentoUsuario.Checked == false) usuario.DataNascimento = null;
 
             return usuario;
         }
@@ -150,7 +118,6 @@ namespace CrudWindowsForm
             CrudUsuario crudUsuario = new CrudUsuario();
 
             Usuario usuario = InsereValoresCampos(this.usuario);
-
             crudUsuario.AtualizarUsuario(usuario.Id, usuario);
 
             MessageBox.Show("Informações atualizadas", "Editar usuário");
