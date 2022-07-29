@@ -14,5 +14,8 @@ C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm\obj\Debug\net
 C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm\obj\Debug\net6.0-windows\CrudWindowsForm.pdb
 C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm\obj\Debug\net6.0-windows\CrudWindowsForm.genruntimeconfig.cache
 C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm\obj\Debug\net6.0-windows\ref\CrudWindowsForm.dll
+C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm\bin\Debug\net6.0-windows\ModeloUsuarios.dll
+C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm\bin\Debug\net6.0-windows\ModeloUsuarios.pdb
+C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm\obj\Debug\net6.0-windows\CrudWindowsForm.csproj.CopyComplete
 C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm\obj\Debug\net6.0-windows\CrudWindowsForm.TelaCadastroUsuario.resources
 C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm\obj\Debug\net6.0-windows\CrudWindowsForm.TelaListarUsuario.resources

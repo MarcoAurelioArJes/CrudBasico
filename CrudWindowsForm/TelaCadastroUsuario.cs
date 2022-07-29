@@ -1,12 +1,11 @@
-﻿using System.Text.RegularExpressions;
-using CrudWindowsForm.Modelo;
-using CrudWindowsForm.Repo;
+﻿using ModeloUsuarios;
+using System.Text.RegularExpressions;
 
 namespace CrudWindowsForm
 {
     public partial class TelaCadastroUsuario : Form
     {
-        private Usuario _usuario;
+        private Usuario usuario;
 
         public TelaCadastroUsuario()
         {
@@ -21,7 +20,7 @@ namespace CrudWindowsForm
             BtnCadastrar.Text = "Atualizar";
         }
 
-        private void AoClicarEmCadastrar(object sender, EventArgs e)
+        private void BtnCadastrar_Click(object sender, EventArgs e)
         {
             try
             {
@@ -36,7 +35,7 @@ namespace CrudWindowsForm
                 bool emailExiste = crudUsuario.EmailEstaDuplicado(txtEmailUsuario.Text, txtId.Text);
                 if (emailExiste) throw new Exception("Email já existe escolha outro");
 
-                if (this._usuario != null) RealizaAtualizacaoUsuario();
+                if (this.usuario != null) RealizaAtualizacaoUsuario();
                 else RealizaCadastro();
 
                 this.Close();
@@ -56,7 +55,7 @@ namespace CrudWindowsForm
             dataNascimentoUsuario.Text = usuario.DataNascimento.ToString();
             dataCriacaoUsuario.Text = usuario.DataCriacao.ToString();
 
-            this._usuario = usuario;
+            this.usuario = usuario;
         }
 
         private void Cancelar_Click(object sender, EventArgs e)
@@ -68,18 +67,18 @@ namespace CrudWindowsForm
         {
             campo.Visible = true;
             campo.Text = mensagem;
+            campo.Focus();
             return true;
         }
 
         public bool ValidaCampos(string nome, string senha, string email, DateTimePicker dataNascimento)
         {
             bool validaTodos = false;
-            string valorPadrao = string.Empty;
 
-            avisoNome.Text = valorPadrao;
-            avisoSenha.Text = valorPadrao;
-            avisoEmail.Text = valorPadrao;
-            avisoDataNascimento.Text = valorPadrao;
+            avisoNome.Text = "";
+            avisoSenha.Text = "";
+            avisoEmail.Text = "";
+            avisoDataNascimento.Text = "";
 
             Regex regex = new Regex(@"\w+.*@\w+\.com");
             if (email.Length <= 0) validaTodos = MensagemErros(avisoEmail, "Informe um email");
@@ -118,7 +117,7 @@ namespace CrudWindowsForm
         {
             CrudUsuario crudUsuario = new CrudUsuario();
 
-            Usuario usuario = InsereValoresCampos(this._usuario);
+            Usuario usuario = InsereValoresCampos(this.usuario);
             crudUsuario.AtualizarUsuario(usuario.Id, usuario);
 
             MessageBox.Show("Informações atualizadas", "Editar usuário");
