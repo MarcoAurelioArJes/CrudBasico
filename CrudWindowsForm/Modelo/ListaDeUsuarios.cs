@@ -1,12 +1,12 @@
 ﻿namespace CrudWindowsForm.Modelo
 {
-    public sealed class ListaUsuarios
+    public sealed class ListaDeUsuarios
     {
         private static List<Usuario>? _instancia;
         private static readonly object _bloqueador = new();
         private static int _idContador = 0;
 
-        private ListaUsuarios() { }
+        private ListaDeUsuarios() { }
 
         public static List<Usuario> Instancia
         {
