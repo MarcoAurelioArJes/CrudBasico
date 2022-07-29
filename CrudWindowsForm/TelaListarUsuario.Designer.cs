@@ -45,7 +45,7 @@ namespace CrudWindowsForm
             this.CadastrarUsuario.TabIndex = 1;
             this.CadastrarUsuario.Text = "Novo";
             this.CadastrarUsuario.UseVisualStyleBackColor = true;
-            this.CadastrarUsuario.Click += new System.EventHandler(this.AoClicarEmUsuario);
+            this.CadastrarUsuario.Click += new System.EventHandler(this.CadastrarUsuario_Click);
             // 
             // EditarUsuario
             // 
@@ -55,7 +55,7 @@ namespace CrudWindowsForm
             this.EditarUsuario.TabIndex = 2;
             this.EditarUsuario.Text = "Editar";
             this.EditarUsuario.UseVisualStyleBackColor = true;
-            this.EditarUsuario.Click += new System.EventHandler(this.AoClicarEmEditar);
+            this.EditarUsuario.Click += new System.EventHandler(this.EditarUsuario_Click);
             // 
             // DeletarUsuario
             // 
@@ -65,7 +65,7 @@ namespace CrudWindowsForm
             this.DeletarUsuario.TabIndex = 3;
             this.DeletarUsuario.Text = "Deletar";
             this.DeletarUsuario.UseVisualStyleBackColor = true;
-            this.DeletarUsuario.Click += new System.EventHandler(this.AoClicarEmDeletar);
+            this.DeletarUsuario.Click += new System.EventHandler(this.DeletarUsuario_Click);
             // 
             // dataGridUsuarios
             // 
@@ -76,7 +76,7 @@ namespace CrudWindowsForm
             this.dataGridUsuarios.RowTemplate.Height = 25;
             this.dataGridUsuarios.Size = new System.Drawing.Size(543, 351);
             this.dataGridUsuarios.TabIndex = 4;
-            this.dataGridUsuarios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.AoClicarNaLinhaDaGrid);
+            this.dataGridUsuarios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridUsuarios_CellClick);
             // 
             // TelaListarUsuario
             // 
@@ -88,7 +88,7 @@ namespace CrudWindowsForm
             this.Controls.Add(this.EditarUsuario);
             this.Controls.Add(this.CadastrarUsuario);
             this.Name = "TelaListarUsuario";
-            this.Text = "Lista de Usuarios";
+            this.Text = "ListaUsuarios";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridUsuarios)).EndInit();
             this.ResumeLayout(false);
 

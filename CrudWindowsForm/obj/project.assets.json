@@ -1,11 +1,33 @@
 {
   "version": 3,
   "targets": {
-    "net6.0-windows7.0": {}
+    "net6.0-windows7.0": {
+      "ModeloUsuarios/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/ModeloUsuarios.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ModeloUsuarios.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WindowsForms"
+        ]
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "ModeloUsuarios/1.0.0": {
+      "type": "project",
+      "path": "../ModeloUsuarios/ModeloUsuarios.csproj",
+      "msbuildProject": "../ModeloUsuarios/ModeloUsuarios.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0-windows7.0": []
+    "net6.0-windows7.0": [
+      "ModeloUsuarios >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Usuario\\.nuget\\packages\\": {}
@@ -33,7 +55,11 @@
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\ModeloUsuarios\\ModeloUsuarios.csproj": {
+              "projectPath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\ModeloUsuarios\\ModeloUsuarios.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

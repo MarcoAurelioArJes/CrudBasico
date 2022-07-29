@@ -2,7 +2,8 @@
 {
     public class CrudUsuario
     {
-        private List<Usuario> listaUsuarios = ListaUsuarios.Instancia;
+        private static List<Usuario> listaUsuarios = new List<Usuario>();
+
         public void CadastrarUsuario(Usuario usuario)
         {
             if (usuario == null)
@@ -11,7 +12,7 @@
             }
 
             listaUsuarios.Add(new Usuario() {
-                Id = ListaUsuarios.IdContador,
+                Id = usuario.IncrementaId(),
                 Nome = usuario.Nome,
                 Senha = usuario.Senha,
                 Email = usuario.Email,
@@ -43,16 +44,18 @@
 
         public void DeletarUsuario(int Id)
         {
-            Usuario usuario = ObterUsuario(Id);
-            listaUsuarios.Remove(usuario);
+            Usuario retornoLista = ObterUsuario(Id);
+            CrudUsuario.listaUsuarios.Remove(retornoLista);
         }
 
         public void AtualizarUsuario(int id, Usuario usuario)
         {
-            int indice = listaUsuarios.FindIndex(usuario => usuario.Id == id);
+            var indice = listaUsuarios.FindIndex(usuario => usuario.Id == id);
             
             if (indice == -1)
+            {
                 throw new Exception($"Não foi encontrado usuário com o Id {id}");
+            }
             
             listaUsuarios[indice] = usuario;
         }

@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v6.0": {
       "CrudWindowsForm/1.0.0": {
+        "dependencies": {
+          "ModeloUsuarios": "1.0.0"
+        },
         "runtime": {
           "CrudWindowsForm.dll": {}
+        }
+      },
+      "ModeloUsuarios/1.0.0": {
+        "runtime": {
+          "ModeloUsuarios.dll": {}
         }
       }
     }
   },
   "libraries": {
     "CrudWindowsForm/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ModeloUsuarios/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
