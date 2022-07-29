@@ -4,7 +4,7 @@
     {
         private static List<Usuario>? _instancia;
         private static readonly object _bloqueador = new();
-        private static int _idContador = 0;
+        private static int _idContador = 1;
 
         private ListaDeUsuarios() { }
 
@@ -23,7 +23,7 @@
         }
 
         public static int IdContador { 
-            get { return ++_idContador; }
+            get { return _idContador++; }
         }
     }
 }
