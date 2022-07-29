@@ -4,7 +4,7 @@ namespace CrudWindowsForm.Repo
 {
     public class CrudUsuario
     {
-        private List<Usuario> listaUsuarios = ListaUsuarios.Instancia;
+        private List<Usuario> listaUsuarios = ListaDeUsuarios.Instancia;
         public void CadastrarUsuario(Usuario usuario)
         {
             if (usuario == null)
@@ -13,7 +13,7 @@ namespace CrudWindowsForm.Repo
             }
 
             listaUsuarios.Add(new Usuario() {
-                Id = ListaUsuarios.IdContador,
+                Id = ListaDeUsuarios.IdContador,
                 Nome = usuario.Nome,
                 Senha = usuario.Senha,
                 Email = usuario.Email,
@@ -53,8 +53,7 @@ namespace CrudWindowsForm.Repo
         {
             int indice = listaUsuarios.FindIndex(usuario => usuario.Id == id);
             
-            if (indice == -1)
-                throw new Exception($"Não foi encontrado usuário com o Id {id}");
+            if (indice == -1) throw new Exception($"Não foi encontrado usuário com o Id {id}");
             
             listaUsuarios[indice] = usuario;
         }
