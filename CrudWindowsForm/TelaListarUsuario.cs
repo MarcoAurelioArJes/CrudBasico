@@ -1,13 +1,13 @@
 ﻿using CrudWindowsForm.Modelo;
-using CrudWindowsForm.Repo;
+using CrudWindowsForm.Repositorio;
 
 namespace CrudWindowsForm
 {
     public partial class TelaListarUsuario : Form
     {
-        private int Id;
+        private Usuario _usuario;
 
-        CrudUsuario crudUsuario = new();
+        UsuarioRepositorio usuarioRepositorio = new();
 
         public TelaListarUsuario()
         {
@@ -30,22 +30,22 @@ namespace CrudWindowsForm
 
         public List<Usuario> ListaUsuarios()
         {
-            dataGridUsuarios.DataSource = crudUsuario.ListarUsuarios().ToList();
+            dataGridUsuarios.DataSource = usuarioRepositorio.Listar().ToList();
             dataGridUsuarios.Columns["Senha"].Visible = false;
-            return crudUsuario.ListarUsuarios();
+            return usuarioRepositorio.Listar();
         }
 
         private void AoClicarEmDeletar(object enviar, EventArgs e)
         {
             try
             {
-                if (Id == decimal.Zero) throw new Exception("Nenhum usuário foi selecionado");
-                DialogResult result = MessageBox.Show($"Deseja realmente excluir o usuário {crudUsuario.ObterUsuario(Id).Nome} ?\n" +
+                if (_usuario == null) throw new Exception("Nenhum usuário foi selecionado");
+                DialogResult result = MessageBox.Show($"Deseja realmente excluir o usuário {_usuario.Nome} ?\n" +
                                                       "Essa ação não poderá ser desfeita",
                                                       "Deleta usuário", MessageBoxButtons.YesNo);
 
-                if (result == DialogResult.Yes) { 
-                    crudUsuario.DeletarUsuario(Id);
+                if (result == DialogResult.Yes) {
+                    usuarioRepositorio.Deletar(_usuario);
                     MessageBox.Show("Usuário deletado com sucesso", "Deleta usuário");
                     ListaUsuarios();
                 }
@@ -57,18 +57,16 @@ namespace CrudWindowsForm
 
         private void AoClicarNaLinhaDaGrid(object sender, DataGridViewCellEventArgs e)
         {
-            Id = int.Parse(dataGridUsuarios.CurrentRow.Cells[0].Value.ToString());
+            _usuario = dataGridUsuarios.CurrentRow.DataBoundItem as Usuario;
         }
 
         private void AoClicarEmEditar(object sender, EventArgs e)
         {
             try
             {
-                if (Id == decimal.Zero) throw new Exception("Nenhum usuário foi selecionado");
+                if (_usuario == null) throw new Exception("Nenhum usuário foi selecionado");
 
-                Usuario usuario = crudUsuario.ObterUsuario(Id);
-
-                TelaCadastroUsuario telaCadastroUsuario = new TelaCadastroUsuario(usuario);
+                TelaCadastroUsuario telaCadastroUsuario = new TelaCadastroUsuario(_usuario);
                 telaCadastroUsuario.ShowDialog();
                 ListaUsuarios();
             } catch (Exception error)

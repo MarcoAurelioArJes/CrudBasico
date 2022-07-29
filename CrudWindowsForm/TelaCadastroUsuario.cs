@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using CrudWindowsForm.Modelo;
-using CrudWindowsForm.Repo;
+using CrudWindowsForm.Repositorio;
 
 namespace CrudWindowsForm
 {
@@ -25,7 +25,7 @@ namespace CrudWindowsForm
         {
             try
             {
-                CrudUsuario crudUsuario = new CrudUsuario();
+                UsuarioRepositorio usuarioRepositorio = new();
 
                 bool validaCampos = ValidaCampos(txtNomeUsuario.Text,
                                             txtSenhaUsuario.Text,
@@ -33,7 +33,7 @@ namespace CrudWindowsForm
                                             dataNascimentoUsuario);
                 if (validaCampos) return;
 
-                bool emailExiste = crudUsuario.EmailEstaDuplicado(txtEmailUsuario.Text, txtId.Text);
+                bool emailExiste = usuarioRepositorio.EmailEstaDuplicado(txtEmailUsuario.Text, txtId.Text);
                 if (emailExiste) throw new Exception("Email já existe escolha outro");
 
                 if (this._usuario != null) RealizaAtualizacaoUsuario();
@@ -108,18 +108,20 @@ namespace CrudWindowsForm
         }
         public void RealizaCadastro()
         {
-            CrudUsuario cadastrarUsuarios = new CrudUsuario();
+            UsuarioRepositorio usuarioRepositorio = new();
             Usuario usuario = new Usuario();
-            cadastrarUsuarios.CadastrarUsuario(InsereValoresCampos(usuario));
+
+            usuarioRepositorio.Criar(InsereValoresCampos(usuario));
+
             MessageBox.Show("Usuário cadastrado com sucesso", "Cadastro usuário");
         }
 
         public void RealizaAtualizacaoUsuario()
         {
-            CrudUsuario crudUsuario = new CrudUsuario();
+            UsuarioRepositorio usuarioRepositorio = new();
 
             Usuario usuario = InsereValoresCampos(this._usuario);
-            crudUsuario.AtualizarUsuario(usuario.Id, usuario);
+            usuarioRepositorio.Atualizar(usuario);
 
             MessageBox.Show("Informações atualizadas", "Editar usuário");
         }
