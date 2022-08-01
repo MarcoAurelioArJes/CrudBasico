@@ -9,23 +9,18 @@ namespace CrudWindowsForm.Repositorio
 {
     public abstract class Repositorio<T> : IRepositorio<T> where T : class {
         protected List<T> _lista = ListaSingleton<T>.Instancia;
-        
-        public virtual void Criar(T entidade)
-        {
-            _lista.Add(entidade);
-        }
+
+        public abstract void Criar(T entidade);
 
         public virtual List<T> Listar()
         {
             return _lista;
         }
 
-        public virtual T ObterPorId(int id) { 
-            return _lista[id];
-        }
+        public abstract T ObterPorId(int id);
 
-        public virtual void Atualizar(T entidade) { }
+        public abstract void Atualizar(T entidade);
 
-        public virtual void Deletar(int id) { }
+        public abstract void Deletar(int id);
     }
 }
