@@ -1,14 +1,14 @@
-﻿namespace CrudWindowsForm.Modelo
+﻿namespace CrudWindowsForm.Servicos
 {
-    public sealed class ListaDeUsuarios
+    public sealed class ListaSingleton<T>
     {
-        private static List<Usuario>? _instancia;
+        private static List<T>? _instancia;
         private static readonly object _bloqueador = new();
         private static int _idContador = 1;
 
-        private ListaDeUsuarios() { }
+        private ListaSingleton() { }
 
-        public static List<Usuario> Instancia
+        public static List<T> Instancia
         {
             get
             {
@@ -16,7 +16,7 @@
                 {
                     lock (_bloqueador)
                         if (_instancia == null)
-                            _instancia = new List<Usuario>();
+                            _instancia = new List<T>();
                 }
                 return _instancia;
             }
