@@ -108,7 +108,7 @@ namespace CrudWindowsForm
         }
         public void RealizaCadastro()
         {
-            UsuarioRepositorio usuarioRepositorio = new();
+            UsuarioRepositorioComSql usuarioRepositorio = new();
             Usuario usuario = new Usuario();
 
             usuarioRepositorio.Criar(InsereValoresCampos(usuario));

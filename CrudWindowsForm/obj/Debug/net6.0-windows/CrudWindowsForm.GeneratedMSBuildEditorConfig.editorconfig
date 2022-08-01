@@ -13,4 +13,4 @@ build_property.InvariantGlobalization =
 build_property.PlatformNeutralAssembly = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = CrudWindowsForm
-build_property.ProjectDir = C:\Users\Usuario\Downloads\Crud\CrudWindowsForm\
+build_property.ProjectDir = C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm\

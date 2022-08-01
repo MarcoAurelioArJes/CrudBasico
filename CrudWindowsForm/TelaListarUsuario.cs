@@ -30,7 +30,8 @@ namespace CrudWindowsForm
 
         public List<Usuario> ListaUsuarios()
         {
-            dataGridUsuarios.DataSource = usuarioRepositorio.Listar().ToList();
+            UsuarioRepositorioComSql usuarioRepositorioSql = new();
+            dataGridUsuarios.DataSource = usuarioRepositorioSql.Listar().ToList();
             dataGridUsuarios.Columns["Senha"].Visible = false;
             return usuarioRepositorio.Listar();
         }

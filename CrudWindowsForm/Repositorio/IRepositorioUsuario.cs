@@ -8,6 +8,6 @@ using CrudWindowsForm.Modelo;
 namespace CrudWindowsForm.Repositorio
 {
     public interface IRepositorioUsuario : IRepositorio<Usuario> {
-    
+        public bool EmailEstaDuplicado(string email, string id);
     }
 }
