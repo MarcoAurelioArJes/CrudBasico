@@ -45,7 +45,7 @@ namespace CrudWindowsForm
             this.CadastrarUsuario.TabIndex = 1;
             this.CadastrarUsuario.Text = "Novo";
             this.CadastrarUsuario.UseVisualStyleBackColor = true;
-            this.CadastrarUsuario.Click += new System.EventHandler(this.AoClicarEmUsuario);
+            this.CadastrarUsuario.Click += new System.EventHandler(this.AoClicarEmNovo);
             // 
             // EditarUsuario
             // 

@@ -15,7 +15,7 @@ namespace CrudWindowsForm
             ListaUsuarios();
         }
 
-        private void AoClicarEmUsuario(object sender, EventArgs e)
+        private void AoClicarEmNovo(object sender, EventArgs e)
         {
             try
             {
@@ -40,13 +40,15 @@ namespace CrudWindowsForm
             try
             {
                 if (_usuario == null) throw new Exception("Nenhum usuário foi selecionado");
+
                 DialogResult result = MessageBox.Show($"Deseja realmente excluir o usuário {_usuario.Nome} ?\n" +
                                                       "Essa ação não poderá ser desfeita",
                                                       "Deleta usuário", MessageBoxButtons.YesNo);
 
                 if (result == DialogResult.Yes) {
-                    usuarioRepositorio.Deletar(_usuario);
+                    usuarioRepositorio.Deletar(_usuario.Id);
                     MessageBox.Show("Usuário deletado com sucesso", "Deleta usuário");
+                    _usuario = null;
                     ListaUsuarios();
                 }
             } catch (Exception error)

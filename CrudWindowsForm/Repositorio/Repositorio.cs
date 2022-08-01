@@ -12,9 +12,6 @@ namespace CrudWindowsForm.Repositorio
         
         public virtual void Criar(T entidade)
         {
-            if (entidade == null)
-                throw new NotImplementedException();
-
             _lista.Add(entidade);
         }
 
@@ -23,17 +20,12 @@ namespace CrudWindowsForm.Repositorio
             return _lista;
         }
 
-        public virtual void Atualizar(T entidade)
-        {
-
+        public virtual T ObterPorId(int id) { 
+            return _lista[id];
         }
 
-        public virtual void Deletar(T entidade)
-        {
-            if (entidade == null)
-                throw new NotImplementedException();
+        public virtual void Atualizar(T entidade) { }
 
-            _lista.Remove(entidade);
-        }
+        public virtual void Deletar(int id) { }
     }
 }

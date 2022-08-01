@@ -7,7 +7,7 @@ using CrudWindowsForm.Modelo;
 
 namespace CrudWindowsForm.Repositorio
 {
-    public interface IRepositorioUsuario : IRepositorio<Usuario>
-    {
+    public interface IRepositorioUsuario : IRepositorio<Usuario> {
+    
     }
 }

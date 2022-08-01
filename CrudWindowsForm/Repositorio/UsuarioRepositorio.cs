@@ -5,7 +5,6 @@ namespace CrudWindowsForm.Repositorio
 {
     public class UsuarioRepositorio : Repositorio<Usuario>, IRepositorioUsuario
     {
-
         public override void Criar(Usuario usuario)
         {
             if (usuario == null)
@@ -32,11 +31,15 @@ namespace CrudWindowsForm.Repositorio
             return encontrado != null;
         }
 
+        public override Usuario ObterPorId(int id)
+        {
+            return _lista.FirstOrDefault(usuarioLista => usuarioLista.Id == id) 
+                ?? throw new Exception($"Não foi encontrado o usuário com o Id {id}");
+        }
+
         public override void Atualizar(Usuario usuarioAtualizado)
         {
-            Usuario usuarioEncontrado = _lista.FirstOrDefault(usuario => usuario == usuarioAtualizado);
-
-            if (usuarioEncontrado == null) throw new Exception($"Não foi encontrado usuário com o Id {usuarioAtualizado.Id}");
+            Usuario usuarioEncontrado = ObterPorId(usuarioAtualizado.Id);
 
             usuarioEncontrado.Nome = usuarioAtualizado.Nome;
             usuarioEncontrado.Senha = usuarioAtualizado.Senha;
@@ -44,42 +47,10 @@ namespace CrudWindowsForm.Repositorio
             usuarioEncontrado.DataNascimento = usuarioAtualizado.DataNascimento;
         }
 
-        //private List<Usuario> listaUsuarios = ListaSingleton<Usuario>.Instancia;
-
-        //public void CadastrarUsuario(Usuario usuario)
-        //{
-        //    if (usuario == null)
-        //    {
-        //        throw new Exception("Não foi informado nenhum usuário");
-        //    }
-
-        //    listaUsuarios.Add(new Usuario() {
-        //        Id = ListaSingleton<Usuario>.IdContador,
-        //        Nome = usuario.Nome,
-        //        Senha = usuario.Senha,
-        //        Email = usuario.Email,
-        //        DataNascimento = usuario.DataNascimento,
-        //        DataCriacao = usuario.DataCriacao
-        //    });
-        //}
-        
-        //public List<Usuario> ListarUsuarios()
-        //{
-        //    return _lista;
-        //}
-        
-
-        //public override Usuario ObterPorId(Usuario usuario)
-        //{
-        //    return _lista
-        //        .FirstOrDefault(usuarioLista => usuarioLista.Id == usuario.Id) ??
-        //        throw new Exception($"Não foi encontrado usuário com o Id {usuario.Id}");
-        //}
-
-        //public void DeletarUsuario(int Id)
-        //{
-        //    Usuario usuario = ObterUsuario(Id);
-        //    _lista.Remove(usuario);
-        //}
+        public override void Deletar(int id)
+        {
+            Usuario usuario = ObterPorId(id);
+            _lista.RemoveAll(usuario => usuario.Id == id);
+        }
     }
 }

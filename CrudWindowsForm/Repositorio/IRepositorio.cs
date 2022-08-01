@@ -10,7 +10,10 @@ namespace CrudWindowsForm.Repositorio
     {
         public void Criar(T entidade);
         public List<T> Listar();
+
+        public T ObterPorId(int id);
+
         public void Atualizar(T entidade);
-        public void Deletar(T entidade);
+        public void Deletar(int id);
     }
 }
