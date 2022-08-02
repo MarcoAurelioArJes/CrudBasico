@@ -40,9 +40,9 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "dependencies": {
-            "Microsoft.SqlServer.SqlManagementObjects": {
+            "System.Data.SqlClient": {
               "target": "Package",
-              "version": "[161.47021.0, )"
+              "version": "[4.8.3, )"
             }
           },
           "imports": [

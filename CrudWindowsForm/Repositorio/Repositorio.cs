@@ -12,7 +12,7 @@ namespace CrudWindowsForm.Repositorio
 
         public abstract void Criar(T entidade);
 
-        public virtual List<T> Listar()
+        public virtual List<T> ObterTodos()
         {
             return _lista;
         }

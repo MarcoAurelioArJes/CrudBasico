@@ -7,7 +7,7 @@ namespace CrudWindowsForm
     {
         private Usuario _usuario;
 
-        UsuarioRepositorio usuarioRepositorio = new();
+        UsuarioRepositorioComSql usuarioRepositorioComSql = new();
 
         public TelaListarUsuario()
         {
@@ -30,10 +30,10 @@ namespace CrudWindowsForm
 
         public List<Usuario> ListaUsuarios()
         {
-            UsuarioRepositorioComSql usuarioRepositorioSql = new();
-            dataGridUsuarios.DataSource = usuarioRepositorioSql.Listar().ToList();
+            UsuarioRepositorioComSql usuarioRepositorioComSql = new();
+            dataGridUsuarios.DataSource = usuarioRepositorioComSql.ObterTodos().ToList();
             dataGridUsuarios.Columns["Senha"].Visible = false;
-            return usuarioRepositorio.Listar();
+            return usuarioRepositorioComSql.ObterTodos();
         }
 
         private void AoClicarEmDeletar(object enviar, EventArgs e)
@@ -47,7 +47,7 @@ namespace CrudWindowsForm
                                                       "Deleta usuário", MessageBoxButtons.YesNo);
 
                 if (result == DialogResult.Yes) {
-                    usuarioRepositorio.Deletar(_usuario.Id);
+                    usuarioRepositorioComSql.Deletar(_usuario.Id);
                     MessageBox.Show("Usuário deletado com sucesso", "Deleta usuário");
                     _usuario = null;
                     ListaUsuarios();
@@ -60,7 +60,7 @@ namespace CrudWindowsForm
 
         private void AoClicarNaLinhaDaGrid(object sender, DataGridViewCellEventArgs e)
         {
-            _usuario = dataGridUsuarios.CurrentRow.DataBoundItem as Usuario;
+            _usuario = (Usuario)dataGridUsuarios.CurrentRow.DataBoundItem;
         }
 
         private void AoClicarEmEditar(object sender, EventArgs e)
