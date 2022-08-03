@@ -10,26 +10,26 @@ namespace CrudWindowsForm.Servicos
 
         public static string SenhaCriptografada(string senha)
         {
-            byte[] senhaCriptografada;
             using (RSACryptoServiceProvider rsaProvider = new RSACryptoServiceProvider(2048))
             {
-                //rsaProvider.PersistKeyInCsp = false;
+                byte[] senhaCriptografada;
+
                 rsaProvider.FromXmlString(ChaveUnica);
                 senhaCriptografada = rsaProvider.Encrypt(Encoding.UTF8.GetBytes(senha), true);
+                return Convert.ToBase64String(senhaCriptografada);
             }
-            return Convert.ToBase64String(senhaCriptografada);
         }
 
         public static string SenhaDescriptografada(string senha)
         {
-            byte[] senhaDescriptografada;
             using (RSACryptoServiceProvider rsaProvider = new(2048))
             {
-                //string privateKey = rsaProvider.ToXmlString(true);
+                byte[] senhaDescriptografada;
+
                 rsaProvider.FromXmlString(ChaveUnica);
                 senhaDescriptografada = rsaProvider.Decrypt(Convert.FromBase64String(senha), true);
+                return Encoding.UTF8.GetString(senhaDescriptografada);
             }
-            return Encoding.UTF8.GetString(senhaDescriptografada);
         }
     }
 }
