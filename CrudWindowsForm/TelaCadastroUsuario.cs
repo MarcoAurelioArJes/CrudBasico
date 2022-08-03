@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using CrudWindowsForm.Modelo;
 using CrudWindowsForm.Repositorio;
+using CrudWindowsForm.Servicos;
 
 namespace CrudWindowsForm
 {
@@ -11,7 +12,7 @@ namespace CrudWindowsForm
         public TelaCadastroUsuario()
         {
             InitializeComponent();
-            txtSenhaUsuario.PasswordChar = '*';
+            //txtSenhaUsuario.PasswordChar = '*';
             dataCriacaoUsuario.Value = DateTime.Today;
         }
 

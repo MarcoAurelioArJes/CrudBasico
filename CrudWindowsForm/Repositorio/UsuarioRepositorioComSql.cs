@@ -1,111 +1,140 @@
 ﻿using System.Text;
 using System.Data;
 using System.Data.SqlClient;
-using System.Security.Cryptography;
 using CrudWindowsForm.Modelo;
 using CrudWindowsForm.Servicos;
+using System.Security.Cryptography;
 
 namespace CrudWindowsForm.Repositorio
 {
     public class UsuarioRepositorioComSql : IRepositorioUsuario
     {
-        ConexaoBancoDeDados conexaoBd = new();
-        SqlCommand comando = new();
+        private string _stringConexao = @"Server=localhost\SQLEXPRESS;Database=CrudBasico;Trusted_Connection=True;";
 
         public void Criar(Usuario usuario)
         {
-            comando.CommandText = "INSERT INTO Usuarios VALUES (@nome, @email, " +
+            string consulta = "INSERT INTO Usuarios VALUES (@nome, @email, " +
                                     "@senha, @dataNascimento, @dataCriacao)";
 
-            AtribuiValoresParametros(usuario, comando);
+            using (SqlConnection conexao = new SqlConnection(_stringConexao))
+            {
+                using (SqlCommand comando = new(consulta, conexao))
+                {
+                    conexao.Open();
+                    AtribuiValoresParametros(usuario, comando);
 
-            comando.Connection = conexaoBd.Conectar();
+                    comando.ExecuteNonQuery();
+                }
+            }
 
-            comando.ExecuteNonQuery();
-
-            conexaoBd.Desconectar();
         }
         public void Atualizar(Usuario usuario)
         {
-            comando.CommandText = "UPDATE Usuarios SET Nome = @nome, " +
+            string consulta = "UPDATE Usuarios SET Nome = @nome, " +
                                   "Email = @email, " +
                                   "Senha = @senha, " +
                                   "DataNascimento = @dataNascimento, " +
                                   "DataCriacao = @dataCriacao " +
                                   "WHERE Id = @id";
 
-            comando.Parameters.AddWithValue("id", usuario.Id);
-            AtribuiValoresParametros(usuario, comando);
+            using (SqlConnection conexao = new SqlConnection(_stringConexao))
+            {
+                using (SqlCommand comando = new(consulta, conexao))
+                {
+                    comando.Parameters.AddWithValue("id", usuario.Id);
+                    conexao.Open();
 
-            comando.Connection = conexaoBd.Conectar();
+                    AtribuiValoresParametros(usuario, comando);
 
-            comando.ExecuteNonQuery();
-
-            conexaoBd.Desconectar();
+                    comando.ExecuteNonQuery();
+                }
+            }
         }
 
 
         public void Deletar(int id)
         {
-            comando.CommandText = "DELETE FROM Usuarios WHERE Id = @id;";
-            comando.Parameters.AddWithValue("id", id);
+            string consulta = "DELETE FROM Usuarios WHERE Id = @id;";
 
-            comando.Connection = conexaoBd.Conectar();
+            using (SqlConnection conexao = new SqlConnection(_stringConexao))
+            {
+                using (SqlCommand comando = new(consulta, conexao))
+                {
+                    comando.Parameters.AddWithValue("id", id);
 
-            comando.ExecuteNonQuery();
-
-            conexaoBd.Desconectar();
+                    conexao.Open();
+                    comando.ExecuteNonQuery();
+                }
+            }
         }
 
         public List<Usuario> ObterTodos()
         {
-            comando.CommandText = "SELECT * FROM Usuarios;";
-            comando.Connection = conexaoBd.Conectar();
+            string consulta = "SELECT * FROM Usuarios;";
 
-            SqlDataReader retornoConsulta = comando.ExecuteReader();
+            using (SqlConnection conexao = new SqlConnection(_stringConexao))
+            {
+                using (SqlCommand comando = new(consulta, conexao))
+                {
+                    conexao.Open();
+                    SqlDataReader retornoConsulta = comando.ExecuteReader();
 
-            List<Usuario> listaUsuarios = ObtemListaUsuarios(retornoConsulta);
+                    List<Usuario> listaUsuarios = ObtemListaUsuarios(retornoConsulta);
 
-            conexaoBd.Desconectar();
-
-            return listaUsuarios;
+                    return listaUsuarios;
+                }
+            }
         }
 
         public Usuario ObterPorId(int id)
         {
-            comando.CommandText = "SELECT * FROM Usuarios WHERE Id = @id;";
-            comando.Connection = conexaoBd.Conectar();
+            string consulta = "SELECT * FROM Usuarios WHERE Id = @id;";
 
-            comando.Parameters.AddWithValue("id", id);
+            using (SqlConnection conexao = new SqlConnection(_stringConexao))
+            {
+                using (SqlCommand comando = new(consulta, conexao))
+                {
+                    conexao.Open();
 
-            SqlDataReader retornoConsulta = comando.ExecuteReader();
+                    comando.Parameters.AddWithValue("id", id);
 
-            Usuario usuario = ObtemListaUsuarios(retornoConsulta)[0];
+                    SqlDataReader retornoConsulta = comando.ExecuteReader();
 
-            return usuario;
+                    Usuario usuario = ObtemListaUsuarios(retornoConsulta)[0];
+
+                    return usuario;
+                }
+            }
         }
 
         public bool EmailEstaDuplicado(string email, string id)
         {
-            comando.CommandText = "SELECT * FROM Usuarios WHERE Id != @id AND Email = @email;";
-            comando.Connection = conexaoBd.Conectar();
+            string consulta = "SELECT * FROM Usuarios WHERE Id != @id AND Email = @email;";
 
-            comando.Parameters.AddWithValue("id", id);
-            comando.Parameters.AddWithValue("email", email);
+            using (SqlConnection conexao = new SqlConnection(_stringConexao))
+            {
+                using (SqlCommand comando = new(consulta, conexao))
+                {
+                    conexao.Open();
 
-            SqlDataReader retornoConsulta = comando.ExecuteReader();
-            bool encontrado = retornoConsulta.HasRows;
+                    comando.Parameters.AddWithValue("id", id);
+                    comando.Parameters.AddWithValue("email", email);
 
-            conexaoBd.Desconectar();
+                    SqlDataReader retornoConsulta = comando.ExecuteReader();
+                    bool encontrado = retornoConsulta.HasRows;
 
-            return encontrado;
+                    return encontrado;
+                }
+            }
+            
         }
 
         public void AtribuiValoresParametros(Usuario usuario, SqlCommand comando)
         {
+            RSACryptoServiceProvider RSA = new();
             comando.Parameters.AddWithValue("nome", usuario.Nome);
             comando.Parameters.AddWithValue("email", usuario.Email);
-            comando.Parameters.AddWithValue("senha", SenhaCriptografada(usuario.Senha));
+            comando.Parameters.AddWithValue("senha", SenhaHash.SenhaCriptografada(usuario.Senha));
             comando.Parameters.AddWithValue("dataNascimento",
                                             usuario.DataNascimento == null ? DBNull.Value : usuario.DataNascimento);
             comando.Parameters.AddWithValue("dataCriacao", usuario.DataCriacao);
@@ -114,6 +143,7 @@ namespace CrudWindowsForm.Repositorio
         public List<Usuario> ObtemListaUsuarios(SqlDataReader retornoConsulta)
         {
             List<Usuario> listaUsuario = new List<Usuario>();
+            RSACryptoServiceProvider RSA = new();
 
             retornoConsulta.ToString().ToList();
             while (retornoConsulta.Read())
@@ -123,41 +153,15 @@ namespace CrudWindowsForm.Repositorio
                 usuario.Id = retornoConsulta.GetInt32("Id");
                 usuario.Nome = retornoConsulta.GetString("Nome");
                 usuario.Email = retornoConsulta.GetString("Email");
-                usuario.Senha = retornoConsulta.GetString("Senha");
-                usuario.DataNascimento = retornoConsulta.IsDBNull("DataNascimento") ? null : 
-                                                                  retornoConsulta.GetDateTime("DataNascimento");
+                usuario.Senha = SenhaHash.SenhaDescriptografada(retornoConsulta.GetString("Senha"));
+                usuario.DataNascimento = retornoConsulta.IsDBNull("DataNascimento")
+                                         ? null : retornoConsulta.GetDateTime("DataNascimento");
                 usuario.DataCriacao = retornoConsulta.GetDateTime("DataCriacao");
 
                 listaUsuario.Add(usuario);
             }
 
             return listaUsuario;
-        }
-
-        public string SenhaCriptografada(string senha)
-        {
-            RSACryptoServiceProvider RSA = new RSACryptoServiceProvider();
-
-            RSA.ImportParameters(RSA.ExportParameters(false));
-
-            byte[] senhaCriptografadaEmBytes = RSA.Encrypt(Encoding.ASCII.GetBytes(senha), false);
-
-            string senhaCriptografadaEmString = Encoding.ASCII.GetString(senhaCriptografadaEmBytes);
-
-            return senhaCriptografadaEmString;
-        }
-
-        public string SenhaDescriptografada(string senha)
-        {
-            RSACryptoServiceProvider RSA = new RSACryptoServiceProvider();
-
-            RSA.ImportParameters(RSA.ExportParameters(true));
-
-            byte[] senhaCriptografadaEmBytes = RSA.Decrypt(Encoding.ASCII.GetBytes(senha), false);
-
-            string senhaDescriptografada = Encoding.ASCII.GetString(senhaCriptografadaEmBytes);
-
-            return senhaDescriptografada;
         }
     }
 }
