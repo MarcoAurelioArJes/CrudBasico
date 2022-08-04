@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using CrudWindowsForm.Modelo;
 using CrudWindowsForm.Repositorio;
+using CrudWindowsForm.Servicos;
 
 namespace CrudWindowsForm
 {
@@ -11,7 +12,7 @@ namespace CrudWindowsForm
         public TelaCadastroUsuario()
         {
             InitializeComponent();
-            txtSenhaUsuario.PasswordChar = '*';
+            //txtSenhaUsuario.PasswordChar = '*';
             dataCriacaoUsuario.Value = DateTime.Today;
         }
 
@@ -25,7 +26,7 @@ namespace CrudWindowsForm
         {
             try
             {
-                UsuarioRepositorio usuarioRepositorio = new();
+                UsuarioRepositorioComSql usuarioRepositorioComSql = new();
 
                 bool validaCampos = ValidaCampos(txtNomeUsuario.Text,
                                             txtSenhaUsuario.Text,
@@ -33,7 +34,7 @@ namespace CrudWindowsForm
                                             dataNascimentoUsuario);
                 if (validaCampos) return;
 
-                bool emailExiste = usuarioRepositorio.EmailEstaDuplicado(txtEmailUsuario.Text, txtId.Text);
+                bool emailExiste = usuarioRepositorioComSql.EmailEstaDuplicado(txtEmailUsuario.Text, txtId.Text);
                 if (emailExiste) throw new Exception("Email já existe escolha outro");
 
                 if (this._usuario != null) RealizaAtualizacaoUsuario();
@@ -99,7 +100,7 @@ namespace CrudWindowsForm
         {
             usuario.Nome = txtNomeUsuario.Text;
             usuario.Senha = txtSenhaUsuario.Text;
-            usuario.Email = txtEmailUsuario.Text;
+            usuario.Email = txtEmailUsuario.Text.ToLower();
             usuario.DataNascimento = dataNascimentoUsuario.Value.Date;
             usuario.DataCriacao = dataCriacaoUsuario.Value.Date;
             if (dataNascimentoUsuario.Checked == false) usuario.DataNascimento = null;
@@ -108,20 +109,20 @@ namespace CrudWindowsForm
         }
         public void RealizaCadastro()
         {
-            UsuarioRepositorio usuarioRepositorio = new();
+            UsuarioRepositorioComSql usuarioRepositorioComSql = new();
             Usuario usuario = new Usuario();
 
-            usuarioRepositorio.Criar(InsereValoresCampos(usuario));
+            usuarioRepositorioComSql.Criar(InsereValoresCampos(usuario));
 
             MessageBox.Show("Usuário cadastrado com sucesso", "Cadastro usuário");
         }
 
         public void RealizaAtualizacaoUsuario()
         {
-            UsuarioRepositorio usuarioRepositorio = new();
+            UsuarioRepositorioComSql usuarioRepositorioComSql = new();
 
             Usuario usuario = InsereValoresCampos(this._usuario);
-            usuarioRepositorio.Atualizar(usuario);
+            usuarioRepositorioComSql.Atualizar(usuario);
 
             MessageBox.Show("Informações atualizadas", "Editar usuário");
         }

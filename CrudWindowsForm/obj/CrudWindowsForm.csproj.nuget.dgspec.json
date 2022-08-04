@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Usuario\\Downloads\\Crud\\CrudWindowsForm\\CrudWindowsForm.csproj": {}
+    "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm\\CrudWindowsForm.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Usuario\\Downloads\\Crud\\CrudWindowsForm\\CrudWindowsForm.csproj": {
+    "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm\\CrudWindowsForm.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\Downloads\\Crud\\CrudWindowsForm\\CrudWindowsForm.csproj",
+        "projectUniqueName": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm\\CrudWindowsForm.csproj",
         "projectName": "CrudWindowsForm",
-        "projectPath": "C:\\Users\\Usuario\\Downloads\\Crud\\CrudWindowsForm\\CrudWindowsForm.csproj",
+        "projectPath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm\\CrudWindowsForm.csproj",
         "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\Downloads\\Crud\\CrudWindowsForm\\obj\\",
+        "outputPath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -39,6 +39,12 @@
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
+          "dependencies": {
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

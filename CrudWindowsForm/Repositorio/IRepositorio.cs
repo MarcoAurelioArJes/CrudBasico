@@ -9,10 +9,8 @@ namespace CrudWindowsForm.Repositorio
     public interface IRepositorio<T> where T : class
     {
         public void Criar(T entidade);
-        public List<T> Listar();
-
+        public List<T> ObterTodos();
         public T ObterPorId(int id);
-
         public void Atualizar(T entidade);
         public void Deletar(int id);
     }
