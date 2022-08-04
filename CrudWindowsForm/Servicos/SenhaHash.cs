@@ -10,7 +10,7 @@ namespace CrudWindowsForm.Servicos
 
         public static string SenhaCriptografada(string senha)
         {
-            using (RSACryptoServiceProvider rsaProvider = new RSACryptoServiceProvider(2048))
+            using (RSACryptoServiceProvider rsaProvider = new(2048))
             {
                 byte[] senhaCriptografada;
 

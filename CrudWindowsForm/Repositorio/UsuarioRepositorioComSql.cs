@@ -100,7 +100,8 @@ namespace CrudWindowsForm.Repositorio
 
                     SqlDataReader retornoConsulta = comando.ExecuteReader();
 
-                    Usuario usuario = ObtemListaUsuarios(retornoConsulta)[0];
+                    Usuario usuario = ObtemListaUsuarios(retornoConsulta).FirstOrDefault()
+                                      ?? throw new Exception($"Usuário não encontrado com o id {id}");
 
                     return usuario;
                 }
@@ -131,7 +132,6 @@ namespace CrudWindowsForm.Repositorio
 
         public void AtribuiValoresParametros(Usuario usuario, SqlCommand comando)
         {
-            RSACryptoServiceProvider RSA = new();
             comando.Parameters.AddWithValue("nome", usuario.Nome);
             comando.Parameters.AddWithValue("email", usuario.Email);
             comando.Parameters.AddWithValue("senha", SenhaHash.SenhaCriptografada(usuario.Senha));
@@ -143,9 +143,7 @@ namespace CrudWindowsForm.Repositorio
         public List<Usuario> ObtemListaUsuarios(SqlDataReader retornoConsulta)
         {
             List<Usuario> listaUsuario = new List<Usuario>();
-            RSACryptoServiceProvider RSA = new();
 
-            retornoConsulta.ToString().ToList();
             while (retornoConsulta.Read())
             {
                 Usuario usuario = new Usuario();
