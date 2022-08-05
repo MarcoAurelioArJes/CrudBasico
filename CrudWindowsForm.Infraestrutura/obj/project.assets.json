@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    "net6.0-windows7.0": {
+    "net6.0": {
       "Microsoft.NETCore.Platforms/3.1.0": {
         "type": "package",
         "compile": {
@@ -139,20 +139,6 @@
         },
         "runtime": {
           "bin/placeholder/CrudWindowsForm.Dominio.dll": {}
-        }
-      },
-      "CrudWindowsForm.Infraestrutura/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "CrudWindowsForm.Dominio": "1.0.0",
-          "System.Data.SqlClient": "4.8.3"
-        },
-        "compile": {
-          "bin/placeholder/CrudWindowsForm.Infraestrutura.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/CrudWindowsForm.Infraestrutura.dll": {}
         }
       }
     }
@@ -475,17 +461,12 @@
       "type": "project",
       "path": "../CrudWindowsForm.Dominio/CrudWindowsForm.Dominio.csproj",
       "msbuildProject": "../CrudWindowsForm.Dominio/CrudWindowsForm.Dominio.csproj"
-    },
-    "CrudWindowsForm.Infraestrutura/1.0.0": {
-      "type": "project",
-      "path": "../CrudWindowsForm.Infraestrutura/CrudWindowsForm.Infraestrutura.csproj",
-      "msbuildProject": "../CrudWindowsForm.Infraestrutura/CrudWindowsForm.Infraestrutura.csproj"
     }
   },
   "projectFileDependencyGroups": {
-    "net6.0-windows7.0": [
+    "net6.0": [
       "CrudWindowsForm.Dominio >= 1.0.0",
-      "CrudWindowsForm.Infraestrutura >= 1.0.0"
+      "System.Data.SqlClient >= 4.8.3"
     ]
   },
   "packageFolders": {
@@ -494,32 +475,29 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm\\CrudWindowsForm.InterfaceUsuario.csproj",
-      "projectName": "CrudWindowsForm.InterfaceUsuario",
-      "projectPath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm\\CrudWindowsForm.InterfaceUsuario.csproj",
+      "projectUniqueName": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\CrudWindowsForm.Infraestrutura.csproj",
+      "projectName": "CrudWindowsForm.Infraestrutura",
+      "projectPath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\CrudWindowsForm.Infraestrutura.csproj",
       "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm\\obj\\",
+      "outputPath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net6.0-windows7.0"
+        "net6.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net6.0-windows7.0": {
-          "targetAlias": "net6.0-windows",
+        "net6.0": {
+          "targetAlias": "net6.0",
           "projectReferences": {
             "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm.Dominio\\CrudWindowsForm.Dominio.csproj": {
               "projectPath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm.Dominio\\CrudWindowsForm.Dominio.csproj"
-            },
-            "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\CrudWindowsForm.Infraestrutura.csproj": {
-              "projectPath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\CrudWindowsForm.Infraestrutura.csproj"
             }
           }
         }
@@ -531,8 +509,14 @@
       }
     },
     "frameworks": {
-      "net6.0-windows7.0": {
-        "targetAlias": "net6.0-windows",
+      "net6.0": {
+        "targetAlias": "net6.0",
+        "dependencies": {
+          "System.Data.SqlClient": {
+            "target": "Package",
+            "version": "[4.8.3, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",
@@ -546,9 +530,6 @@
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
-          },
-          "Microsoft.WindowsDesktop.App.WindowsForms": {
-            "privateAssets": "none"
           }
         },
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"

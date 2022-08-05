@@ -1,0 +1,15 @@
+C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Infraestrutura\obj\Debug\net6.0\CrudWindowsForm.Infraestrutura.csproj.AssemblyReference.cache
+C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Infraestrutura\obj\Debug\net6.0\CrudWindowsForm.Infraestrutura.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Infraestrutura\obj\Debug\net6.0\CrudWindowsForm.Infraestrutura.AssemblyInfoInputs.cache
+C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Infraestrutura\obj\Debug\net6.0\CrudWindowsForm.Infraestrutura.AssemblyInfo.cs
+C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Infraestrutura\obj\Debug\net6.0\CrudWindowsForm.Infraestrutura.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Infraestrutura\bin\Debug\net6.0\CrudWindowsForm.Infraestrutura.deps.json
+C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Infraestrutura\bin\Debug\net6.0\CrudWindowsForm.Infraestrutura.dll
+C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Infraestrutura\bin\Debug\net6.0\CrudWindowsForm.Infraestrutura.pdb
+C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Infraestrutura\bin\Debug\net6.0\CrudWindowsForm.Dominio.dll
+C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Infraestrutura\bin\Debug\net6.0\CrudWindowsForm.Dominio.pdb
+C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Infraestrutura\obj\Debug\net6.0\CrudWindowsForm.Infraestrutura.csproj.CopyComplete
+C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Infraestrutura\obj\Debug\net6.0\CrudWindowsForm.Infraestrutura.dll
+C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Infraestrutura\obj\Debug\net6.0\refint\CrudWindowsForm.Infraestrutura.dll
+C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Infraestrutura\obj\Debug\net6.0\CrudWindowsForm.Infraestrutura.pdb
+C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Infraestrutura\obj\Debug\net6.0\ref\CrudWindowsForm.Infraestrutura.dll
