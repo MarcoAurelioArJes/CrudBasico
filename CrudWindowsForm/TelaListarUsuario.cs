@@ -1,17 +1,21 @@
 ﻿using CrudWindowsForm.Modelo;
 using CrudWindowsForm.Repositorio;
+using CrudWindowsForm.Interfaces;
 
 namespace CrudWindowsForm
 {
     public partial class TelaListarUsuario : Form
     {
-        private Usuario _usuario;
+        private Usuario? _usuario;
 
-        UsuarioRepositorioComSql usuarioRepositorioComSql = new();
+        private readonly IRepositorioUsuario? _usuarioRepositorioComSql;
 
-        public TelaListarUsuario()
+        public TelaListarUsuario(IRepositorioUsuario usuarioRepositorioComSql)
         {
             InitializeComponent();
+
+            _usuarioRepositorioComSql = usuarioRepositorioComSql;
+
             ListaUsuarios();
         }
 
@@ -19,7 +23,7 @@ namespace CrudWindowsForm
         {
             try
             {
-                TelaCadastroUsuario telaDeCadastro = new();
+                TelaCadastroUsuario telaDeCadastro = new(_usuarioRepositorioComSql);
                 telaDeCadastro.ShowDialog();
                 ListaUsuarios();
             } catch (Exception error)
@@ -30,10 +34,9 @@ namespace CrudWindowsForm
 
         public List<Usuario> ListaUsuarios()
         {
-            UsuarioRepositorioComSql usuarioRepositorioComSql = new();
-            dataGridUsuarios.DataSource = usuarioRepositorioComSql.ObterTodos().ToList();
+            dataGridUsuarios.DataSource = _usuarioRepositorioComSql.ObterTodos().ToList();
             dataGridUsuarios.Columns["Senha"].Visible = false;
-            return usuarioRepositorioComSql.ObterTodos();
+            return _usuarioRepositorioComSql.ObterTodos();
         }
 
         private void AoClicarEmDeletar(object enviar, EventArgs e)
@@ -47,7 +50,7 @@ namespace CrudWindowsForm
                                                       "Deleta usuário", MessageBoxButtons.YesNo);
 
                 if (result == DialogResult.Yes) {
-                    usuarioRepositorioComSql.Deletar(_usuario.Id);
+                    _usuarioRepositorioComSql.Deletar(_usuario.Id);
                     MessageBox.Show("Usuário deletado com sucesso", "Deleta usuário");
                     _usuario = null;
                     ListaUsuarios();
@@ -60,7 +63,7 @@ namespace CrudWindowsForm
 
         private void AoClicarNaLinhaDaGrid(object sender, DataGridViewCellEventArgs e)
         {
-            _usuario = (Usuario)dataGridUsuarios.CurrentRow.DataBoundItem;
+            _usuario = dataGridUsuarios.CurrentRow.DataBoundItem as Usuario;
         }
 
         private void AoClicarEmEditar(object sender, EventArgs e)
@@ -69,7 +72,7 @@ namespace CrudWindowsForm
             {
                 if (_usuario == null) throw new Exception("Nenhum usuário foi selecionado");
 
-                TelaCadastroUsuario telaCadastroUsuario = new TelaCadastroUsuario(_usuario);
+                TelaCadastroUsuario telaCadastroUsuario = new TelaCadastroUsuario(_usuario, _usuarioRepositorioComSql);
                 telaCadastroUsuario.ShowDialog();
                 ListaUsuarios();
             } catch (Exception error)

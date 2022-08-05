@@ -1,22 +1,25 @@
 ﻿using System.Text.RegularExpressions;
 using CrudWindowsForm.Modelo;
 using CrudWindowsForm.Repositorio;
-using CrudWindowsForm.Servicos;
+using CrudWindowsForm.Interfaces;
 
 namespace CrudWindowsForm
 {
     public partial class TelaCadastroUsuario : Form
     {
         private Usuario _usuario;
-
-        public TelaCadastroUsuario()
+        private readonly IRepositorioUsuario? _repositorioUsuario;
+        public TelaCadastroUsuario(IRepositorioUsuario repositorioUsuario)
         {
+            _repositorioUsuario = repositorioUsuario;
+
             InitializeComponent();
             //txtSenhaUsuario.PasswordChar = '*';
             dataCriacaoUsuario.Value = DateTime.Today;
         }
 
-        public TelaCadastroUsuario(Usuario usuario) : this()
+        public TelaCadastroUsuario(Usuario usuario, IRepositorioUsuario repositorioUsuario) 
+        : this(repositorioUsuario)
         {
             PopularCampos(usuario);
             BtnCadastrar.Text = "Atualizar";
@@ -26,15 +29,13 @@ namespace CrudWindowsForm
         {
             try
             {
-                UsuarioRepositorioComSql usuarioRepositorioComSql = new();
-
                 bool validaCampos = ValidaCampos(txtNomeUsuario.Text,
                                             txtSenhaUsuario.Text,
                                             txtEmailUsuario.Text,
                                             dataNascimentoUsuario);
                 if (validaCampos) return;
 
-                bool emailExiste = usuarioRepositorioComSql.EmailEstaDuplicado(txtEmailUsuario.Text, txtId.Text);
+                bool emailExiste = _repositorioUsuario.EmailEstaDuplicado(txtEmailUsuario.Text, txtId.Text);
                 if (emailExiste) throw new Exception("Email já existe escolha outro");
 
                 if (this._usuario != null) RealizaAtualizacaoUsuario();
@@ -60,7 +61,7 @@ namespace CrudWindowsForm
             this._usuario = usuario;
         }
 
-        private void Cancelar_Click(object sender, EventArgs e)
+        private void AoClicarEmCancelar(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -109,20 +110,17 @@ namespace CrudWindowsForm
         }
         public void RealizaCadastro()
         {
-            UsuarioRepositorioComSql usuarioRepositorioComSql = new();
             Usuario usuario = new Usuario();
 
-            usuarioRepositorioComSql.Criar(InsereValoresCampos(usuario));
+            _repositorioUsuario.Criar(InsereValoresCampos(usuario));
 
             MessageBox.Show("Usuário cadastrado com sucesso", "Cadastro usuário");
         }
 
         public void RealizaAtualizacaoUsuario()
         {
-            UsuarioRepositorioComSql usuarioRepositorioComSql = new();
-
             Usuario usuario = InsereValoresCampos(this._usuario);
-            usuarioRepositorioComSql.Atualizar(usuario);
+            _repositorioUsuario.Atualizar(usuario);
 
             MessageBox.Show("Informações atualizadas", "Editar usuário");
         }
