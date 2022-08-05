@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4q/b6o7ciknPkJiKAQylcrW0kDglTpe1+eAN2GxNYVWGf7PEpqH3jg9F1szbd41NR6w8xgUDhYpO/AIP2wno5A==",
+  "dgSpecHash": "PmyTJUHE78K6qbYfKB9xteZnWJtSXNuEDs+T/0iTNjywLrkxMHZxPdWArkHbqsFlQxxbjT6wfgyVKxBk3t3KEA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm\\CrudWindowsForm.InterfaceUsuario.csproj",
+  "projectFilePath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\CrudWindowsForm.Infraestrutura.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
