@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using CrudWindowsForm.Interfaces;
-using CrudWindowsForm.Repositorio;
+using CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb;
 
 namespace CrudWindowsForm
 {
@@ -25,6 +25,6 @@ namespace CrudWindowsForm
         static IHostBuilder CreateHostBuilder() =>
             Host.CreateDefaultBuilder()
                 .ConfigureServices((_, services) =>
-                    services.AddTransient<IRepositorioUsuario, UsuarioRepositorioComSql>());
+                    services.AddTransient<IRepositorioUsuario, UsuarioRepositorioComLinqToDb>());
     }
 }
