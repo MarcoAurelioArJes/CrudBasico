@@ -18,13 +18,13 @@ namespace CrudWindowsForm
             ApplicationConfiguration.Initialize();
             
             IHost host = CreateHostBuilder().Build();
-            Application.Run(host.Services.GetService<TelaListarUsuario>());
+            var repositorioUsuario = host.Services.GetService<IRepositorioUsuario>();
+            Application.Run(new TelaListarUsuario(repositorioUsuario));
         }
 
         static IHostBuilder CreateHostBuilder() =>
             Host.CreateDefaultBuilder()
                 .ConfigureServices((_, services) =>
-                    services.AddTransient<IRepositorioUsuario, UsuarioRepositorioComSql>()
-                            .AddSingleton<TelaListarUsuario>());
+                    services.AddTransient<IRepositorioUsuario, UsuarioRepositorioComSql>());
     }
 }

@@ -9,6 +9,7 @@ namespace CrudWindowsForm
     {
         private Usuario _usuario;
         private readonly IRepositorioUsuario? _repositorioUsuario;
+
         public TelaCadastroUsuario(IRepositorioUsuario repositorioUsuario)
         {
             _repositorioUsuario = repositorioUsuario;
