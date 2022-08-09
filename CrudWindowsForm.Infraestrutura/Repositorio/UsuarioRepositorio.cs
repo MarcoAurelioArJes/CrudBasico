@@ -1,8 +1,8 @@
-﻿using CrudWindowsForm.Interfaces;
-using CrudWindowsForm.Modelo;
+﻿using CrudWindowsForm.Dominio.Interfaces;
+using CrudWindowsForm.Dominio.Modelo;
 using CrudWindowsForm.Servicos;
 
-namespace CrudWindowsForm.Repositorio
+namespace CrudWindowsForm.Infraestrutura.Repositorio
 {
     public class UsuarioRepositorio : Repositorio<Usuario>, IRepositorioUsuario
     {

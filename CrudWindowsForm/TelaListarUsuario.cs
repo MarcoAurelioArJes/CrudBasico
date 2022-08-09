@@ -1,6 +1,7 @@
-﻿using CrudWindowsForm.Modelo;
-using CrudWindowsForm.Repositorio;
-using CrudWindowsForm.Interfaces;
+﻿using CrudWindowsForm.Dominio.Modelo;
+using CrudWindowsForm.Dominio.Interfaces;
+using CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb;
+using Microsoft.Data.SqlClient;
 
 namespace CrudWindowsForm
 {
@@ -28,13 +29,14 @@ namespace CrudWindowsForm
                 ListaUsuarios();
             } catch (Exception error)
             {
-                MessageBox.Show(error.Message);
+                var msg = $"{error.Message}{error.InnerException?.Message}";
+                MessageBox.Show(msg);
             }
         }
 
         public List<Usuario> ListaUsuarios()
         {
-            dataGridUsuarios.DataSource = _usuarioRepositorioComSql.ObterTodos().ToList();
+            dataGridUsuarios.DataSource = _usuarioRepositorioComSql.ObterTodos();
             dataGridUsuarios.Columns["Senha"].Visible = false;
             return _usuarioRepositorioComSql.ObterTodos();
         }
@@ -57,13 +59,18 @@ namespace CrudWindowsForm
                 }
             } catch (Exception error)
             {
-                MessageBox.Show(error.Message);
+                var msg = $"{error.Message}{error.InnerException?.Message}";
+                MessageBox.Show(msg);
             }
         }
 
         private void AoClicarNaLinhaDaGrid(object sender, DataGridViewCellEventArgs e)
         {
-            _usuario = dataGridUsuarios.CurrentRow.DataBoundItem as Usuario;
+            string? id = dataGridUsuarios.CurrentRow.Cells["Id"].Value.ToString();
+            if (id == null)
+                throw new Exception("Nenhum usuário selecionado");
+
+            _usuario = _usuarioRepositorioComSql.ObterPorId(int.Parse(id));
         }
 
         private void AoClicarEmEditar(object sender, EventArgs e)
@@ -72,12 +79,13 @@ namespace CrudWindowsForm
             {
                 if (_usuario == null) throw new Exception("Nenhum usuário foi selecionado");
 
-                TelaCadastroUsuario telaCadastroUsuario = new TelaCadastroUsuario(_usuario, _usuarioRepositorioComSql);
+                TelaCadastroUsuario telaCadastroUsuario = new(_usuario, _usuarioRepositorioComSql);
                 telaCadastroUsuario.ShowDialog();
                 ListaUsuarios();
             } catch (Exception error)
             {
-                MessageBox.Show(error.Message);
+                var msg = $"{error.Message}{error.InnerException?.Message}";
+                MessageBox.Show(msg);
             }
         }
     }

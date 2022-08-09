@@ -1,7 +1,7 @@
-﻿using CrudWindowsForm.Interfaces;
+﻿using CrudWindowsForm.Dominio.Interfaces;
 using CrudWindowsForm.Servicos;
 
-namespace CrudWindowsForm.Repositorio
+namespace CrudWindowsForm.Infraestrutura.Repositorio
 {
     public abstract class Repositorio<T> : IRepositorio<T> where T : class {
         protected List<T> _lista = ListaSingleton<T>.Instancia;

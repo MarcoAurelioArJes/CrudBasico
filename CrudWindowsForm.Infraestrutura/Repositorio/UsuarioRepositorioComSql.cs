@@ -1,12 +1,12 @@
 ﻿using System.Text;
 using System.Data;
 using System.Data.SqlClient;
-using CrudWindowsForm.Modelo;
+using CrudWindowsForm.Dominio.Modelo;
 using CrudWindowsForm.Dominio.Seguranca;
 using System.Security.Cryptography;
-using CrudWindowsForm.Interfaces;
+using CrudWindowsForm.Dominio.Interfaces;
 
-namespace CrudWindowsForm.Repositorio
+namespace CrudWindowsForm.Infraestrutura.Repositorio
 {
     public class UsuarioRepositorioComSql : IRepositorioUsuario
     {

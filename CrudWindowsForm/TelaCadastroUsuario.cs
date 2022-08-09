@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
-using CrudWindowsForm.Modelo;
-using CrudWindowsForm.Repositorio;
-using CrudWindowsForm.Interfaces;
+using CrudWindowsForm.Dominio.Modelo;
+using CrudWindowsForm.Dominio.Interfaces;
+using CrudWindowsForm.Infraestrutura.Repositorio;
 
 namespace CrudWindowsForm
 {
@@ -37,6 +37,8 @@ namespace CrudWindowsForm
                 if (validaCampos) return;
 
                 bool emailExiste = _repositorioUsuario.EmailEstaDuplicado(txtEmailUsuario.Text, txtId.Text);
+
+               
                 if (emailExiste) throw new Exception("Email já existe escolha outro");
 
                 if (this._usuario != null) RealizaAtualizacaoUsuario();
@@ -46,7 +48,8 @@ namespace CrudWindowsForm
             }
             catch (Exception error)
             {
-                MessageBox.Show(error.Message);
+                var msg = $"{error.Message}{error.InnerException?.Message}";
+                MessageBox.Show(msg);
             }
         }
 

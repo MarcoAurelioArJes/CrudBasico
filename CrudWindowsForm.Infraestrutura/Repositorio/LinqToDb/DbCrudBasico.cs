@@ -1,21 +1,20 @@
 ﻿using System.Configuration;
 using LinqToDB;
 using LinqToDB.Data;
+using CrudWindowsForm.Dominio.Modelo;
 
 namespace CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb
 {
     public class DbCrudBasico : DataConnection
     {
-        public DbCrudBasico()
-        {
-            var db = new DataConnection(
-              ProviderName.SqlServer2019,
-              "Server=localhost\\SQLEXPRESS;Database=CrudBasico;Trusted_Connection=True;Enlist=False;");
+        static private ConnectionStringSettings _connectString = 
+            new ConnectionStringSettings("CrudBasico",
+                                         "Server=localhost\\SQLEXPRESS;Database=CrudBasico;User Id=sa;Password=AAASDSDsds@sdadsa@sdasds;Encrypt=false;",
+                                         ProviderName.SqlServer);
+        
+        public DbCrudBasico() : base(_connectString.ProviderName, _connectString.ConnectionString) {
         }
 
-
-        public ITable<UsuarioRepositorioComLinqToDb> Usuarios
-            => this.GetTable<UsuarioRepositorioComLinqToDb>();
-
+        public ITable<Usuario> Usuarios => this.GetTable<Usuario>();
     }
 }
