@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using CrudWindowsForm.Dominio.Interfaces;
-using CrudWindowsForm.Infraestrutura.Repositorio;
+using CrudWindowsForm.Dominio.Validacoes;
 using CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb;
 
 namespace CrudWindowsForm
@@ -17,15 +17,18 @@ namespace CrudWindowsForm
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            
+
             IHost host = CreateHostBuilder().Build();
             var repositorioUsuario = host.Services.GetService<IRepositorioUsuario>();
-            Application.Run(new TelaListarUsuario(repositorioUsuario));
+            var validacaoDeUsuario = host.Services.GetService<IValidacaoDeUsuario>();
+            Application.Run(new TelaListarUsuario(repositorioUsuario, validacaoDeUsuario));
         }
 
         static IHostBuilder CreateHostBuilder() =>
             Host.CreateDefaultBuilder()
                 .ConfigureServices((_, services) =>
-                    services.AddScoped<IRepositorioUsuario, UsuarioRepositorioComLinqToDb>());
+                    services.AddScoped<IRepositorioUsuario, UsuarioRepositorioComLinqToDb>()
+                    .AddScoped<DbCrudBasico>()
+                    .AddScoped<IValidacaoDeUsuario, ValidacaoDeUsuario>());
     }
 }

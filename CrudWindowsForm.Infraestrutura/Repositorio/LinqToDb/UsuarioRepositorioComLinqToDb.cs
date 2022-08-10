@@ -9,13 +9,20 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb
 {
     public class UsuarioRepositorioComLinqToDb : IRepositorioUsuario
     {
+
+        private readonly DbCrudBasico _dbCrudBasico;
+
+        public UsuarioRepositorioComLinqToDb(DbCrudBasico crudBasico)
+        {
+            _dbCrudBasico = crudBasico;
+        }
+
         public void Criar(Usuario usuario)
         {
             try
             {
-                DbCrudBasico dbCrudBasico = new();
                 usuario.Senha = CriptografiaSenha.SenhaCriptografada(usuario.Senha);
-                dbCrudBasico.Insert("TEste");
+                _dbCrudBasico.Insert(usuario);
             }
             catch (Exception erro)
             {
@@ -27,10 +34,8 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb
         {
             try
             {
-                DbCrudBasico dbCrudBasico = new();
-
                 var query = from usuarios
-                            in dbCrudBasico.Usuarios
+                            in _dbCrudBasico.Usuarios
                             select usuarios;
 
                 return query.ToList();
@@ -45,9 +50,8 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb
         {
             try
             {
-                DbCrudBasico dbCrudBasico = new();
                 var usuarioRetornado = from usuario
-                                        in dbCrudBasico.Usuarios
+                                        in _dbCrudBasico.Usuarios
                                        where usuario.Id == id
                                        select new Usuario
                                        {
@@ -55,7 +59,7 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb
                                            Nome = usuario.Nome,
                                            Senha = CriptografiaSenha.SenhaDescriptografada(usuario.Senha),
                                            Email = usuario.Email,
-                                           DataNascimento = usuario.DataNascimento,
+                                           DataNascimento = usuario.DataNascimento == null ? null : usuario.DataNascimento,
                                            DataCriacao = usuario.DataCriacao
                                        };
 
@@ -72,9 +76,7 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb
         {
             try
             {
-                DbCrudBasico dbCrudBasico = new();
-
-                dbCrudBasico.Usuarios
+                _dbCrudBasico.Usuarios
                     .Where(usuario => usuario.Id == usuarioAtualizado.Id)
                     .Set(usuario => usuario.Nome, usuarioAtualizado.Nome)
                     .Set(usuario => usuario.Senha, CriptografiaSenha.SenhaCriptografada(usuarioAtualizado.Senha))
@@ -93,8 +95,7 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb
         {
             try
             {
-                DbCrudBasico dbCrudBasico = new();
-                dbCrudBasico.Usuarios
+                _dbCrudBasico.Usuarios
                     .Where(usuario => usuario.Id == id)
                     .Delete();
 
@@ -109,14 +110,12 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb
         {
             try
             {
-                DbCrudBasico dbCrudBasico = new();
-
                 var query = from usuarios
-                            in dbCrudBasico.Usuarios
+                            in _dbCrudBasico.Usuarios
                             where usuarios.Id.ToString() != id && usuarios.Email == email
                             select usuarios;
 
-                return query.ToList().Count != 0;
+                return query.ToList().Any();
 
             } catch (Exception erro)
             {

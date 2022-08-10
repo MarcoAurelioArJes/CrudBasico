@@ -1,7 +1,6 @@
 ﻿using CrudWindowsForm.Dominio.Modelo;
 using CrudWindowsForm.Dominio.Interfaces;
-using CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb;
-using Microsoft.Data.SqlClient;
+using CrudWindowsForm.Dominio.Validacoes;
 
 namespace CrudWindowsForm
 {
@@ -10,12 +9,13 @@ namespace CrudWindowsForm
         private Usuario? _usuario;
 
         private readonly IRepositorioUsuario? _usuarioRepositorioComSql;
-
-        public TelaListarUsuario(IRepositorioUsuario usuarioRepositorioComSql)
+        private readonly IValidacaoDeUsuario? _validacaoDeUsuario;
+        public TelaListarUsuario(IRepositorioUsuario usuarioRepositorioComSql, IValidacaoDeUsuario validacaoDeUsuario)
         {
             InitializeComponent();
 
             _usuarioRepositorioComSql = usuarioRepositorioComSql;
+            _validacaoDeUsuario = validacaoDeUsuario;
 
             ListaUsuarios();
         }
@@ -24,7 +24,7 @@ namespace CrudWindowsForm
         {
             try
             {
-                TelaCadastroUsuario telaDeCadastro = new(_usuarioRepositorioComSql);
+                var telaDeCadastro = new TelaCadastroUsuario(_usuarioRepositorioComSql, _validacaoDeUsuario);
                 telaDeCadastro.ShowDialog();
                 ListaUsuarios();
             } catch (Exception error)
@@ -79,7 +79,7 @@ namespace CrudWindowsForm
             {
                 if (_usuario == null) throw new Exception("Nenhum usuário foi selecionado");
 
-                TelaCadastroUsuario telaCadastroUsuario = new(_usuario, _usuarioRepositorioComSql);
+                TelaCadastroUsuario telaCadastroUsuario = new(_usuario, _usuarioRepositorioComSql, _validacaoDeUsuario);
                 telaCadastroUsuario.ShowDialog();
                 ListaUsuarios();
             } catch (Exception error)
