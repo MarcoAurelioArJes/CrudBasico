@@ -28,6 +28,10 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb
             {
                 throw new Exception("Ocorreu um erro ao criar o usuário\n", erro);
             }
+            finally
+            {
+                _dbCrudBasico.Close();
+            }
         }
 
         public List<Usuario> ObterTodos()
@@ -44,6 +48,10 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb
             {
                 throw new Exception("Ocorreu um erro ao listar os usuários", erro);
             }
+            finally
+            {
+                _dbCrudBasico.Close();
+            }
         }
 
         public Usuario ObterPorId(int id)
@@ -59,7 +67,7 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb
                                            Nome = usuario.Nome,
                                            Senha = CriptografiaSenha.SenhaDescriptografada(usuario.Senha),
                                            Email = usuario.Email,
-                                           DataNascimento = usuario.DataNascimento == null ? null : usuario.DataNascimento,
+                                           DataNascimento = usuario.DataNascimento.HasValue ? usuario.DataNascimento : null,
                                            DataCriacao = usuario.DataCriacao
                                        };
 
@@ -70,23 +78,33 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb
             {
                 throw new Exception($"Ocorreu um erro ao obter o usuário com o id {id}\n", erro);
             }
+            finally
+            {
+                _dbCrudBasico.Close();
+            }
         }
 
         public void Atualizar(Usuario usuarioAtualizado)
         {
             try
             {
+                DateTime? dataNascimento = usuarioAtualizado.DataNascimento.HasValue ? usuarioAtualizado.DataNascimento : null;
+
                 _dbCrudBasico.Usuarios
                     .Where(usuario => usuario.Id == usuarioAtualizado.Id)
                     .Set(usuario => usuario.Nome, usuarioAtualizado.Nome)
                     .Set(usuario => usuario.Senha, CriptografiaSenha.SenhaCriptografada(usuarioAtualizado.Senha))
                     .Set(usuario => usuario.Email, usuarioAtualizado.Email)
-                    .Set(usuario => usuario.DataNascimento, usuarioAtualizado.DataNascimento.GetValueOrDefault())
+                    .Set(usuario => usuario.DataNascimento, dataNascimento)
                     .Update();
             }
             catch (Exception erro)
             {
                 throw new Exception($"Ocorreu um erro ao atualizar o usuário com id {usuarioAtualizado.Id}\n", erro);
+            }
+            finally
+            {
+                _dbCrudBasico.Close();
             }
 
         }
@@ -98,11 +116,14 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb
                 _dbCrudBasico.Usuarios
                     .Where(usuario => usuario.Id == id)
                     .Delete();
-
             }
             catch (Exception erro)
             {
                 throw new Exception($"Ocorreu um erro ao deletar o usuário\n", erro);
+            }
+            finally
+            {
+                _dbCrudBasico.Close();
             }
         }
 
@@ -117,9 +138,14 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb
 
                 return query.ToList().Any();
 
-            } catch (Exception erro)
+            }
+            catch (Exception erro)
             {
                 throw new Exception($"Ocorreu um erro ao verificar o email do usuário com id {id}\n", erro);
+            }
+            finally
+            {
+                _dbCrudBasico.Close();
             }
         }
     }

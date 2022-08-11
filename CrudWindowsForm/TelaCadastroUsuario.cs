@@ -1,5 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using CrudWindowsForm.Dominio.Modelo;
+﻿using CrudWindowsForm.Dominio.Modelo;
 using CrudWindowsForm.Dominio.Interfaces;
 using CrudWindowsForm.Dominio.Validacoes;
 using FluentValidation.Results;
@@ -17,7 +16,6 @@ namespace CrudWindowsForm
             _validacaoDeUsuario = validacaoDeUsuario;
 
             InitializeComponent();
-            //txtSenhaUsuario.PasswordChar = '*';
             dataCriacaoUsuario.Value = DateTime.Today;
         }
 
@@ -32,13 +30,8 @@ namespace CrudWindowsForm
         {
             try
             {
-                bool emailExiste = _repositorioUsuario.EmailEstaDuplicado(txtEmailUsuario.Text, txtId.Text);
-                if (emailExiste) throw new Exception("Email já existe escolha outro");
-
                 if (this._usuario != null) RealizaAtualizacaoUsuario();
                 else RealizaCadastro();
-
-                this.Close();
             }
             catch (Exception error)
             {
@@ -111,6 +104,7 @@ namespace CrudWindowsForm
             usuario.Email = txtEmailUsuario.Text.ToLower();
             usuario.DataNascimento = dataNascimentoUsuario.Value.Date;
             usuario.DataCriacao = dataCriacaoUsuario.Value.Date;
+
             if (dataNascimentoUsuario.Checked == false) usuario.DataNascimento = null;
 
             return usuario;
@@ -120,23 +114,24 @@ namespace CrudWindowsForm
             var usuario = new Usuario();
             var novoUsuario = InsereValoresCampos(usuario);
 
-            if (ValidaCampos(novoUsuario))
-                throw new Exception("Não foi possível cadastrar o usuário");
+            if (ValidaCampos(novoUsuario)) return;
 
             _repositorioUsuario.Criar(novoUsuario);
 
             MessageBox.Show("Usuário cadastrado com sucesso", "Cadastro usuário");
+            this.Close();
         }
 
         public void RealizaAtualizacaoUsuario()
         {
-            if (ValidaCampos(this._usuario))
-                throw new Exception("Não foi possível editar o usuário");
-
             Usuario usuario = InsereValoresCampos(this._usuario);
+
+            if (ValidaCampos(usuario)) return;
+
             _repositorioUsuario.Atualizar(usuario);
 
             MessageBox.Show("Informações atualizadas", "Editar usuário");
+            this.Close();
         }
     }
 }
