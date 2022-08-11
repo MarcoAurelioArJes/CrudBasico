@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 using CrudWindowsForm.Dominio.Interfaces;
 using CrudWindowsForm.Dominio.Validacoes;
 using CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb;
+using CrudWindowsForm.Infraestrutura.Migrations;
 
 namespace CrudWindowsForm
 {
@@ -17,6 +18,8 @@ namespace CrudWindowsForm
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
+
+            new RealizaMigracoes();
 
             IHost host = CreateHostBuilder().Build();
             var repositorioUsuario = host.Services.GetService<IRepositorioUsuario>();

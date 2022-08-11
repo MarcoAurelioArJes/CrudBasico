@@ -108,6 +108,18 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "FluentMigrator": {
+              "target": "Package",
+              "version": "[3.3.2, )"
+            },
+            "FluentMigrator.Runner": {
+              "target": "Package",
+              "version": "[3.3.2, )"
+            },
+            "FluentMigrator.Runner.SqlServer": {
+              "target": "Package",
+              "version": "[3.3.2, )"
+            },
             "Microsoft.Data.SqlClient": {
               "target": "Package",
               "version": "[5.0.0, )"
