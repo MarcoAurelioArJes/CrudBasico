@@ -7,8 +7,28 @@
   "targets": {
     ".NETCoreApp,Version=v6.0": {
       "CrudWindowsForm.Dominio/1.0.0": {
+        "dependencies": {
+          "FluentValidation": "11.2.0",
+          "linq2db": "4.1.1"
+        },
         "runtime": {
           "CrudWindowsForm.Dominio.dll": {}
+        }
+      },
+      "FluentValidation/11.2.0": {
+        "runtime": {
+          "lib/net6.0/FluentValidation.dll": {
+            "assemblyVersion": "11.0.0.0",
+            "fileVersion": "11.2.0.0"
+          }
+        }
+      },
+      "linq2db/4.1.1": {
+        "runtime": {
+          "lib/net6.0/linq2db.dll": {
+            "assemblyVersion": "4.1.1.0",
+            "fileVersion": "4.1.1.0"
+          }
         }
       }
     }
@@ -18,6 +38,20 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "FluentValidation/11.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KV1YBM8T4plLKmShjxfmHMF6X1lDuXgyqE+t8NYNxb7jmMbPnA3u30RsuXAf2NYMv0TBCUQguI2Z6W17c/Dh1A==",
+      "path": "fluentvalidation/11.2.0",
+      "hashPath": "fluentvalidation.11.2.0.nupkg.sha512"
+    },
+    "linq2db/4.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-s0/kByoS3qgQn/OHu8htt7m1plsAsRxNgXhYfXBRedy+SsRv0xuHA6w8X5J1WLWjXUjANRWtTNjCyD1lWZD69Q==",
+      "path": "linq2db/4.1.1",
+      "hashPath": "linq2db.4.1.1.nupkg.sha512"
     }
   }
 }

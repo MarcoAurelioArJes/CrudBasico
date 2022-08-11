@@ -1,22 +1,26 @@
-﻿using System.Text.RegularExpressions;
-using CrudWindowsForm.Modelo;
-using CrudWindowsForm.Repositorio;
-using CrudWindowsForm.Servicos;
+﻿using CrudWindowsForm.Dominio.Modelo;
+using CrudWindowsForm.Dominio.Interfaces;
+using CrudWindowsForm.Dominio.Validacoes;
+using FluentValidation.Results;
 
 namespace CrudWindowsForm
 {
     public partial class TelaCadastroUsuario : Form
     {
         private Usuario _usuario;
-
-        public TelaCadastroUsuario()
+        private readonly IRepositorioUsuario? _repositorioUsuario;
+        private readonly IValidacaoDeUsuario? _validacaoDeUsuario;
+        public TelaCadastroUsuario(IRepositorioUsuario repositorioUsuario, IValidacaoDeUsuario validacaoDeUsuario)
         {
+            _repositorioUsuario = repositorioUsuario;
+            _validacaoDeUsuario = validacaoDeUsuario;
+
             InitializeComponent();
-            //txtSenhaUsuario.PasswordChar = '*';
             dataCriacaoUsuario.Value = DateTime.Today;
         }
 
-        public TelaCadastroUsuario(Usuario usuario) : this()
+        public TelaCadastroUsuario(Usuario usuario, IRepositorioUsuario repositorioUsuario, IValidacaoDeUsuario validacaoDeUsuario)
+        : this(repositorioUsuario, validacaoDeUsuario)
         {
             PopularCampos(usuario);
             BtnCadastrar.Text = "Atualizar";
@@ -26,25 +30,13 @@ namespace CrudWindowsForm
         {
             try
             {
-                UsuarioRepositorioComSql usuarioRepositorioComSql = new();
-
-                bool validaCampos = ValidaCampos(txtNomeUsuario.Text,
-                                            txtSenhaUsuario.Text,
-                                            txtEmailUsuario.Text,
-                                            dataNascimentoUsuario);
-                if (validaCampos) return;
-
-                bool emailExiste = usuarioRepositorioComSql.EmailEstaDuplicado(txtEmailUsuario.Text, txtId.Text);
-                if (emailExiste) throw new Exception("Email já existe escolha outro");
-
                 if (this._usuario != null) RealizaAtualizacaoUsuario();
                 else RealizaCadastro();
-
-                this.Close();
             }
             catch (Exception error)
             {
-                MessageBox.Show(error.Message);
+                var msg = $"{error.Message}{error.InnerException?.Message}";
+                MessageBox.Show(msg);
             }
         }
 
@@ -60,20 +52,21 @@ namespace CrudWindowsForm
             this._usuario = usuario;
         }
 
-        private void Cancelar_Click(object sender, EventArgs e)
+        private void AoClicarEmCancelar(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        public bool MensagemErros(Label campo, string mensagem)
+        public void MensagensLabel(Label campo, string mensagem)
         {
             campo.Visible = true;
             campo.Text = mensagem;
-            return true;
         }
 
-        public bool ValidaCampos(string nome, string senha, string email, DateTimePicker dataNascimento)
+        public bool ValidaCampos(Usuario usuario)
         {
+            var results = _validacaoDeUsuario.Validate(usuario);
+
             bool validaTodos = false;
             string valorPadrao = string.Empty;
 
@@ -82,16 +75,24 @@ namespace CrudWindowsForm
             avisoEmail.Text = valorPadrao;
             avisoDataNascimento.Text = valorPadrao;
 
-            Regex regex = new Regex(@"\w+.*@\w+\.com");
-            if (email.Length <= 0) validaTodos = MensagemErros(avisoEmail, "Informe um email");
-            else if (!regex.IsMatch(email)) validaTodos = MensagemErros(avisoEmail, "Por favor insira um email válido");
+            if (!results.IsValid)
+            {
+                foreach (ValidationFailure erros in results.Errors)
+                {
+                    if (erros.PropertyName == "Nome")
+                        MensagensLabel(avisoNome, erros.ErrorMessage);
 
-            if (senha.Length <= 0) validaTodos = MensagemErros(avisoSenha, "Informe a senha");
+                    if (erros.PropertyName == "Senha")
+                        MensagensLabel(avisoSenha, erros.ErrorMessage);
 
-            if (nome.Length <= 0) validaTodos = MensagemErros(avisoNome, "Informe um nome");
+                    if (erros.PropertyName == "Email")
+                        MensagensLabel(avisoEmail, erros.ErrorMessage);
 
-            if ((dataNascimento.Value > DateTime.Today || dataNascimento.Value < new DateTime(1930, 01, 01)) && dataNascimento.Checked)
-                validaTodos = MensagemErros(avisoDataNascimento, "Data de nascimento inválida");
+                    if (erros.PropertyName == "DataNascimento")
+                        MensagensLabel(avisoDataNascimento, erros.ErrorMessage);
+                }
+                validaTodos = true;
+            }
 
             return validaTodos;
         }
@@ -103,28 +104,34 @@ namespace CrudWindowsForm
             usuario.Email = txtEmailUsuario.Text.ToLower();
             usuario.DataNascimento = dataNascimentoUsuario.Value.Date;
             usuario.DataCriacao = dataCriacaoUsuario.Value.Date;
+
             if (dataNascimentoUsuario.Checked == false) usuario.DataNascimento = null;
 
             return usuario;
         }
         public void RealizaCadastro()
         {
-            UsuarioRepositorioComSql usuarioRepositorioComSql = new();
-            Usuario usuario = new Usuario();
+            var usuario = new Usuario();
+            var novoUsuario = InsereValoresCampos(usuario);
 
-            usuarioRepositorioComSql.Criar(InsereValoresCampos(usuario));
+            if (ValidaCampos(novoUsuario)) return;
+
+            _repositorioUsuario.Criar(novoUsuario);
 
             MessageBox.Show("Usuário cadastrado com sucesso", "Cadastro usuário");
+            this.Close();
         }
 
         public void RealizaAtualizacaoUsuario()
         {
-            UsuarioRepositorioComSql usuarioRepositorioComSql = new();
-
             Usuario usuario = InsereValoresCampos(this._usuario);
-            usuarioRepositorioComSql.Atualizar(usuario);
+
+            if (ValidaCampos(usuario)) return;
+
+            _repositorioUsuario.Atualizar(usuario);
 
             MessageBox.Show("Informações atualizadas", "Editar usuário");
+            this.Close();
         }
     }
 }

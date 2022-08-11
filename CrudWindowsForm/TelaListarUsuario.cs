@@ -1,17 +1,22 @@
-﻿using CrudWindowsForm.Modelo;
-using CrudWindowsForm.Repositorio;
+﻿using CrudWindowsForm.Dominio.Modelo;
+using CrudWindowsForm.Dominio.Interfaces;
+using CrudWindowsForm.Dominio.Validacoes;
 
 namespace CrudWindowsForm
 {
     public partial class TelaListarUsuario : Form
     {
-        private Usuario _usuario;
+        private Usuario? _usuario;
 
-        UsuarioRepositorioComSql usuarioRepositorioComSql = new();
-
-        public TelaListarUsuario()
+        private readonly IRepositorioUsuario? _usuarioRepositorioComSql;
+        private readonly IValidacaoDeUsuario? _validacaoDeUsuario;
+        public TelaListarUsuario(IRepositorioUsuario usuarioRepositorioComSql, IValidacaoDeUsuario validacaoDeUsuario)
         {
             InitializeComponent();
+
+            _usuarioRepositorioComSql = usuarioRepositorioComSql;
+            _validacaoDeUsuario = validacaoDeUsuario;
+
             ListaUsuarios();
         }
 
@@ -19,21 +24,21 @@ namespace CrudWindowsForm
         {
             try
             {
-                TelaCadastroUsuario telaDeCadastro = new();
+                var telaDeCadastro = new TelaCadastroUsuario(_usuarioRepositorioComSql, _validacaoDeUsuario);
                 telaDeCadastro.ShowDialog();
                 ListaUsuarios();
             } catch (Exception error)
             {
-                MessageBox.Show(error.Message);
+                var msg = $"{error.Message}{error.InnerException?.Message}";
+                MessageBox.Show(msg);
             }
         }
 
         public List<Usuario> ListaUsuarios()
         {
-            UsuarioRepositorioComSql usuarioRepositorioComSql = new();
-            dataGridUsuarios.DataSource = usuarioRepositorioComSql.ObterTodos().ToList();
+            dataGridUsuarios.DataSource = _usuarioRepositorioComSql.ObterTodos();
             dataGridUsuarios.Columns["Senha"].Visible = false;
-            return usuarioRepositorioComSql.ObterTodos();
+            return _usuarioRepositorioComSql.ObterTodos();
         }
 
         private void AoClicarEmDeletar(object enviar, EventArgs e)
@@ -47,20 +52,25 @@ namespace CrudWindowsForm
                                                       "Deleta usuário", MessageBoxButtons.YesNo);
 
                 if (result == DialogResult.Yes) {
-                    usuarioRepositorioComSql.Deletar(_usuario.Id);
+                    _usuarioRepositorioComSql.Deletar(_usuario.Id);
                     MessageBox.Show("Usuário deletado com sucesso", "Deleta usuário");
                     _usuario = null;
                     ListaUsuarios();
                 }
             } catch (Exception error)
             {
-                MessageBox.Show(error.Message);
+                var msg = $"{error.Message}{error.InnerException?.Message}";
+                MessageBox.Show(msg);
             }
         }
 
         private void AoClicarNaLinhaDaGrid(object sender, DataGridViewCellEventArgs e)
         {
-            _usuario = (Usuario)dataGridUsuarios.CurrentRow.DataBoundItem;
+            string? id = dataGridUsuarios.CurrentRow.Cells["Id"].Value.ToString();
+            if (id == null)
+                throw new Exception("Nenhum usuário selecionado");
+
+            _usuario = _usuarioRepositorioComSql.ObterPorId(int.Parse(id));
         }
 
         private void AoClicarEmEditar(object sender, EventArgs e)
@@ -69,12 +79,13 @@ namespace CrudWindowsForm
             {
                 if (_usuario == null) throw new Exception("Nenhum usuário foi selecionado");
 
-                TelaCadastroUsuario telaCadastroUsuario = new TelaCadastroUsuario(_usuario);
+                TelaCadastroUsuario telaCadastroUsuario = new(_usuario, _usuarioRepositorioComSql, _validacaoDeUsuario);
                 telaCadastroUsuario.ShowDialog();
                 ListaUsuarios();
             } catch (Exception error)
             {
-                MessageBox.Show(error.Message);
+                var msg = $"{error.Message}{error.InnerException?.Message}";
+                MessageBox.Show(msg);
             }
         }
     }

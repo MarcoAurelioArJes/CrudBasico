@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CrudWindowsForm.Interfaces
+namespace CrudWindowsForm.Dominio.Interfaces
 {
     public interface IRepositorio<T> where T : class
     {

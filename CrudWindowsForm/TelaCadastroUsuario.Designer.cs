@@ -95,6 +95,7 @@
             // 
             this.txtSenhaUsuario.Location = new System.Drawing.Point(149, 162);
             this.txtSenhaUsuario.Name = "txtSenhaUsuario";
+            this.txtSenhaUsuario.PasswordChar = '*';
             this.txtSenhaUsuario.Size = new System.Drawing.Size(288, 23);
             this.txtSenhaUsuario.TabIndex = 6;
             // 
@@ -156,7 +157,7 @@
             this.Cancelar.TabIndex = 13;
             this.Cancelar.Text = "Cancelar";
             this.Cancelar.UseVisualStyleBackColor = true;
-            this.Cancelar.Click += new System.EventHandler(this.Cancelar_Click);
+            this.Cancelar.Click += new System.EventHandler(this.AoClicarEmCancelar);
             // 
             // label1
             // 

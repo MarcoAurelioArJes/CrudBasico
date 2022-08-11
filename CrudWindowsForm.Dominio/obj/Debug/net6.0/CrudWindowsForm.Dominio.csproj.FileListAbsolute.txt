@@ -1,11 +1,11 @@
+C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Dominio\bin\Debug\net6.0\CrudWindowsForm.Dominio.deps.json
+C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Dominio\bin\Debug\net6.0\CrudWindowsForm.Dominio.dll
+C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Dominio\bin\Debug\net6.0\CrudWindowsForm.Dominio.pdb
 C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Dominio\obj\Debug\net6.0\CrudWindowsForm.Dominio.csproj.AssemblyReference.cache
 C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Dominio\obj\Debug\net6.0\CrudWindowsForm.Dominio.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Dominio\obj\Debug\net6.0\CrudWindowsForm.Dominio.AssemblyInfoInputs.cache
 C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Dominio\obj\Debug\net6.0\CrudWindowsForm.Dominio.AssemblyInfo.cs
 C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Dominio\obj\Debug\net6.0\CrudWindowsForm.Dominio.csproj.CoreCompileInputs.cache
-C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Dominio\bin\Debug\net6.0\CrudWindowsForm.Dominio.deps.json
-C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Dominio\bin\Debug\net6.0\CrudWindowsForm.Dominio.dll
-C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Dominio\bin\Debug\net6.0\CrudWindowsForm.Dominio.pdb
 C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Dominio\obj\Debug\net6.0\CrudWindowsForm.Dominio.dll
 C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Dominio\obj\Debug\net6.0\refint\CrudWindowsForm.Dominio.dll
 C:\Users\Usuario\workspace-vs-code\CrudWindowsForm\CrudWindowsForm.Dominio\obj\Debug\net6.0\CrudWindowsForm.Dominio.pdb
