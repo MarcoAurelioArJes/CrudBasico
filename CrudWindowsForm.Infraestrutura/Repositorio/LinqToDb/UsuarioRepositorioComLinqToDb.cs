@@ -21,7 +21,7 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb
         {
             try
             {
-                usuario.Senha = CriptografiaSenha.SenhaCriptografada(usuario.Senha);
+                usuario.Senha = CriptografiaSenha.CriptografarSenha(usuario.Senha);
                 _dbCrudBasico.Insert(usuario);
             }
             catch (Exception erro)
@@ -65,7 +65,7 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb
                                        {
                                            Id = usuario.Id,
                                            Nome = usuario.Nome,
-                                           Senha = CriptografiaSenha.SenhaDescriptografada(usuario.Senha),
+                                           Senha = CriptografiaSenha.DescriptografarSenha(usuario.Senha),
                                            Email = usuario.Email,
                                            DataNascimento = usuario.DataNascimento.HasValue ? usuario.DataNascimento : null,
                                            DataCriacao = usuario.DataCriacao
@@ -93,7 +93,7 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb
                 _dbCrudBasico.Usuarios
                     .Where(usuario => usuario.Id == usuarioAtualizado.Id)
                     .Set(usuario => usuario.Nome, usuarioAtualizado.Nome)
-                    .Set(usuario => usuario.Senha, CriptografiaSenha.SenhaCriptografada(usuarioAtualizado.Senha))
+                    .Set(usuario => usuario.Senha, CriptografiaSenha.CriptografarSenha(usuarioAtualizado.Senha))
                     .Set(usuario => usuario.Email, usuarioAtualizado.Email)
                     .Set(usuario => usuario.DataNascimento, dataNascimento)
                     .Update();
