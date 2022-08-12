@@ -19,7 +19,7 @@ namespace CrudWindowsForm.Infraestrutura.Migrations
             }
         }
 
-        private IServiceProvider CriarServicos()
+        private static IServiceProvider CriarServicos()
         {
             return new ServiceCollection()
                 .AddFluentMigratorCore()
@@ -30,7 +30,7 @@ namespace CrudWindowsForm.Infraestrutura.Migrations
                     .AddLogging(loginBuilder => loginBuilder.AddFluentMigratorConsole())
                     .BuildServiceProvider(false);
         }
-        private void AtualizarBaseDeDados(IServiceProvider serviceProvider)
+        private static void AtualizarBaseDeDados(IServiceProvider serviceProvider)
         {
             var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
 

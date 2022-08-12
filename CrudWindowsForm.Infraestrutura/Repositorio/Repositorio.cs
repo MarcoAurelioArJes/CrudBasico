@@ -4,6 +4,7 @@ using CrudWindowsForm.Servicos;
 namespace CrudWindowsForm.Infraestrutura.Repositorio
 {
     public abstract class Repositorio<T> : IRepositorio<T> where T : class {
+
         protected List<T> _lista = ListaSingleton<T>.Instancia;
 
         public abstract void Criar(T entidade);
