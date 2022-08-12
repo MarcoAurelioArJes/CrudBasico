@@ -16,12 +16,10 @@ namespace CrudWindowsForm.Dominio.Validacoes
 
             RuleFor(usuarioNome => usuarioNome.Nome)
                 .NotEmpty()
-                .NotNull()
                 .WithMessage("Informe o nome do usuário");
 
             RuleFor(usuarioSenha => usuarioSenha.Senha)
                 .NotEmpty()
-                .NotNull()
                 .WithMessage("Informe a senha do usuário");
 
             RuleFor(usuarioEmail => usuarioEmail.Email)
