@@ -16,22 +16,28 @@ namespace CrudWindowsForm.Dominio.Validacoes
 
             RuleFor(usuarioNome => usuarioNome.Nome)
                 .NotEmpty()
-                .WithMessage("Informe o nome do usuário");
+                .WithMessage("Informe o {PropertyName} do usuário");
 
             RuleFor(usuarioSenha => usuarioSenha.Senha)
                 .NotEmpty()
-                .WithMessage("Informe a senha do usuário");
+                .MinimumLength(8)
+                .WithMessage("A {PropertyName} do usuário é obrigatória \ne precisa ter no mínimo 8 caracteres");
 
             RuleFor(usuarioEmail => usuarioEmail.Email)
+                .NotEmpty()
+                .WithMessage("Informe um {PropertyName}")
                 .Must(email => VerificaEmail(email))
-                .WithMessage("Informe um email válido")
+                .WithMessage("Um {PropertyName} precisa ter um @ e .com para ser válido")
                 .Must((usuario, email) => EmailPodeSerCadastrado(usuario, email))
-                .WithMessage("Email está duplicado");
+                .WithMessage("{PropertyName} está duplicado");
 
 
             RuleFor(usuarioDataNasc => usuarioDataNasc.DataNascimento)
                 .InclusiveBetween(DateTime.Parse("1930/01/01"), DateTime.Today)
-                .WithMessage("Data de Nascimento inválida");
+                .WithMessage("{PropertyName} precisa\n" +
+                             "ser maior que 31/12/1929\n" +
+                             "e menor que a data atual: \n" +
+                             $"{DateTime.Today:dd/MM/yyyy}");
         }
 
         public bool EmailPodeSerCadastrado(Usuario usuario, string email)
@@ -39,10 +45,15 @@ namespace CrudWindowsForm.Dominio.Validacoes
             return !_repositorioUsuario.EmailEstaDuplicado(email, usuario.Id.ToString());
         }
         
-        public bool VerificaEmail(string email)
+        public static bool VerificaEmail(string email)
         {
-            Regex regex = new Regex(@"\w+.*@\w+\.+\w+");
-            return regex.IsMatch(email);
+            if (string.IsNullOrWhiteSpace(email) == false)
+            {
+                var regex = new Regex(@"\w+.*@\w+\.+\w+");
+                return regex.IsMatch(email);
+            }
+
+            return true;
         }
     }
 }
