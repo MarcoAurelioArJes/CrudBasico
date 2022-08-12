@@ -26,7 +26,7 @@ namespace CrudWindowsForm.Infraestrutura.Migrations
                 .ConfigureRunner(runnerBuilder => 
                     runnerBuilder.AddSqlServer()
                     .WithGlobalConnectionString(_stringDeConexao.ConnectionString)
-                    .ScanIn(typeof(_20220811_AddTabelaUsuario).Assembly).For.Migrations())
+                    .ScanIn(typeof(_20220812_AddTabelaUsuario).Assembly).For.Migrations())
                     .AddLogging(loginBuilder => loginBuilder.AddFluentMigratorConsole())
                     .BuildServiceProvider(false);
         }

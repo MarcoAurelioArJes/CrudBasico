@@ -135,7 +135,7 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio
         {
             comando.Parameters.AddWithValue("nome", usuario.Nome);
             comando.Parameters.AddWithValue("email", usuario.Email);
-            comando.Parameters.AddWithValue("senha", CriptografiaSenha.SenhaCriptografada(usuario.Senha));
+            comando.Parameters.AddWithValue("senha", CriptografiaSenha.CriptografarSenha(usuario.Senha));
             comando.Parameters.AddWithValue("dataNascimento",
                                             usuario.DataNascimento == null ? DBNull.Value : usuario.DataNascimento);
             comando.Parameters.AddWithValue("dataCriacao", usuario.DataCriacao);
@@ -152,7 +152,7 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio
                 usuario.Id = retornoConsulta.GetInt32("Id");
                 usuario.Nome = retornoConsulta.GetString("Nome");
                 usuario.Email = retornoConsulta.GetString("Email");
-                usuario.Senha = CriptografiaSenha.SenhaDescriptografada(retornoConsulta.GetString("Senha"));
+                usuario.Senha = CriptografiaSenha.DescriptografarSenha(retornoConsulta.GetString("Senha"));
                 usuario.DataNascimento = retornoConsulta.IsDBNull("DataNascimento")
                                          ? null : retornoConsulta.GetDateTime("DataNascimento");
                 usuario.DataCriacao = retornoConsulta.GetDateTime("DataCriacao");
