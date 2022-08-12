@@ -7,21 +7,20 @@ namespace CrudWindowsForm.Dominio.Modelo
     {
         [PrimaryKey, Identity]
         public int Id { get; set; }
+
         [Column(Name = "Nome"), NotNull]
         public string Nome { get; set; }
+
         [Column(Name = "Senha"), NotNull]
         public string Senha { get; set; }
+
         [Column(Name = "Email"), NotNull]
         public string Email { get; set; }
+
         [Column(Name = "DataNascimento")]
         public DateTime? DataNascimento { get; set; }
+
         [Column(Name = "DataCriacao"), NotNull]
         public DateTime DataCriacao { get; set; }
-        //public int Id { get; set; }
-        //public string Nome { get; set; }
-        //public string Senha { get; set; }
-        //public string Email { get; set; }
-        //public DateTime? DataNascimento { get; set; }
-        //public DateTime DataCriacao { get; set; }
     }
 }

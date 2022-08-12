@@ -1,6 +1,5 @@
 ﻿using CrudWindowsForm.Dominio.Modelo;
 using CrudWindowsForm.Dominio.Interfaces;
-using CrudWindowsForm.Dominio.Validacoes;
 using FluentValidation.Results;
 
 namespace CrudWindowsForm
@@ -10,12 +9,14 @@ namespace CrudWindowsForm
         private Usuario _usuario;
         private readonly IRepositorioUsuario? _repositorioUsuario;
         private readonly IValidacaoDeUsuario? _validacaoDeUsuario;
+
         public TelaCadastroUsuario(IRepositorioUsuario repositorioUsuario, IValidacaoDeUsuario validacaoDeUsuario)
         {
             _repositorioUsuario = repositorioUsuario;
             _validacaoDeUsuario = validacaoDeUsuario;
 
             InitializeComponent();
+
             dataCriacaoUsuario.Value = DateTime.Today;
         }
 
@@ -23,6 +24,7 @@ namespace CrudWindowsForm
         : this(repositorioUsuario, validacaoDeUsuario)
         {
             PopularCampos(usuario);
+
             BtnCadastrar.Text = "Atualizar";
         }
 
@@ -68,6 +70,7 @@ namespace CrudWindowsForm
             var results = _validacaoDeUsuario.Validate(usuario);
 
             bool validaTodos = false;
+
             string valorPadrao = string.Empty;
 
             avisoNome.Text = valorPadrao;

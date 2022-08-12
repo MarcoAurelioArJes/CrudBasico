@@ -53,10 +53,5 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio
             Usuario usuario = ObterPorId(id);
             _lista.RemoveAll(usuario => usuario.Id == id);
         }
-
-        public string SenhaHash(string senha)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

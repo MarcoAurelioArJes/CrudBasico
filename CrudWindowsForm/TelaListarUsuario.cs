@@ -67,6 +67,7 @@ namespace CrudWindowsForm
         private void AoClicarNaLinhaDaGrid(object sender, DataGridViewCellEventArgs e)
         {
             string? id = dataGridUsuarios.CurrentRow.Cells["Id"].Value.ToString();
+
             if (id == null)
                 throw new Exception("Nenhum usuário selecionado");
 
