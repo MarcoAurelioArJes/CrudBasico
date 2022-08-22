@@ -3677,11 +3677,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\CrudWindowsForm.Infraestrutura.csproj",
+      "projectUniqueName": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\CrudWindowsForm.Infraestrutura.csproj",
       "projectName": "CrudWindowsForm.Infraestrutura",
-      "projectPath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\CrudWindowsForm.Infraestrutura.csproj",
+      "projectPath": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\CrudWindowsForm.Infraestrutura.csproj",
       "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\obj\\",
+      "outputPath": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3698,8 +3698,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm.Dominio\\CrudWindowsForm.Dominio.csproj": {
-              "projectPath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm.Dominio\\CrudWindowsForm.Dominio.csproj"
+            "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.Dominio\\CrudWindowsForm.Dominio.csproj": {
+              "projectPath": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.Dominio\\CrudWindowsForm.Dominio.csproj"
             }
           }
         }

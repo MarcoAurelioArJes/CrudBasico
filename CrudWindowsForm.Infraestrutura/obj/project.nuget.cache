@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "uYbv0yGMXSHrjJT4jZsBt6ki6GXKcCzWI2DI0KTqxoh4Up2/FpS/ftfkWPSUKMmR7oVpi4V8SvTnrOy75KuMRg==",
+  "dgSpecHash": "18TxET9L0nubhbVMniyRTDLdUR3bXbPFueoODs0Lw58bLQ81eC9SB32bhzPTRt3LY1fW6l9uH11nI50+o5dLfg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\CrudWindowsForm.Infraestrutura.csproj",
+  "projectFilePath": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\CrudWindowsForm.Infraestrutura.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Usuario\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

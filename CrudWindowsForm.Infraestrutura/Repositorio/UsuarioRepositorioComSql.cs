@@ -71,7 +71,7 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio
 
         public List<Usuario> ObterTodos()
         {
-            string consulta = "SELECT * FROM Usuarios;";
+            string consulta = "SELECT * FROM Usuario;";
 
             using (SqlConnection conexao = new SqlConnection(_stringConexao))
             {
