@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using CrudWindowsForm.Dominio.Modelo;
 using CrudWindowsForm.Dominio.Interfaces;
-using Microsoft.AspNetCore.Cors;
+using FluentValidation.Results;
+using System.Net;
 
 namespace CrudWindowsForm.API.Controllers
 {
@@ -10,40 +11,105 @@ namespace CrudWindowsForm.API.Controllers
     public class UsuarioController : Controller
     {
         private readonly IRepositorioUsuario _repositorioUsuario;
+        private readonly IValidacaoDeUsuario _validacaoDeUsuario;
 
-        public UsuarioController(IRepositorioUsuario repositorioUsuario)
+        public UsuarioController(IRepositorioUsuario repositorioUsuario, IValidacaoDeUsuario validacaoDeUsuario)
         {
             _repositorioUsuario = repositorioUsuario;
+            _validacaoDeUsuario = validacaoDeUsuario;
         }
 
         [HttpPost]
-        public void Criar([FromBody] Usuario usuario)
+        public IActionResult Criar([FromBody] Usuario usuario)
         {
-            _repositorioUsuario.Criar(usuario);
+            try
+            {
+                ValidaCampos(usuario);
+
+                usuario.DataCriacao = DateTime.Today;
+                _repositorioUsuario.Criar(usuario);
+                return StatusCode(200);
+            } catch (Exception err)
+            {
+                return StatusCode(400, new JsonResult(err.Message));
+            }
         }
 
         [HttpGet]
-        public List<Usuario> ObterTodos()
+        public IActionResult ObterTodos()
         {
-            return _repositorioUsuario.ObterTodos();
+            try
+            {
+                var retorno = _repositorioUsuario.ObterTodos();
+
+                return Ok(retorno);
+            } catch (Exception err)
+            {
+                return StatusCode(404, new JsonResult(err.Message));
+            }
         }
 
         [HttpGet("{id}")]
-        public Usuario ObterPorId(int id)
+        public IActionResult ObterPorId(int id)
         {
-            return _repositorioUsuario.ObterPorId(id);
+            try
+            {
+                var usuario = _repositorioUsuario.ObterPorId(id);
+                
+                return Ok(usuario);
+            } catch (Exception err)
+            {
+                return StatusCode(404, new JsonResult(err.Message));
+            }
+
         }
 
         [HttpPut]
-        public void Atualizar([FromForm] Usuario usuarioAtualizado)
+        public IActionResult Atualizar([FromBody] Usuario usuarioAtualizado)
         {
-            _repositorioUsuario.Atualizar(usuarioAtualizado);
+            try
+            {
+                ValidaCampos(usuarioAtualizado);
+
+                _repositorioUsuario.Atualizar(usuarioAtualizado);
+                return StatusCode(200);
+            } catch (Exception err)
+            {
+                return StatusCode(400, new JsonResult(err.Message));
+            }
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
-            _repositorioUsuario.Deletar(id);
+            try
+            {
+                ObterPorId(id);
+                _repositorioUsuario.Deletar(id);
+
+                return StatusCode(200);
+            } catch (Exception err)
+            {
+                return StatusCode(404, new JsonResult(err.Message));
+            }
+        }
+
+        public bool ValidaCampos(Usuario usuario)
+        {
+            var results = _validacaoDeUsuario.Validate(usuario);
+
+            bool validaTodos = false;
+
+            if (!results.IsValid)
+            {
+                foreach (ValidationFailure erros in results.Errors)
+                {
+                   throw new Exception(erros.ErrorMessage);
+                }
+                validaTodos = true;
+            }
+
+            return validaTodos;
         }
     }
 }

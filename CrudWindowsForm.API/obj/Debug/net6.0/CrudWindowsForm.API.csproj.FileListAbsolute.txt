@@ -92,3 +92,7 @@ C:\Users\Usuario\workspace\CrudWindowsForm\CrudWindowsForm.API\bin\Debug\net6.0\
 C:\Users\Usuario\workspace\CrudWindowsForm\CrudWindowsForm.API\bin\Debug\net6.0\CrudWindowsForm.Infraestrutura.dll
 C:\Users\Usuario\workspace\CrudWindowsForm\CrudWindowsForm.API\bin\Debug\net6.0\CrudWindowsForm.Infraestrutura.pdb
 C:\Users\Usuario\workspace\CrudWindowsForm\CrudWindowsForm.API\bin\Debug\net6.0\CrudWindowsForm.Dominio.pdb
+C:\Users\Usuario\workspace\CrudWindowsForm\CrudWindowsForm.API\bin\Debug\net6.0\System.Net.Http.Formatting.dll
+C:\Users\Usuario\workspace\CrudWindowsForm\CrudWindowsForm.API\bin\Debug\net6.0\System.Web.Http.dll
+C:\Users\Usuario\workspace\CrudWindowsForm\CrudWindowsForm.API\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\Usuario\workspace\CrudWindowsForm\CrudWindowsForm.API\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll

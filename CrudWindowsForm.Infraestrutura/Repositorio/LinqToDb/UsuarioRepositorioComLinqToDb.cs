@@ -113,6 +113,7 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb
         {
             try
             {
+                ObterPorId(id);
                 _dbCrudBasico.Usuarios
                     .Where(usuario => usuario.Id == id)
                     .Delete();

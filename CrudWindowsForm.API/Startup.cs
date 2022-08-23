@@ -1,5 +1,5 @@
 ﻿using CrudWindowsForm.Dominio.Interfaces;
-using CrudWindowsForm.Infraestrutura.Repositorio;
+using CrudWindowsForm.Dominio.Validacoes;
 using CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb;
 
 namespace CrudWindowsForm.API
@@ -9,7 +9,8 @@ namespace CrudWindowsForm.API
         public void ConfigureServices(IServiceCollection servicos)
         {
             servicos.AddScoped<IRepositorioUsuario, UsuarioRepositorioComLinqToDb>()
-                .AddScoped<DbCrudBasico>();
+                .AddScoped<DbCrudBasico>()
+                .AddScoped<IValidacaoDeUsuario, ValidacaoDeUsuario>();
             servicos.AddControllers();
             servicos.AddCors();
         }
@@ -21,7 +22,7 @@ namespace CrudWindowsForm.API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(opcao => opcao.AllowAnyOrigin());
+            app.UseCors(opcao => opcao.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
