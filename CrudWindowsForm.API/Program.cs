@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-
+using CrudWindowsForm.Infraestrutura.Migrations;
 
 namespace CrudWindowsForm.API
 {
@@ -8,6 +8,8 @@ namespace CrudWindowsForm.API
     {
         public static void Main(string[] args)
         {
+            new RealizaMigracoes();
+
             CreateWebHostBuilder(args).Build().Run();
         }
 

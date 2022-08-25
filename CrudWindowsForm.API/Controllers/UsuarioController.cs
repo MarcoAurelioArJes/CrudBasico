@@ -28,7 +28,7 @@ namespace CrudWindowsForm.API.Controllers
 
                 usuario.DataCriacao = DateTime.Today;
                 _repositorioUsuario.Criar(usuario);
-                return StatusCode(200);
+                return StatusCode(201, new JsonResult(""));
             } catch (Exception err)
             {
                 return StatusCode(400, new JsonResult(err.Message));
@@ -42,7 +42,7 @@ namespace CrudWindowsForm.API.Controllers
             {
                 var retorno = _repositorioUsuario.ObterTodos();
 
-                return Ok(retorno);
+                return Ok(retorno, new JsonResult(""));
             } catch (Exception err)
             {
                 return StatusCode(404, new JsonResult(err.Message));
@@ -56,7 +56,7 @@ namespace CrudWindowsForm.API.Controllers
             {
                 var usuario = _repositorioUsuario.ObterPorId(id);
                 
-                return Ok(usuario);
+                return Ok(usuario, new JsonResult(""));
             } catch (Exception err)
             {
                 return StatusCode(404, new JsonResult(err.Message));
@@ -72,7 +72,7 @@ namespace CrudWindowsForm.API.Controllers
                 ValidaCampos(usuarioAtualizado);
 
                 _repositorioUsuario.Atualizar(usuarioAtualizado);
-                return StatusCode(200);
+                return StatusCode(204, new JsonResult(""));
             } catch (Exception err)
             {
                 return StatusCode(400, new JsonResult(err.Message));
@@ -87,7 +87,7 @@ namespace CrudWindowsForm.API.Controllers
                 ObterPorId(id);
                 _repositorioUsuario.Deletar(id);
 
-                return StatusCode(200);
+                return StatusCode(204, new JsonResult(""));
             } catch (Exception err)
             {
                 return StatusCode(404, new JsonResult(err.Message));
