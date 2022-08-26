@@ -42,7 +42,7 @@ namespace CrudWindowsForm.API.Controllers
             {
                 var retorno = _repositorioUsuario.ObterTodos();
 
-                return Ok(retorno, new JsonResult(""));
+                return Ok(retorno);
             } catch (Exception err)
             {
                 return StatusCode(404, new JsonResult(err.Message));
@@ -56,7 +56,7 @@ namespace CrudWindowsForm.API.Controllers
             {
                 var usuario = _repositorioUsuario.ObterPorId(id);
                 
-                return Ok(usuario, new JsonResult(""));
+                return Ok(usuario);
             } catch (Exception err)
             {
                 return StatusCode(404, new JsonResult(err.Message));
@@ -72,7 +72,7 @@ namespace CrudWindowsForm.API.Controllers
                 ValidaCampos(usuarioAtualizado);
 
                 _repositorioUsuario.Atualizar(usuarioAtualizado);
-                return StatusCode(204, new JsonResult(""));
+                return NoContent();
             } catch (Exception err)
             {
                 return StatusCode(400, new JsonResult(err.Message));
@@ -87,7 +87,7 @@ namespace CrudWindowsForm.API.Controllers
                 ObterPorId(id);
                 _repositorioUsuario.Deletar(id);
 
-                return StatusCode(204, new JsonResult(""));
+                return NoContent();
             } catch (Exception err)
             {
                 return StatusCode(404, new JsonResult(err.Message));
