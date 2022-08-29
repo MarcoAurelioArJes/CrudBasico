@@ -1,0 +1,44 @@
+<mvc:View
+	controllerName="crudBasico.controller.DetalhesDoUsuario"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+	<Page title="{i18n>TituloDetalhesUsuario}" showNavButton="true" navButtonPress=".aoClicarEmVoltar">
+		<Toolbar id="barraFerramentas">
+            <ToolbarSpacer/>
+            <Button text="{i18n>BotaoEditar}" press=".aoClicarEmEditar"/>
+            <Button text="{i18n>BotaoDeletar}" press=".aoClicarEmDeletar"/>
+        </Toolbar>
+        <VBox class="sapUiSmallMargin" alignItems="Center">
+                <HBox class="sapUiMediumMarginTop" justifyContent="SpaceAround" width="20rem">
+                    <HBox justifyContent="SpaceBetween" width="100%">
+                        <Label text="Nome" />
+                        <Text id="nameText" text="{usuario>/nome}" />
+                    </HBox>
+                </HBox>
+                <HBox justifyContent="SpaceAround" width="20rem">
+                    <HBox justifyContent="SpaceBetween" width="100%">
+                        <Label text="Email" />
+                        <Text text="{usuario>/email}" />
+                    </HBox>
+                </HBox>
+                <HBox justifyContent="SpaceAround" width="20rem">
+                    <HBox justifyContent="SpaceBetween" width="100%">
+                        <Label text="Data Nascimento" />
+                        <Text text="{= ${usuario>/dataNascimento} !== null ? ${path: 'usuario>/dataNascimento', 
+                                                                                type:'sap.ui.model.type.DateTime', 
+                                                                                formatOptions: { pattern: 'dd le MMMM le yyyy' }} 
+                                                                                : ${i18n>PlaceholderAvisoDataNascimentoEditar}}" />
+                    </HBox>
+                </HBox>
+                <HBox justifyContent="FlexStart" width="20rem">
+                    <HBox justifyContent="SpaceBetween" width="100%">
+                        <Label text="Data Criação" />
+                        <Text text="{usuario>/dataCriacao}" />
+                    </HBox>
+                </HBox>
+		</VBox>
+	</Page>
+</mvc:View>

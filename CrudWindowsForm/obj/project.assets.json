@@ -313,6 +313,19 @@
           "lib/net6.0/FluentValidation.dll": {}
         }
       },
+      "FluentValidation.DependencyInjectionExtensions/11.2.1": {
+        "type": "package",
+        "dependencies": {
+          "FluentValidation": "11.2.1",
+          "Microsoft.Extensions.Dependencyinjection.Abstractions": "2.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/FluentValidation.DependencyInjectionExtensions.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/FluentValidation.DependencyInjectionExtensions.dll": {}
+        }
+      },
       "linq2db/4.1.1": {
         "type": "package",
         "compile": {
@@ -1473,7 +1486,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "FluentValidation": "11.2.0",
+          "FluentValidation": "11.2.1",
+          "FluentValidation.DependencyInjectionExtensions": "11.2.1",
           "linq2db": "4.1.1"
         },
         "compile": {
@@ -1908,6 +1922,23 @@
         "lib/netstandard2.0/FluentValidation.xml",
         "lib/netstandard2.1/FluentValidation.dll",
         "lib/netstandard2.1/FluentValidation.xml"
+      ]
+    },
+    "FluentValidation.DependencyInjectionExtensions/11.2.1": {
+      "sha512": "WqR2kt0OidUCg9xS+YOoiDmdCu7EnYLLgQb/bX+5fTTVor+90dWmr1OdJaWlLZvg2nbwV9EfxA9FZp91+JmQtg==",
+      "type": "package",
+      "path": "fluentvalidation.dependencyinjectionextensions/11.2.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "fluent-validation-icon.png",
+        "fluentvalidation.dependencyinjectionextensions.11.2.1.nupkg.sha512",
+        "fluentvalidation.dependencyinjectionextensions.nuspec",
+        "lib/netstandard2.0/FluentValidation.DependencyInjectionExtensions.dll",
+        "lib/netstandard2.0/FluentValidation.DependencyInjectionExtensions.xml",
+        "lib/netstandard2.1/FluentValidation.DependencyInjectionExtensions.dll",
+        "lib/netstandard2.1/FluentValidation.DependencyInjectionExtensions.xml"
       ]
     },
     "linq2db/4.1.1": {
@@ -4679,5 +4710,16 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1605",
+      "level": "Error",
+      "message": "Downgrade de pacote detectado: FluentValidation de 11.2.1 para 11.2.0. Referencie o pacote diretamente do projeto para selecionar uma versão diferente. \r\n CrudWindowsForm.InterfaceUsuario -> CrudWindowsForm.Dominio -> FluentValidation (>= 11.2.1) \r\n CrudWindowsForm.InterfaceUsuario -> FluentValidation (>= 11.2.0)",
+      "libraryId": "FluentValidation",
+      "targetGraphs": [
+        "net6.0-windows7.0"
+      ]
+    }
+  ]
 }

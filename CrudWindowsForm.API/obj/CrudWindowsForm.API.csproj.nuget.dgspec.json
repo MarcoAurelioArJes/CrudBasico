@@ -113,7 +113,11 @@
           "dependencies": {
             "FluentValidation": {
               "target": "Package",
-              "version": "[11.2.0, )"
+              "version": "[11.2.1, )"
+            },
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[11.2.1, )"
             },
             "linq2db": {
               "target": "Package",

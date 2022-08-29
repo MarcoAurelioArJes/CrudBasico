@@ -3,6 +3,7 @@ using CrudWindowsForm.Dominio.Modelo;
 using CrudWindowsForm.Dominio.Interfaces;
 using FluentValidation.Results;
 using System.Net;
+using FluentValidation;
 
 namespace CrudWindowsForm.API.Controllers
 {
@@ -29,9 +30,9 @@ namespace CrudWindowsForm.API.Controllers
                 usuario.DataCriacao = DateTime.Today;
                 _repositorioUsuario.Criar(usuario);
                 return StatusCode(201, new JsonResult(""));
-            } catch (Exception err)
+            } catch (ValidationException err)
             {
-                return StatusCode(400, new JsonResult(err.Message));
+                return StatusCode(400, new JsonResult(""));
             }
         }
 
@@ -94,22 +95,18 @@ namespace CrudWindowsForm.API.Controllers
             }
         }
 
-        public bool ValidaCampos(Usuario usuario)
+        public async Task<IActionResult> Criar(Usuario usuario)
         {
-            var results = _validacaoDeUsuario.Validate(usuario);
+            ValidationResult results = await _validacaoDeUsuario.ValidateAsync(usuario);
 
             bool validaTodos = false;
 
             if (!results.IsValid)
             {
-                foreach (ValidationFailure erros in results.Errors)
-                {
-                   throw new Exception(erros.ErrorMessage);
-                }
-                validaTodos = true;
+                results.AddToModelState();
             }
 
-            return validaTodos;
+            return View("Criar", usuario);
         }
     }
 }

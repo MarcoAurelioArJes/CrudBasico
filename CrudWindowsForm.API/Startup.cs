@@ -1,6 +1,7 @@
 ﻿using CrudWindowsForm.Dominio.Interfaces;
 using CrudWindowsForm.Dominio.Validacoes;
 using CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb;
+using FluentValidation;
 
 namespace CrudWindowsForm.API
 {
@@ -10,7 +11,9 @@ namespace CrudWindowsForm.API
         {
             servicos.AddScoped<IRepositorioUsuario, UsuarioRepositorioComLinqToDb>()
                 .AddScoped<DbCrudBasico>()
-                .AddScoped<IValidacaoDeUsuario, ValidacaoDeUsuario>();
+                .AddScoped<IValidacaoDeUsuario, ValidacaoDeUsuario>()
+                .AddValidatorsFromAssemblyContaining<ValidacaoDeUsuario>();
+            
             servicos.AddControllers();
             servicos.AddCors();
         }

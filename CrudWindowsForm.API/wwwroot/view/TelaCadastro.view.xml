@@ -1,0 +1,44 @@
+<mvc:View
+	controllerName="crudBasico.controller.TelaCadastro"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+	<Page id="paginaCadastro" showNavButton="true" title="{i18n>TituloTelaCadastrar}" navButtonPress=".aoClicarEmVoltar">
+		<VBox class="sapUiSmallMargin" alignItems="Center">
+			<f:SimpleForm 
+				id="CadastroUsuario"
+				editable="true"
+				layout="ResponsiveGridLayout"
+				singleContainerFullSize="false">
+				<f:content>
+					<Label text="Nome" />
+					<Input name="Nome" value="{usuario>/nome}" 
+						placeholder="{i18n>PlaceholderCampoNome}" id="campoNome"/>
+					
+					<Label text="Email" />
+					<Input name="Email" type="Email" value="{usuario>/email}" placeholder="{i18n>PlaceholderCampoEmail}" 
+					id="campoEmail"/>
+					
+					<Label text="Senha" />
+					<Input name="Senha" type="Password" value="{usuario>/senha}" placeholder="{i18n>PlaceholderCampoSenha}" 
+					id="campoSenha"/>
+					
+					<Label text="Data Nascimento" />
+					<DatePicker
+						name="DataNascimento"
+						displayFormat="short"
+						change="handleChange"
+						class="sapUiSmallMarginBottom"
+						valueFormat="yyyy-MM-dd"
+						id="campoDataNascimento"
+						value="{usuario>/dataNascimento}"/>
+
+					<Button id="btnCadastrar" visible="false" text="{i18n>BotaoCadastrar}" press=".botaoCadastrar" />
+					<Button id="btnEditar" visible="false" text="{i18n>BotaoEditar}" press=".botaoEditar" />
+				</f:content>
+			</f:SimpleForm>
+		</VBox>
+	</Page>
+</mvc:View>

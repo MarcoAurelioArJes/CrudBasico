@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "18TxET9L0nubhbVMniyRTDLdUR3bXbPFueoODs0Lw58bLQ81eC9SB32bhzPTRt3LY1fW6l9uH11nI50+o5dLfg==",
+  "dgSpecHash": "5pulaES5bENH0kybPkRTHn7kmWIMCFwa4ckkjIzAW55pSJAwkbn/wFlPomV4MkmXgTzoRhXYeXkNOVN6a04BjQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\CrudWindowsForm.Infraestrutura.csproj",
   "expectedPackageFiles": [
@@ -25,7 +25,8 @@
     "C:\\Users\\Usuario\\.nuget\\packages\\fluentmigrator.runner.sqlite\\3.3.2\\fluentmigrator.runner.sqlite.3.3.2.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\fluentmigrator.runner.sqlserver\\3.3.2\\fluentmigrator.runner.sqlserver.3.3.2.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\fluentmigrator.runner.sqlserverce\\3.3.2\\fluentmigrator.runner.sqlserverce.3.3.2.nupkg.sha512",
-    "C:\\Users\\Usuario\\.nuget\\packages\\fluentvalidation\\11.2.0\\fluentvalidation.11.2.0.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\fluentvalidation\\11.2.1\\fluentvalidation.11.2.1.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.2.1\\fluentvalidation.dependencyinjectionextensions.11.2.1.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\linq2db\\4.1.1\\linq2db.4.1.1.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
@@ -33,7 +34,7 @@
     "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\5.0.0\\microsoft.data.sqlclient.sni.runtime.5.0.0.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\2.0.1\\microsoft.extensions.configuration.abstractions.2.0.1.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\2.0.0\\microsoft.extensions.dependencyinjection.2.0.0.nupkg.sha512",
-    "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\2.0.0\\microsoft.extensions.dependencyinjection.abstractions.2.0.0.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\2.1.0\\microsoft.extensions.dependencyinjection.abstractions.2.1.0.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.extensions.logging\\2.0.1\\microsoft.extensions.logging.2.0.1.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\2.0.1\\microsoft.extensions.logging.abstractions.2.0.1.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.extensions.options\\2.0.1\\microsoft.extensions.options.2.0.1.nupkg.sha512",

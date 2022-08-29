@@ -1,0 +1,10 @@
+<mvc:View
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc">
+    <Page title="Crud Básico">
+        <content>
+            <mvc:XMLView viewName="crudBasico.view.ListaUsuarios" />
+            <mvc:XMLView viewName="crudBasico.view.TelaCadastro" />
+        </content>
+    </Page>
+</mvc:View>
