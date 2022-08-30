@@ -5,7 +5,7 @@ sap.ui.define([
 ], function (ValidateException, mensagensDeErro, DateFormat) {
     "use strict";
     return {
-      validaData: function (data) {
+      retornaDataValida: function (data) {
         let i18n = this.getView().getModel("i18n").getResourceBundle();
 
         let instanciaData = new Date(data.getValue());
@@ -22,36 +22,43 @@ sap.ui.define([
 
           throw new ValidateException(mensagem);
         } else if (!data.isValidValue(data)) {
-          mensagensDeErro.mensagensDeErro.bind(this)({input: data, mensagem: i18n.getText("AvisoCampoDataNascimento")});
+          mensagensDeErro.mensagensDeErroParaOsCampos.bind(this)({input: data, mensagem: i18n.getText("AvisoCampoDataNascimento")});
         }
         data.setValueState("None");
 
         return data.getValue();  
       },
-      validaEmail: function (email) {
+      retornaEmailValido: function (email) {
         let valorDoInput = email.getValue();
 
         let i18n = this.getView().getModel("i18n").getResourceBundle();
 
         let regexEmail = /^\w+[\w-+\.]*\@\w+([-\.]\w+)*\.[a-zA-Z]{2,}$/;
         if (!valorDoInput.match(regexEmail)) {
-          mensagensDeErro.mensagensDeErro.bind(this)({input: email, mensagem: `${valorDoInput} ${i18n.getText("AvisoCampoEmail")}`});
+          mensagensDeErro.mensagensDeErroParaOsCampos.bind(this)({input: email, mensagem: `${valorDoInput} ${i18n.getText("AvisoCampoEmail")}`});
         }
         email.setValueState("None");
 
         return valorDoInput;
       },
-      validaCampoGenerico: function(input) {
+      retornaValorCampoGenerico: function(input) {
         let valorDoInput = input.getValue();
         let nomeInput = input.getName();
-        console.log("teste")
+
         let i18n = this.getView().getModel("i18n").getResourceBundle();
         if (valorDoInput.length === 0 || valorDoInput === undefined) {
-          mensagensDeErro.mensagensDeErro.bind(this)({input, mensagem: `${nomeInput} ${i18n.getText("AvisoCampoGenerico")}`});
+          mensagensDeErro.mensagensDeErroParaOsCampos.bind(this)({input, mensagem: `${nomeInput} ${i18n.getText("AvisoCampoGenerico")}`});
         }
 
         input.setValueState("None");
         return valorDoInput;
+      },
+      defineCampoDeErroDaApi: function({nomePropriedade, mensagem}) {
+        let campo = this.byId(`campo${nomePropriedade}`);
+        mensagensDeErro.mensagensDeErroParaOsCampos.bind(this)({input : campo,
+                                                   mensagem: mensagem});
+
+        campo.setValueState("None");
       }
     }
 });

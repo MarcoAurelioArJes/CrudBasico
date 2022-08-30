@@ -4,8 +4,9 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageToast",
     "sap/ui/core/format/DateFormat",
-    "../validator/validaCampos"
-], function(Controller, History, JSONModel, MessageToast, DateFormat, validaCampos) {
+    "../validator/validaCampos",
+    "../validator/mensagensDeErro"
+], function(Controller, History, JSONModel, MessageToast, DateFormat, validaCampos, mensagensDeErro) {
     "use strict";
     let rotas;
 
@@ -34,17 +35,19 @@ sap.ui.define([
         let idUsuario = event.getParameters().arguments.caminhoDaListaDeUsuarios;
 
         try {
-          let respostaHTTP = await fetch(`https://localhost:7150/api/Usuario/${idUsuario}`, {
-            method: "GET",
-          });
+          let respostaHTTP = await fetch(`https://localhost:7150/api/Usuario/${idUsuario}`, {method: "GET"});
 
           let dadosRetornados = await respostaHTTP.json();
 
+          if (!respostaHTTP.ok) mensagensDeErro.mensagensDeErro(dadosRetornados.value);
+
           if (dadosRetornados.dataNascimento !== null) {
-            dadosRetornados.dataNascimento = DateFormat.getDateInstance({pattern: "yyyy-MM-dd"}).format(new Date(dadosRetornados.dataNascimento));
+            dadosRetornados.dataNascimento = DateFormat.getDateInstance({pattern: "yyyy-MM-dd"})
+            .format(new Date(dadosRetornados.dataNascimento));
           } else {
             let i18n = this.getView().getModel("i18n").getResourceBundle();
-            this.byId("campoDataNascimento").setPlaceholder(i18n.getText("PlaceholderAvisoDataNascimentoEditar"));
+            this.byId("campoDataNascimento")
+            .setPlaceholder(i18n.getText("PlaceholderAvisoDataNascimentoEditar"));
           }
 
           let usuario = new JSONModel(dadosRetornados);
@@ -94,23 +97,26 @@ sap.ui.define([
       servicoParaCadastrarEAtualizar: async function({verboHTTP, idUsuario}) {
         try {
           let objetoCadastro = {
-            nome: validaCampos.validaCampoGenerico.bind(this)(this.byId("campoNome")),
-            email: validaCampos.validaEmail.bind(this)(this.byId("campoEmail")),
-            senha: validaCampos.validaCampoGenerico.bind(this)(this.byId("campoSenha")),
-            dataNascimento: validaCampos.validaData.bind(this)(this.byId("campoDataNascimento")) || null
+            nome: validaCampos.retornaValorCampoGenerico.bind(this)(this.byId("campoNome")),
+            email: validaCampos.retornaEmailValido.bind(this)(this.byId("campoEmail")),
+            senha: validaCampos.retornaValorCampoGenerico.bind(this)(this.byId("campoSenha")),
+            dataNascimento: validaCampos.retornaDataValida.bind(this)(this.byId("campoDataNascimento")) || null
           };
 
           if (idUsuario != undefined) objetoCadastro.id = idUsuario;
           
-          let resultHTTP = await fetch(`https://localhost:7150/api/Usuario`, {
+          let respostaHttp = await fetch(`https://localhost:7150/api/Usuario`, {
             method: `${verboHTTP}`,
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(objetoCadastro)
           });
-            
-          let resultado = resultHTTP.status !== 204 ? await resultHTTP.json() : null;
-          console.log(resultado);
-          if (!resultHTTP.ok) throw new Error(resultado.value)
+
+          let resultado = respostaHttp.headers.get("content-type") !== null ? await respostaHttp.json() : null;
+
+          if (!respostaHttp.ok) {
+            validaCampos.defineCampoDeErroDaApi.bind(this)({nomePropriedade: resultado.value.nomePropriedade, 
+              mensagem: resultado.value.mensagemErro});
+          }
           
           let i18n = this.getView().getModel("i18n").getResourceBundle();
           MessageToast.show(i18n.getText("MensagemDeSucessoAoCadastrar"));

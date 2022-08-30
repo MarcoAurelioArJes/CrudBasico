@@ -4,6 +4,8 @@ using CrudWindowsForm.Dominio.Interfaces;
 using FluentValidation.Results;
 using System.Net;
 using FluentValidation;
+using System.Text.Json;
+using CrudWindowsForm.API.Models;
 
 namespace CrudWindowsForm.API.Controllers
 {
@@ -30,9 +32,10 @@ namespace CrudWindowsForm.API.Controllers
                 usuario.DataCriacao = DateTime.Today;
                 _repositorioUsuario.Criar(usuario);
                 return StatusCode(201, new JsonResult(""));
-            } catch (ValidationException err)
+            } catch (Exception err)
             {
-                return StatusCode(400, new JsonResult(""));
+                return StatusCode(400, new JsonResult(JsonSerializer
+                                            .Deserialize<RespostaDeErroJsonModel>(err.Message)));
             }
         }
 
@@ -95,18 +98,24 @@ namespace CrudWindowsForm.API.Controllers
             }
         }
 
-        public async Task<IActionResult> Criar(Usuario usuario)
+        public void ValidaCampos(Usuario usuario)
         {
-            ValidationResult results = await _validacaoDeUsuario.ValidateAsync(usuario);
-
-            bool validaTodos = false;
+            ValidationResult results = _validacaoDeUsuario.Validate(usuario);
 
             if (!results.IsValid)
             {
-                results.AddToModelState();
-            }
+                foreach(ValidationFailure result in results.Errors)
+                {
+                    var respostaJson = new RespostaDeErroJsonModel
+                    {
+                        NomePropriedade = result.PropertyName,
+                        MensagemErro = result.ErrorMessage
+                    };
 
-            return View("Criar", usuario);
+                    string jsonString = JsonSerializer.Serialize(respostaJson);
+                    throw new Exception(jsonString);
+                }
+            }
         }
     }
 }

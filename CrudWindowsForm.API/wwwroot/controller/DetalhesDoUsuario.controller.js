@@ -3,8 +3,9 @@ sap.ui.define([
     "sap/ui/core/routing/History",
     "sap/ui/model/json/JSONModel",
     "sap/ui/core/syncStyleClass",
-    "sap/ui/core/format/DateFormat"
-], function(Controller, History, JSONModel, syncStyleClass, DateFormat) {
+    "sap/ui/core/format/DateFormat",
+    "sap/m/MessageToast"
+], function(Controller, History, JSONModel, syncStyleClass, DateFormat, MessageToast) {
     "use strict";
 
     return Controller.extend("crudBasico.controller.DetalhesDoUsuario", {
@@ -59,24 +60,21 @@ sap.ui.define([
       fecharDialog: function() {
         this.byId("dialogParaConfirmacao").close();
       },
-      pegaUsuarioPorId: function (event) {
-        let idUsuario = event.getParameters().arguments.caminhoDaListaDeUsuarios;
+      pegaUsuarioPorId: async function (event) {
+        try {
+          let idUsuario = event.getParameters().arguments.caminhoDaListaDeUsuarios;
 
-        fetch(`https://localhost:7150/api/Usuario/${idUsuario}`, {
-          method: "GET",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            let dataCriacao = new Date(data.dataCriacao);
-            data.dataCriacao = DateFormat.getDateInstance().format(dataCriacao);
-            
-            if (data.dataNascimento) {
-              data.dataNascimento = new Date(data.dataNascimento)
-            }
+          let respostaHttp = await fetch(`https://localhost:7150/api/Usuario/${idUsuario}`, {method: "GET"});
+          let respostaBody = await respostaHttp.json();
 
-            let usuario = new JSONModel(data);
-            this.getView().setModel(usuario, "usuario");
-          });
+          respostaBody.dataCriacao = DateFormat.getDateInstance().format(new Date(respostaBody.dataCriacao));
+          if (respostaBody.dataNascimento) respostaBody.dataNascimento = new Date(respostaBody.dataNascimento);
+
+          let usuario = new JSONModel(respostaBody);
+          this.getView().setModel(usuario, "usuario");
+        } catch (err) {
+          MessageToast.show(err.message);
+        }
       },
     });
 });

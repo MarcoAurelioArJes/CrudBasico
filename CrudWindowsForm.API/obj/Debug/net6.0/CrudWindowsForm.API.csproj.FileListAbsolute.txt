@@ -96,3 +96,5 @@ C:\Users\Usuario\workspace\CrudWindowsForm\CrudWindowsForm.API\obj\Debug\net6.0\
 C:\Users\Usuario\workspace\CrudWindowsForm\CrudWindowsForm.API\obj\Debug\net6.0\CrudWindowsForm.API.pdb
 C:\Users\Usuario\workspace\CrudWindowsForm\CrudWindowsForm.API\obj\Debug\net6.0\CrudWindowsForm.API.genruntimeconfig.cache
 C:\Users\Usuario\workspace\CrudWindowsForm\CrudWindowsForm.API\obj\Debug\net6.0\ref\CrudWindowsForm.API.dll
+C:\Users\Usuario\workspace\CrudWindowsForm\CrudWindowsForm.API\bin\Debug\net6.0\CrudWindowsForm.API.staticwebassets.runtime.json
+C:\Users\Usuario\workspace\CrudWindowsForm\CrudWindowsForm.API\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll

@@ -28,7 +28,7 @@ namespace CrudWindowsForm.Dominio.Validacoes
                 .Must(email => VerificaEmail(email))
                 .WithMessage("Um {PropertyName} precisa ter um @ e .com para ser válido")
                 .Must((usuario, email) => EmailPodeSerCadastrado(usuario, email))
-                .WithMessage("{PropertyName} está duplicado");
+                .WithMessage("Já existe outro usuário com esse {PropertyName}");
 
 
             RuleFor(usuarioDataNasc => usuarioDataNasc.DataNascimento)

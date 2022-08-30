@@ -6,13 +6,14 @@
     <Page title="{i18n>TituloListaUsuario}">
         <Toolbar>
             <ToolbarSpacer/>
-            <Button text="{i18n>BotaoNovoUsuario}" press=".aoClicarEmCadastrar" type="Accept"/>
+            <Button icon="sap-icon://add" text="{i18n>BotaoNovoUsuario}" press=".aoClicarEmCadastrar" type="Accept"/>
         </Toolbar>
         <Table 
             headerText="{Lista de usuários}"
             width="auto"
             items="{usuarios>/listaUsuarios}"
-            class="alinhaTexto">
+            class="alinhaTexto"
+            alternateRowColors="true">
         
         <columns>
             <Column hAlign="Begin" width="10rem">
@@ -28,7 +29,7 @@
             <ColumnListItem type="Navigation" press=".aoClicarNoItemDaLista">
                 <cells>
                     <ObjectIdentifier title="{usuarios>id}" />
-                    <ObjectIdentifier title="{usuarios>nome}"/>
+                    <ObjectIdentifier title="{usuarios>nome}" text="{usuarios>email}"/>
                 </cells>
             </ColumnListItem>
 		</items>
