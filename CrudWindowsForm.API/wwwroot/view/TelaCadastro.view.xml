@@ -1,4 +1,4 @@
-<mvc:View
+<!-- <mvc:View
 	controllerName="crudBasico.controller.TelaCadastro"
 	xmlns:l="sap.ui.layout"
 	xmlns:f="sap.ui.layout.form"
@@ -21,7 +21,8 @@
 				<f:content>
 					<Label text="Nome" />
 					<Input name="Nome" value="{usuario>/nome}" 
-						placeholder="{i18n>PlaceholderCampoNome}" id="campoNome"/>
+						placeholder="{i18n>PlaceholderCampoNome}" id="campoNome"
+						class="sapMInputBaseContentWrapper"/>
 					
 					<Label text="Email" />
 					<Input name="Email" type="Email" value="{usuario>/email}" placeholder="{i18n>PlaceholderCampoEmail}" 
@@ -43,5 +44,215 @@
 				</f:content>
 			</f:SimpleForm>
 		</VBox>
+	</Page>
+</mvc:View> -->
+
+
+<mvc:View
+	controllerName="crudBasico.controller.TelaCadastro"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:u="sap.ui.unified"
+	xmlns:fc="sap.f"
+	xmlns="sap.m"
+>
+	<Page
+		id="paginaDeCadastroDeEmpresa"
+		title="{i18n>Empresa.Title}"
+		navButtonPress="aoClicarEmVoltarParaListaDeEmpesas"
+		showNavButton="true"
+	>
+		<headerContent>
+			<Button
+				id="botaoDeCancelar"
+				width="130px"
+				press="aoClicarEmCancelar"
+				text="{i18n>Common.Cancelar}"
+				type="Ghost"
+			/>
+			<Button
+				id="botaoDeSalvar"
+				width="130px"
+				press="aoClicarEmSalvarEmpresa"
+				text="{i18n>Common.Salvar}"
+				type="Emphasized"
+			/>
+		</headerContent>
+		<content>
+			<VBox>
+				<f:Form
+					id="FormChange480_12120"
+					editable="true"
+				>
+					<f:layout>
+						<f:ResponsiveGridLayout
+							labelSpanXL="12"
+							labelSpanL="12"
+							labelSpanM="12"
+							adjustLabelSpan="false"
+							emptySpanXL="0"
+							columnsXL="2"
+							singleContainerFullSize="false"
+						/>
+					</f:layout>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement label="{i18n>Empresa.NomeFantasia}">
+								<f:fields>
+									<Input
+										id="campoDeTextoNomeFantasia"
+										change="aoMudarNomeFantasia"
+										class="sapUiTinyMarginTop"
+										placeholder="{i18n>Empresa.DigiteONomeFantasia}"
+										value="{
+											path: 'empresa>/nomeFantasia',
+											type: 'sap.ui.model.type.String'
+										}"
+									/>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="{i18n>Empresa.RazaoSocial}">
+								<f:fields>
+									<Input
+										id="campoDeTextoRazaoSocial"
+										change=".aoMudarRazaoSocial"
+										class="sapUiTinyMarginTop"
+										placeholder="{i18n>Empresa.DigiteARazaoSocial}"
+										value="{empresa>/razaoSocial}"
+									/>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement
+								class="sapUiTinyMarginTop"
+								label="{i18n>Empresa.CNPJ}"
+							>
+								<f:fields>
+									<MaskInput
+										id="campoDeTextoCnpj"
+										editable="{visualizacao>/inputCnpj}"
+										class="sapUiTinyMarginTop"
+										mask="{tela>/mascaraDoCnpjOuCnpjBase}"
+										placeholder="{i18n>Empresa.DigiteOCNPJ}"
+										value="{empresa>/cnpjBase}"
+									>
+										<rules>
+											<MaskInputRule
+												maskFormatSymbol="C"
+												regex="[A-Z0-9]"
+											/>
+										</rules>
+									</MaskInput>
+									<Select
+										id="campoDeSelecaoStatus"
+										class="sapUiTinyMarginTop"
+										forceSelection="false"
+										selectedKey="{empresa>/situacao}"
+									>
+										<core:Item
+											key="1"
+											text="{i18n>Empresa.Ativo}"
+										/>
+										<core:Item
+											key="2"
+											text="{i18n>Empresa.Inativo}"
+										/>
+										<layoutData>
+											<l:GridData span="XL3 L3 M3 S4"/>
+										</layoutData>
+									</Select>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement
+								id="formularioDeCampoDeTextoCidadeEEstado"
+								class="sapUiTinyMarginTop"
+								visible="{visualizacao>/mostrarCampodeTextoCidadeEEstado}"
+								label="{i18n>Empresa.Filial.CidadeEstado}"
+							>
+								<f:fields>
+									<Input
+										id="campoDeTextoCidade"
+										placeholder="{i18n>Empresa.Filial.DigiteONomeDaCidade}"
+										class="sapUiTinyMarginTop"
+										change=".aoMudarNomeDaCidade"
+										value="{empresa>/cidade}"
+									/>
+									<Select
+										id="campoDeSelecaoEstado"
+										selectedKey="{empresa>/estado}"
+										class="sapUiTinyMarginTop"
+										forceSelection="false"
+										items="{
+											path: 'aux>/codigoDoEstado',
+											sorter: {
+												path: 'Name'
+											}
+										}"
+									>
+										<core:Item
+											key="{aux>descricao}"
+											text="{aux>descricao}"
+										/>
+										<layoutData>
+											<l:GridData span="XL3 L3 M3 S4"/>
+										</layoutData>
+									</Select>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+					<f:formContainers>
+						<f:FormContainer>
+							<f:formElements>
+								<f:FormElement label="{i18n>Empresa.Logotipo}">
+									<f:fields>
+										<fc:Card
+											class="sapUiTinyMarginTop"
+											height="120px"
+										>
+											<fc:content>
+												<Image
+													id="imagemDaLogotipo"
+													height="90px"
+													width="320px"
+													class="sapUiSmallMarginTop "
+													src="{logotipo>/img}"
+												/>
+											</fc:content>
+										</fc:Card>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement>
+									<f:fields>
+										<FlexBox>
+											<u:FileUploader
+												id="uploadDeLogotipo"
+												class="sapUiTinyMarginEnd sapUiTinyMarginTop"
+												name="myFileUpload"
+												uploadUrl=""
+												tooltip="{i18n>Empresa.LogotipoConfig}"
+												change="aoClicarEmProcurarArquivo"
+												style="Emphasized"
+												fileType="png"
+												placeholder="{i18n>Empresa.LogotipoConfig}"
+											/>
+											<Button
+												id="botaoRemoverLogotipo"
+												icon="sap-icon://decline"
+												width="130px"
+												class="sapUiTinyMarginTop"
+												text="{i18n>Empresa.RemoverLogo}"
+												press="aoClicarEmRemoverLogo"
+											/>
+										</FlexBox>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+					</f:formContainers>
+				</f:Form>
+			</VBox>
+		</content>
 	</Page>
 </mvc:View>

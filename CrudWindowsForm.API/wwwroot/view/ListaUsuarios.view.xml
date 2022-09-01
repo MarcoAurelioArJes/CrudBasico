@@ -5,7 +5,7 @@
 
     <Page title="{i18n>TituloListaUsuario}" titleAlignment="Start">
         <headerContent>
-            <SearchField width="50%" search=".pesquisarUsuario"/>
+            <SearchField width="auto" search=".pesquisarUsuario"/>
             <Button icon="sap-icon://add" text="{i18n>BotaoNovoUsuario}" press=".aoClicarEmCadastrar" type="Accept"/>
         </headerContent>
         <Table 

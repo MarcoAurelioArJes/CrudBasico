@@ -1,6 +1,16 @@
-.sapMBtnInner {
+/* .sapMBtnInner {
     height: 25px;
     align-items: center;
+}
+
+.sapUiIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sapUiIcon, .sapMInputBaseInner, .sapMInputBaseContentWrapper {
+    height: 25px;
 }
 
 .sapMBtnIcon  {
@@ -10,3 +20,17 @@
 .sapMBtn.sapMBtnBase {
     height: 60px;
 }
+
+.sapMSF {
+    height: 32px;
+}
+
+.sapMSFF {
+    height: 25px;
+}
+
+.sapMSFB {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
