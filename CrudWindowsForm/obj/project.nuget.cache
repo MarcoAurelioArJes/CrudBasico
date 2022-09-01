@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "dgSpecHash": "KdrwEGS8ulpMpM+a0A6l1FlUmLAz/5DBNT0j04WHt7/xdjMr8GQvQQdHk0KvB/KYlCL3IhYCMJSSE6CvrOgHxQ==",
-  "success": false,
+  "dgSpecHash": "gcl9+FHUNkpUdVzsb7NdQggFKprQXo+NHtnUbGQ0KZMpLYIbN8mcjLHzGL/O6/pTL/apwHG3jNGU+9OGp0J2kA==",
+  "success": true,
   "projectFilePath": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm\\CrudWindowsForm.InterfaceUsuario.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Usuario\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
@@ -25,7 +25,7 @@
     "C:\\Users\\Usuario\\.nuget\\packages\\fluentmigrator.runner.sqlite\\3.3.2\\fluentmigrator.runner.sqlite.3.3.2.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\fluentmigrator.runner.sqlserver\\3.3.2\\fluentmigrator.runner.sqlserver.3.3.2.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\fluentmigrator.runner.sqlserverce\\3.3.2\\fluentmigrator.runner.sqlserverce.3.3.2.nupkg.sha512",
-    "C:\\Users\\Usuario\\.nuget\\packages\\fluentvalidation\\11.2.0\\fluentvalidation.11.2.0.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\fluentvalidation\\11.2.1\\fluentvalidation.11.2.1.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.2.1\\fluentvalidation.dependencyinjectionextensions.11.2.1.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\linq2db\\4.1.1\\linq2db.4.1.1.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
@@ -108,15 +108,5 @@
     "C:\\Users\\Usuario\\.nuget\\packages\\system.valuetuple\\4.4.0\\system.valuetuple.4.4.0.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1605",
-      "level": "Error",
-      "message": "Downgrade de pacote detectado: FluentValidation de 11.2.1 para 11.2.0. Referencie o pacote diretamente do projeto para selecionar uma versão diferente. \r\n CrudWindowsForm.InterfaceUsuario -> CrudWindowsForm.Dominio -> FluentValidation (>= 11.2.1) \r\n CrudWindowsForm.InterfaceUsuario -> FluentValidation (>= 11.2.0)",
-      "libraryId": "FluentValidation",
-      "targetGraphs": [
-        "net6.0-windows7.0"
-      ]
-    }
-  ]
+  "logs": []
 }

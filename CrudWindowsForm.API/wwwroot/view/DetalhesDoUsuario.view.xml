@@ -1,17 +1,18 @@
 <mvc:View
 	controllerName="crudBasico.controller.DetalhesDoUsuario"
-	xmlns:l="sap.ui.layout"
-	xmlns:f="sap.ui.layout.form"
 	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:core="sap.ui.core"
 	xmlns="sap.m">
-	<Page title="{i18n>TituloDetalhesUsuario}" showNavButton="true" navButtonPress=".aoClicarEmVoltar">
-		<Toolbar id="barraFerramentas">
-            <ToolbarSpacer/>
-            <Button icon="sap-icon://edit" text="{i18n>BotaoEditar}" type="Attention" press=".aoClicarEmEditar"/>
-            <Button icon="sap-icon://delete" text="{i18n>BotaoDeletar}" type="Reject" press=".aoClicarEmDeletar"/>
-        </Toolbar>
-        <VBox class="sapUiSmallMargin" alignItems="Center">
+	<Page title="{i18n>TituloDetalhesUsuario}" titleAlignment="Start" showNavButton="true" navButtonPress=".aoClicarEmVoltar">
+		<headerContent>
+            <Button icon="sap-icon://edit" 
+                    text="{i18n>BotaoEditar}" 
+                    type="Emphasized"
+                    press=".aoClicarEmEditar"
+            />
+            <Button icon="sap-icon://delete" 
+                    text="{i18n>BotaoDeletar}" type="Emphasized" press=".aoClicarEmDeletar"/>
+        </headerContent>
+        <VBox class="sapUiSmallMargin" alignItems="Start">
                 <HBox class="sapUiMediumMarginTop" justifyContent="SpaceAround" width="20rem">
                     <HBox justifyContent="SpaceBetween" width="100%">
                         <Label text="Nome" />
@@ -32,7 +33,7 @@
                                                                                 : ${i18n>PlaceholderAvisoDataNascimentoEditar}}" />
                     </HBox>
                 </HBox>
-                <HBox justifyContent="FlexStart" width="20rem">
+                <HBox width="20rem">
                     <HBox justifyContent="SpaceBetween" width="100%">
                         <Label text="Data Criação" />
                         <Text text="{usuario>/dataCriacao}" />

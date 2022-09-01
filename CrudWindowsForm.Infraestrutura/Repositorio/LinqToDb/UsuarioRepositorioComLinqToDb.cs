@@ -149,5 +149,27 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb
                 _dbCrudBasico.Close();
             }
         }
+
+        public List<Usuario> ObterPesquisa(string consulta)
+        {
+            try
+            {
+                var query = from usuarios
+                            in _dbCrudBasico.Usuarios
+                            where usuarios.Nome.Contains(consulta) || usuarios.Email.Contains(consulta)
+                            select usuarios;
+
+                return query.ToList();
+
+            }
+            catch (Exception erro)
+            {
+                throw new Exception($"Ocorreu um erro ao pesquisar usuarios\n", erro);
+            }
+            finally
+            {
+                _dbCrudBasico.Close();
+            }
+        }
     }
 }

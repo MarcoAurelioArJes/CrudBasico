@@ -1,0 +1,12 @@
+.sapMBtnInner {
+    height: 25px;
+    align-items: center;
+}
+
+.sapMBtnIcon  {
+    font-size: 15px;
+}
+
+.sapMBtn.sapMBtnBase {
+    height: 60px;
+}

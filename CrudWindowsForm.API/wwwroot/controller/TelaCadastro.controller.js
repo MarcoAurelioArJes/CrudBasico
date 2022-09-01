@@ -94,6 +94,9 @@ sap.ui.define([
         let idUsuario = event.getSource().getModel("usuario").getData().id
         this.servicoParaCadastrarEAtualizar({verboHTTP: "PUT", idUsuario});
       },
+      botaoCancelar: function() {
+        this.aoClicarEmVoltar();
+      },
       servicoParaCadastrarEAtualizar: async function({verboHTTP, idUsuario}) {
         try {
           let objetoCadastro = {

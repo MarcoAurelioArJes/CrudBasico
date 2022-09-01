@@ -15,12 +15,13 @@ sap.ui.define([
         
         let formatador = DateFormat.getDateInstance({pattern: "dd/MM/yyyy"});
         
-        if ((instanciaData < data.getMinDate() || instanciaData > data.getMaxDate())) {
-          let mensagem = i18n.getText("AvisoCampoDataNascimentoDataMaiorOuMenor", 
-                          [formatador.format(new Date(dataMinima.getMinDate())), 
-                          formatador.format(new Date(dataMaxima.getMaxDate()))]);
+        if (!data.isValidValue(data) && (instanciaData < data.getMinDate() 
+            || instanciaData > data.getMaxDate())) {
+            let mensagem = i18n.getText("AvisoCampoDataNascimentoDataMaiorOuMenor", 
+                            [formatador.format(new Date(dataMinima.getMinDate())), 
+                            formatador.format(new Date(dataMaxima.getMaxDate()))]);
+          mensagensDeErro.mensagensDeErroParaOsCampos.bind(this)({input: data, mensagem: mensagem});
 
-          throw new ValidateException(mensagem);
         } else if (!data.isValidValue(data)) {
           mensagensDeErro.mensagensDeErroParaOsCampos.bind(this)({input: data, mensagem: i18n.getText("AvisoCampoDataNascimento")});
         }

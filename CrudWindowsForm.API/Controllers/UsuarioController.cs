@@ -39,11 +39,30 @@ namespace CrudWindowsForm.API.Controllers
             }
         }
 
+        [Route("pesquisa")]
+        [HttpGet]
+        public IActionResult PesquisarUsuario([FromQuery(Name = "consulta")] string consulta)
+        {
+            try
+            {
+
+                var retorno = _repositorioUsuario.ObterPesquisa(consulta);
+
+                return Ok(retorno);
+            }
+            catch (Exception err)
+            {
+                return StatusCode(404, new JsonResult(err.Message));
+            }
+        }
+
+
         [HttpGet]
         public IActionResult ObterTodos()
         {
             try
             {
+
                 var retorno = _repositorioUsuario.ObterTodos();
 
                 return Ok(retorno);

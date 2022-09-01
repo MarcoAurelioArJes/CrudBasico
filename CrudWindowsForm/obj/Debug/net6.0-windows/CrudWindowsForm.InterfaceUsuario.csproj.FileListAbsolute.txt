@@ -127,6 +127,7 @@ C:\Users\Usuario\workspace\CrudWindowsForm\CrudWindowsForm\bin\Debug\net6.0-wind
 C:\Users\Usuario\workspace\CrudWindowsForm\CrudWindowsForm\bin\Debug\net6.0-windows\FluentMigrator.Runner.SqlServerCe.dll
 C:\Users\Usuario\workspace\CrudWindowsForm\CrudWindowsForm\bin\Debug\net6.0-windows\System.Data.SqlServerCe.dll
 C:\Users\Usuario\workspace\CrudWindowsForm\CrudWindowsForm\bin\Debug\net6.0-windows\FluentValidation.dll
+C:\Users\Usuario\workspace\CrudWindowsForm\CrudWindowsForm\bin\Debug\net6.0-windows\FluentValidation.DependencyInjectionExtensions.dll
 C:\Users\Usuario\workspace\CrudWindowsForm\CrudWindowsForm\bin\Debug\net6.0-windows\linq2db.dll
 C:\Users\Usuario\workspace\CrudWindowsForm\CrudWindowsForm\bin\Debug\net6.0-windows\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\Usuario\workspace\CrudWindowsForm\CrudWindowsForm\bin\Debug\net6.0-windows\Microsoft.Data.SqlClient.dll

@@ -6,7 +6,13 @@
 	xmlns:core="sap.ui.core"
 	xmlns="sap.m">
 	<Page id="paginaCadastro" showNavButton="true" title="{i18n>TituloTelaCadastrar}" navButtonPress=".aoClicarEmVoltar">
-		<VBox class="sapUiSmallMargin" alignItems="Center">
+		<headerContent>
+			<Button id="btnCadastrar" visible="false" type="Emphasized" text="{i18n>BotaoCadastrar}" press=".botaoCadastrar" />
+			<Button id="btnEditar" visible="false" type="Emphasized" text="{i18n>BotaoEditar}" press=".botaoEditar" />
+			<Button id="btnCancelar" type="Ghost" text="{i18n>BotaoCancelar}" press=".botaoCancelar" />
+		</headerContent>
+		
+		<VBox class="sapUiSmallMargin" alignItems="Start">
 			<f:SimpleForm 
 				id="CadastroUsuario"
 				editable="true"
@@ -34,9 +40,6 @@
 						valueFormat="yyyy-MM-dd"
 						id="campoDataNascimento"
 						value="{usuario>/dataNascimento}"/>
-
-					<Button id="btnCadastrar" visible="false" text="{i18n>BotaoCadastrar}" press=".botaoCadastrar" />
-					<Button id="btnEditar" visible="false" text="{i18n>BotaoEditar}" press=".botaoEditar" />
 				</f:content>
 			</f:SimpleForm>
 		</VBox>

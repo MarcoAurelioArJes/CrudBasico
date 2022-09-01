@@ -38,6 +38,30 @@ sap.ui.define([
             } catch (err) {
                 MessageToast.show(err.message);
             }
+        },
+        pesquisarUsuario: async function(event) {
+            try {
+                let consulta = event.getParameter("query");
+                if (consulta) {
+                    let respostaHttp = await fetch(`https://localhost:7150/api/Usuario/pesquisa/?consulta=${consulta}`, 
+                    {method: "GET"});
+                    let respostaBody = await respostaHttp.json(); 
+
+                    if (respostaBody.length === 0) mensagensDeErro.mensagensDeErro("Usuário não encontrado");
+
+                    if (!respostaHttp.ok) mensagensDeErro.mensagensDeErro(respostaBody.value);
+                    
+                    let modelo = new JSONModel({
+                        listaUsuarios: respostaBody
+                    });
+    
+                    this.getOwnerComponent().setModel(modelo, "usuarios");
+                } else {
+                    this.criaModelo();
+                }
+            } catch (err) {
+                MessageToast.show(err.message);
+            }
         }
     })
 });

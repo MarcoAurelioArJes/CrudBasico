@@ -3,18 +3,20 @@
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc">
 
-    <Page title="{i18n>TituloListaUsuario}">
-        <Toolbar>
-            <ToolbarSpacer/>
+    <Page title="{i18n>TituloListaUsuario}" titleAlignment="Start">
+        <headerContent>
+            <SearchField width="50%" search=".pesquisarUsuario"/>
             <Button icon="sap-icon://add" text="{i18n>BotaoNovoUsuario}" press=".aoClicarEmCadastrar" type="Accept"/>
-        </Toolbar>
+        </headerContent>
         <Table 
+            id="listaDeUsuarios"
             headerText="{Lista de usuários}"
             width="auto"
             items="{usuarios>/listaUsuarios}"
             class="alinhaTexto"
-            alternateRowColors="true">
-        
+            alternateRowColors="true"
+            growing="true" 
+            growingThreshold="5">
         <columns>
             <Column hAlign="Begin" width="10rem">
                 

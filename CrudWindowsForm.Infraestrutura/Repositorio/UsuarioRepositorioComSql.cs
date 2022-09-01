@@ -162,5 +162,10 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio
 
             return listaUsuario;
         }
+
+        public List<Usuario> ObterPesquisa(string consulta)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

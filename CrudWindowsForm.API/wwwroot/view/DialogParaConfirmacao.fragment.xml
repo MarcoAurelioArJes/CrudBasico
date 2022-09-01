@@ -8,12 +8,14 @@
       <beginButton>
          <Button
             text="{i18n>BotaoCancelar}"
-            press=".fecharDialog"/>
+            press=".fecharDialog"
+            type="Ghost"/>
       </beginButton>
       <endButton>
          <Button
             text="{i18n>BotaoConfirmar}"
-            press=".confirmarDialog"/>
+            press=".confirmarDialog"
+            type="Emphasized" />
       </endButton>
    </Dialog>
 </core:FragmentDefinition>
