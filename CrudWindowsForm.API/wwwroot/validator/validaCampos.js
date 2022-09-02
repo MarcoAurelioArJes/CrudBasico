@@ -1,8 +1,7 @@
 sap.ui.define([
-    "sap/ui/model/ValidateException",
     "./mensagensDeErro",
     "sap/ui/core/format/DateFormat",
-], function (ValidateException, mensagensDeErro, DateFormat) {
+], function (mensagensDeErro, DateFormat) {
     "use strict";
     return {
       retornaDataValida: function (data) {
@@ -17,9 +16,11 @@ sap.ui.define([
         
         if (!data.isValidValue(data) && (instanciaData < data.getMinDate() 
             || instanciaData > data.getMaxDate())) {
+
             let mensagem = i18n.getText("AvisoCampoDataNascimentoDataMaiorOuMenor", 
                             [formatador.format(new Date(dataMinima.getMinDate())), 
                             formatador.format(new Date(dataMaxima.getMaxDate()))]);
+                            
           mensagensDeErro.mensagensDeErroParaOsCampos.bind(this)({input: data, mensagem: mensagem});
 
         } else if (!data.isValidValue(data)) {
@@ -30,13 +31,14 @@ sap.ui.define([
         return data.getValue();  
       },
       retornaEmailValido: function (email) {
-        let valorDoInput = email.getValue();
-
         let i18n = this.getView().getModel("i18n").getResourceBundle();
+        
+        let valorDoInput = email.getValue();
 
         let regexEmail = /^\w+[\w-+\.]*\@\w+([-\.]\w+)*\.[a-zA-Z]{2,}$/;
         if (!valorDoInput.match(regexEmail)) {
-          mensagensDeErro.mensagensDeErroParaOsCampos.bind(this)({input: email, mensagem: `${valorDoInput} ${i18n.getText("AvisoCampoEmail")}`});
+          mensagensDeErro.mensagensDeErroParaOsCampos.bind(this)
+          ({input: email, mensagem: `"${valorDoInput}" ${i18n.getText("AvisoCampoEmail")}`});
         }
         email.setValueState("None");
 
@@ -56,6 +58,7 @@ sap.ui.define([
       },
       defineCampoDeErroDaApi: function({nomePropriedade, mensagem}) {
         let campo = this.byId(`campo${nomePropriedade}`);
+        
         mensagensDeErro.mensagensDeErroParaOsCampos.bind(this)({input : campo,
                                                    mensagem: mensagem});
 

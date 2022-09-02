@@ -9,6 +9,7 @@ sap.ui.define([
     return Controller.extend("crudBasico.controller.ListaUsuarios", {
         onInit: function() {
             let rotas = this.getOwnerComponent().getRouter();
+            
             rotas.getRoute("ListaUsuarios").attachPatternMatched(this.criaModelo, this);
         },
         aoClicarEmCadastrar: function() {

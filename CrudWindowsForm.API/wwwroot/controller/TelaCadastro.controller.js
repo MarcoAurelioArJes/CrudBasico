@@ -15,15 +15,15 @@ sap.ui.define([
         rotas = this.getOwnerComponent().getRouter();
         
         rotas
+          .getRoute("Cadastrar")
+          .attachPatternMatched(this.limpaValoresDosCampos, this);
+        rotas
           .getRoute("Editar")
           .attachPatternMatched(this.criaModeloUsuario, this);
-        rotas
-          .getRoute("Cadastrar")
-          .attachPatternMatched(this.manipulaValoresDosCampos, this);
       },
       aoClicarEmVoltar: function () {
-        var historico = History.getInstance();
-        var rotaAnterior = historico.getPreviousHash();
+        let historico = History.getInstance();
+        let rotaAnterior = historico.getPreviousHash();
 
         if (rotaAnterior !== undefined) {
           window.history.go(-1);
@@ -59,13 +59,25 @@ sap.ui.define([
           MessageToast.show("Ocorreu um erro" + err.message);
         }
       },
-      manipulaValoresDosCampos: function () {
-        this.byId("campoNome").setValue("");
-        this.byId("campoEmail").setValue("");
-        this.byId("campoSenha").setValue("");
-        this.byId("campoDataNascimento").setValue("");
+      retornaArrayDeCampos: function() {
+        return [
+          this.byId("campoNome"),
+          this.byId("campoEmail"),
+          this.byId("campoSenha"),
+          this.byId("campoDataNascimento")
+        ];
+      },
+      limpaValoresDosCampos: function () {
+        this.retornaArrayDeCampos().forEach(input => {
+          input.setValue("");
+        });
         
         this._alteracoesParaRotaDeCadastrar();
+      },
+      limpaErrosDosCampos: function() {
+        this.retornaArrayDeCampos().forEach(input => {
+          input.setValueState("None");
+        });
       },
       _alteracoesParaRotaDeCadastrar: function () {
         this.byId("btnCadastrar").setVisible(true);
@@ -77,6 +89,12 @@ sap.ui.define([
         this.byId("campoDataNascimento").setPlaceholder(i18n.getText("PlaceholderDataNascimentoCadastrar"));
         
         this.byId("paginaCadastro").setTitle(i18n.getText("TituloTelaCadastrar"));
+        
+        this.byId("campoEmail").setEnabled(true);
+
+        this.byId("campoSenha").setVisible(true);
+
+        this.limpaErrosDosCampos();
       },
       _alteracoesParaRotaDeEditar: function () {
         let i18n = this.getView().getModel("i18n").getResourceBundle();
@@ -86,6 +104,12 @@ sap.ui.define([
         this.byId("btnEditar").setVisible(true);
         
         this.byId("btnCadastrar").setVisible(false);
+        
+        this.byId("campoEmail").setEnabled(false);
+
+        this.byId("campoSenha").setVisible(false);
+
+        this.limpaErrosDosCampos();
       },
       botaoCadastrar: function() {
         this.servicoParaCadastrarEAtualizar({verboHTTP: "POST"});
@@ -99,19 +123,19 @@ sap.ui.define([
       },
       servicoParaCadastrarEAtualizar: async function({verboHTTP, idUsuario}) {
         try {
-          let objetoCadastro = {
+          let objetoUsuario = {
             nome: validaCampos.retornaValorCampoGenerico.bind(this)(this.byId("campoNome")),
             email: validaCampos.retornaEmailValido.bind(this)(this.byId("campoEmail")),
             senha: validaCampos.retornaValorCampoGenerico.bind(this)(this.byId("campoSenha")),
             dataNascimento: validaCampos.retornaDataValida.bind(this)(this.byId("campoDataNascimento")) || null
           };
 
-          if (idUsuario != undefined) objetoCadastro.id = idUsuario;
+          if (idUsuario != undefined) objetoUsuario.id = idUsuario;
           
           let respostaHttp = await fetch(`https://localhost:7150/api/Usuario`, {
             method: `${verboHTTP}`,
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(objetoCadastro)
+            body: JSON.stringify(objetoUsuario)
           });
 
           let resultado = respostaHttp.headers.get("content-type") !== null ? await respostaHttp.json() : null;

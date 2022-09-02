@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "f1yMTJCEO4Kedhnvn/Qlufo03Nubiq7RBeSyicWbvc4=",
+  "Hash": "g1L5ujnpFMuwDvI1L9j37AOeCHyIRGeOsDCaWfwgvfY=",
   "Source": "CrudWindowsForm.API",
   "BasePath": "_content/CrudWindowsForm.API",
   "Mode": "Default",
@@ -32,6 +32,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Component.js"
+    },
+    {
+      "Identity": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.API\\wwwroot\\controller\\App.controller.js",
+      "SourceId": "CrudWindowsForm.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.API\\wwwroot\\",
+      "BasePath": "_content/CrudWindowsForm.API",
+      "RelativePath": "controller/App.controller.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\controller\\App.controller.js"
     },
     {
       "Identity": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.API\\wwwroot\\controller\\BaseController.controller.js",

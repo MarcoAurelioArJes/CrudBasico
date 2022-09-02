@@ -14,8 +14,8 @@ sap.ui.define([
         rotas.getRoute("Detalhes").attachPatternMatched(this.pegaUsuarioPorId, this);
       },
       aoClicarEmVoltar: function () {
-        var historico = History.getInstance();
-        var rotaAnterior = historico.getPreviousHash();
+        let historico = History.getInstance();
+        let rotaAnterior = historico.getPreviousHash();
 
         if (rotaAnterior !== undefined) {
           window.history.go(-1);

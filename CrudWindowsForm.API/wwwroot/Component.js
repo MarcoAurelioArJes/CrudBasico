@@ -1,7 +1,8 @@
 sap.ui.define([
     "sap/ui/core/UIComponent",
-    "sap/ui/Device"
-], function (UIComponent, Device) {
+    "sap/ui/Device",
+    "sap/ui/model/json/JSONModel"
+], function (UIComponent, Device, JSONModel) {
     "use strict";
 
     return UIComponent.extend("crudBasico.Component", {
@@ -11,7 +12,11 @@ sap.ui.define([
         },
         init : function () {
             UIComponent.prototype.init.apply(this, arguments);
-
+            
+            let modeloDoDispositivo = new JSONModel(Device);
+            modeloDoDispositivo.setDefaultBindingMode("OneWay");
+            this.setModel(modeloDoDispositivo, "device");
+            
             this.getRouter().initialize();
         },
         getContentDensityClass : function () {
