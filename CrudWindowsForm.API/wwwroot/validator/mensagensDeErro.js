@@ -3,7 +3,7 @@ sap.ui.define([
 ],
 function(ValidateException) {
     return {
-        mensagensDeErroParaOsCampos: function ({input, mensagem}) {
+          mensagensDeErroParaOsCampos: function ({input, mensagem}) {
             let i18n = this.getView().getModel("i18n").getResourceBundle();
             
             input.setValueState("Error");

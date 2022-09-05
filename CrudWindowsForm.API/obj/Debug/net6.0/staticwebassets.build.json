@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "g1L5ujnpFMuwDvI1L9j37AOeCHyIRGeOsDCaWfwgvfY=",
+  "Hash": "8NKn6czHInWqL4Y4VgxgrgSHaNSCaNrsMaq66onY+go=",
   "Source": "CrudWindowsForm.API",
   "BasePath": "_content/CrudWindowsForm.API",
   "Mode": "Default",
@@ -51,12 +51,12 @@
       "OriginalItemSpec": "wwwroot\\controller\\App.controller.js"
     },
     {
-      "Identity": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.API\\wwwroot\\controller\\BaseController.controller.js",
+      "Identity": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.API\\wwwroot\\controller\\BaseController.js",
       "SourceId": "CrudWindowsForm.API",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.API\\wwwroot\\",
       "BasePath": "_content/CrudWindowsForm.API",
-      "RelativePath": "controller/BaseController.controller.js",
+      "RelativePath": "controller/BaseController.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -65,7 +65,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\controller\\BaseController.controller.js"
+      "OriginalItemSpec": "wwwroot\\controller\\BaseController.js"
     },
     {
       "Identity": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.API\\wwwroot\\controller\\DetalhesDoUsuario.controller.js",
@@ -185,6 +185,57 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\manifest.json"
+    },
+    {
+      "Identity": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.API\\wwwroot\\model\\formataData.js",
+      "SourceId": "CrudWindowsForm.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.API\\wwwroot\\",
+      "BasePath": "_content/CrudWindowsForm.API",
+      "RelativePath": "model/formataData.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\model\\formataData.js"
+    },
+    {
+      "Identity": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.API\\wwwroot\\repo\\ServicoParaApi.js",
+      "SourceId": "CrudWindowsForm.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.API\\wwwroot\\",
+      "BasePath": "_content/CrudWindowsForm.API",
+      "RelativePath": "repo/ServicoParaApi.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\repo\\ServicoParaApi.js"
+    },
+    {
+      "Identity": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.API\\wwwroot\\repo\\UsuarioRepositorio.js",
+      "SourceId": "CrudWindowsForm.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.API\\wwwroot\\",
+      "BasePath": "_content/CrudWindowsForm.API",
+      "RelativePath": "repo/UsuarioRepositorio.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\repo\\UsuarioRepositorio.js"
     },
     {
       "Identity": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.API\\wwwroot\\validator\\mensagensDeErro.js",

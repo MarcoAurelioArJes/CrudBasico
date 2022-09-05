@@ -10,21 +10,21 @@
         </headerContent>
         <Table 
             id="listaDeUsuarios"
-            headerText="{Lista de usuários}"
             width="auto"
-            items="{usuarios>/listaUsuarios}"
+            items="{usuarios>/}"
             class="alinhaTexto"
             alternateRowColors="true"
             growing="true" 
-            growingThreshold="5">
+            growingThreshold="5"
+            noData="{i18n>ListaUsuarios.NaoHaUsuariosCadastrados}">
         <columns>
             <Column hAlign="Begin" width="10rem">
                 
-                <Text text="Id"/>
+                <Text text="{i18n>TextoId}"/>
             </Column>
             <Column hAlign="Begin">
                 
-                <Text text="Nome"/>
+                <Text text="{i18n>TextoNome}"/>
             </Column>
         </columns>
         <items>

@@ -1,63 +1,23 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
-    "sap/ui/core/routing/History",
-    "sap/ui/model/json/JSONModel",
+    "./BaseController",
     "sap/m/MessageToast",
-    "sap/ui/core/format/DateFormat",
+    "../model/formataData",
     "../validator/validaCampos",
-    "../validator/mensagensDeErro"
-], function(Controller, History, JSONModel, MessageToast, DateFormat, validaCampos, mensagensDeErro) {
+    "../repo/UsuarioRepositorio"
+], function(BaseController, MessageToast, formataData, validaCampos, UsuarioRepositorio) {
     "use strict";
     let rotas;
 
-    return Controller.extend("crudBasico.controller.TelaCadastro", {
+    return BaseController.extend("crudBasico.controller.TelaCadastro", {
       onInit: function () {
         rotas = this.getOwnerComponent().getRouter();
         
         rotas
           .getRoute("Cadastrar")
-          .attachPatternMatched(this.limpaValoresDosCampos, this);
+          .attachPatternMatched(this._alteracoesParaRotaDeCadastrar, this);
         rotas
           .getRoute("Editar")
-          .attachPatternMatched(this.criaModeloUsuario, this);
-      },
-      aoClicarEmVoltar: function () {
-        let historico = History.getInstance();
-        let rotaAnterior = historico.getPreviousHash();
-
-        if (rotaAnterior !== undefined) {
-          window.history.go(-1);
-        } else {
-          rotas.navTo("ListaUsuarios", {}, true);
-        }
-      },
-      criaModeloUsuario: async function (event) {
-        let idUsuario = event.getParameters().arguments.caminhoDaListaDeUsuarios;
-
-        try {
-          let respostaHTTP = await fetch(`https://localhost:7150/api/Usuario/${idUsuario}`, {method: "GET"});
-
-          let dadosRetornados = await respostaHTTP.json();
-
-          if (!respostaHTTP.ok) mensagensDeErro.mensagensDeErro(dadosRetornados.value);
-
-          if (dadosRetornados.dataNascimento !== null) {
-            dadosRetornados.dataNascimento = DateFormat.getDateInstance({pattern: "yyyy-MM-dd"})
-            .format(new Date(dadosRetornados.dataNascimento));
-          } else {
-            let i18n = this.getView().getModel("i18n").getResourceBundle();
-            this.byId("campoDataNascimento")
-            .setPlaceholder(i18n.getText("PlaceholderAvisoDataNascimentoEditar"));
-          }
-
-          let usuario = new JSONModel(dadosRetornados);
-                      
-          this.getView().setModel(usuario, "usuario");
-          
-          this._alteracoesParaRotaDeEditar();
-        } catch (err) {
-          MessageToast.show("Ocorreu um erro" + err.message);
-        }
+          .attachPatternMatched(this.criaModeloParaRotaEditar, this);
       },
       retornaArrayDeCampos: function() {
         return [
@@ -67,24 +27,17 @@ sap.ui.define([
           this.byId("campoDataNascimento")
         ];
       },
-      limpaValoresDosCampos: function () {
-        this.retornaArrayDeCampos().forEach(input => {
-          input.setValue("");
-        });
-        
-        this._alteracoesParaRotaDeCadastrar();
-      },
       limpaErrosDosCampos: function() {
         this.retornaArrayDeCampos().forEach(input => {
           input.setValueState("None");
         });
       },
       _alteracoesParaRotaDeCadastrar: function () {
+        let i18n = this.getView().getModel("i18n").getResourceBundle();
+
         this.byId("btnCadastrar").setVisible(true);
 
         this.byId("btnEditar").setVisible(false);
-        
-        let i18n = this.getView().getModel("i18n").getResourceBundle();
         
         this.byId("campoDataNascimento").setPlaceholder(i18n.getText("PlaceholderDataNascimentoCadastrar"));
         
@@ -95,6 +48,8 @@ sap.ui.define([
         this.byId("campoSenha").setVisible(true);
 
         this.limpaErrosDosCampos();
+      
+        this.criaModelo({}, "usuario");
       },
       _alteracoesParaRotaDeEditar: function () {
         let i18n = this.getView().getModel("i18n").getResourceBundle();
@@ -111,17 +66,37 @@ sap.ui.define([
 
         this.limpaErrosDosCampos();
       },
+      criaModeloParaRotaEditar: async function (event) {
+        let i18n = this.getView().getModel("i18n").getResourceBundle();
+        try {
+          let idUsuario = event.getParameters().arguments.caminhoDaListaDeUsuarios;
+          let dadosRetornados = await UsuarioRepositorio.obterPorId(idUsuario);
+
+          if (dadosRetornados.dataNascimento !== null) {
+            dadosRetornados.dataNascimento = formataData.retornaDataFormatada(dadosRetornados.dataNascimento);
+          } else {
+            this.byId("campoDataNascimento")
+            .setPlaceholder(i18n.getText("PlaceholderAvisoDataNascimentoEditar"));
+          }
+
+          this.criaModelo(dadosRetornados, "usuario")
+
+          this._alteracoesParaRotaDeEditar();
+        } catch (err) {
+          MessageToast.show(i18n.getText("Mensagem.OcorreuUmErro"));
+        }
+      },
       botaoCadastrar: function() {
-        this.servicoParaCadastrarEAtualizar({verboHTTP: "POST"});
+        this.servicoParaCadastrarEAtualizar();
       },
       botaoEditar: function(event) {
         let idUsuario = event.getSource().getModel("usuario").getData().id
-        this.servicoParaCadastrarEAtualizar({verboHTTP: "PUT", idUsuario});
+        this.servicoParaCadastrarEAtualizar(idUsuario);
       },
-      botaoCancelar: function() {
+      aoClicarEmCancelar: function() {
         this.aoClicarEmVoltar();
       },
-      servicoParaCadastrarEAtualizar: async function({verboHTTP, idUsuario}) {
+      servicoParaCadastrarEAtualizar: async function(idUsuario) {
         try {
           let objetoUsuario = {
             nome: validaCampos.retornaValorCampoGenerico.bind(this)(this.byId("campoNome")),
@@ -129,20 +104,12 @@ sap.ui.define([
             senha: validaCampos.retornaValorCampoGenerico.bind(this)(this.byId("campoSenha")),
             dataNascimento: validaCampos.retornaDataValida.bind(this)(this.byId("campoDataNascimento")) || null
           };
-
-          if (idUsuario != undefined) objetoUsuario.id = idUsuario;
           
-          let respostaHttp = await fetch(`https://localhost:7150/api/Usuario`, {
-            method: `${verboHTTP}`,
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(objetoUsuario)
-          });
-
-          let resultado = respostaHttp.headers.get("content-type") !== null ? await respostaHttp.json() : null;
-
-          if (!respostaHttp.ok) {
-            validaCampos.defineCampoDeErroDaApi.bind(this)({nomePropriedade: resultado.value.nomePropriedade, 
-              mensagem: resultado.value.mensagemErro});
+          if (idUsuario !== undefined) {
+            objetoUsuario.id = idUsuario
+            await UsuarioRepositorio.atualizar.bind(this)(objetoUsuario);
+          } else {
+            await UsuarioRepositorio.criar.bind(this)(objetoUsuario);
           }
           
           let i18n = this.getView().getModel("i18n").getResourceBundle();

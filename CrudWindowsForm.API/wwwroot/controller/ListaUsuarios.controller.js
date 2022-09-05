@@ -1,16 +1,16 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
+    "./BaseController",
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageToast",
-    "../validator/mensagensDeErro"
-], function(Controller, JSONModel, MessageToast, mensagensDeErro) {
+    "../repo/UsuarioRepositorio"
+], function(BaseController, JSONModel, MessageToast, UsuarioRepositorio) {
     "use strict";
 
-    return Controller.extend("crudBasico.controller.ListaUsuarios", {
+    return BaseController.extend("crudBasico.controller.ListaUsuarios", {
         onInit: function() {
             let rotas = this.getOwnerComponent().getRouter();
             
-            rotas.getRoute("ListaUsuarios").attachPatternMatched(this.criaModelo, this);
+            rotas.getRoute("ListaUsuarios").attachPatternMatched(this.listarTodos, this);
         },
         aoClicarEmCadastrar: function() {
             let rotas = this.getOwnerComponent().getRouter();
@@ -24,18 +24,9 @@ sap.ui.define([
               caminhoDaListaDeUsuarios: window.encodeURIComponent(idUsuario)
             });
         },
-        criaModelo: async function() {
+        listarTodos: async function() {
             try {
-                let respostaHttp = await fetch("https://localhost:7150/api/Usuario", {method: "GET"});
-                let respostaBody = await respostaHttp.json(); 
-                
-                if (!respostaHttp.ok) mensagensDeErro.mensagensDeErro(respostaBody.value);
-                    
-                let modelo = new JSONModel({
-                    listaUsuarios: respostaBody
-                });
-    
-                this.getOwnerComponent().setModel(modelo, "usuarios");
+                this.criaModelo(await UsuarioRepositorio.listar(), "usuarios");
             } catch (err) {
                 MessageToast.show(err.message);
             }
@@ -43,22 +34,11 @@ sap.ui.define([
         pesquisarUsuario: async function(event) {
             try {
                 let consulta = event.getParameter("query");
+
                 if (consulta) {
-                    let respostaHttp = await fetch(`https://localhost:7150/api/Usuario/pesquisa/?consulta=${consulta}`, 
-                    {method: "GET"});
-                    let respostaBody = await respostaHttp.json(); 
-
-                    if (respostaBody.length === 0) mensagensDeErro.mensagensDeErro("Usuário não encontrado");
-
-                    if (!respostaHttp.ok) mensagensDeErro.mensagensDeErro(respostaBody.value);
-                    
-                    let modelo = new JSONModel({
-                        listaUsuarios: respostaBody
-                    });
-    
-                    this.getOwnerComponent().setModel(modelo, "usuarios");
+                    this.criaModelo(await UsuarioRepositorio.pesquisar.bind(this)(consulta), "usuarios");
                 } else {
-                    this.criaModelo();
+                    this.listarTodos();
                 }
             } catch (err) {
                 MessageToast.show(err.message);

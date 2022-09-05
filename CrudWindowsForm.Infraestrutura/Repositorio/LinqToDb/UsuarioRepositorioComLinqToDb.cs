@@ -40,6 +40,7 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb
             {
                 var query = from usuarios
                             in _dbCrudBasico.Usuarios
+                            orderby usuarios.Id descending
                             select usuarios;
 
                 return query.ToList();
@@ -160,7 +161,6 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb
                             select usuarios;
 
                 return query.ToList();
-
             }
             catch (Exception erro)
             {

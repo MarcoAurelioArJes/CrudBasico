@@ -1,32 +1,21 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
-    "sap/ui/core/routing/History",
-    "sap/ui/model/json/JSONModel",
+    "./BaseController",
     "sap/ui/core/syncStyleClass",
-    "sap/ui/core/format/DateFormat",
-    "sap/m/MessageToast"
-], function(Controller, History, JSONModel, syncStyleClass, DateFormat, MessageToast) {
+    "sap/m/MessageToast",
+    "../validator/mensagensDeErro",
+    "../repo/UsuarioRepositorio",
+    "../model/formataData"
+], function(BaseController, syncStyleClass, MessageToast, mensagensDeErro, UsuarioRepositorio, formataData) {
     "use strict";
 
-    return Controller.extend("crudBasico.controller.DetalhesDoUsuario", {
+    let rotas;
+    return BaseController.extend("crudBasico.controller.DetalhesDoUsuario", {
       onInit: function () {
-        let rotas = this.getOwnerComponent().getRouter();
+        rotas = this.getOwnerComponent().getRouter();
         rotas.getRoute("Detalhes").attachPatternMatched(this.pegaUsuarioPorId, this);
-      },
-      aoClicarEmVoltar: function () {
-        let historico = History.getInstance();
-        let rotaAnterior = historico.getPreviousHash();
-
-        if (rotaAnterior !== undefined) {
-          window.history.go(-1);
-        } else {
-          let rotas = this.getOwnerComponent().getRouter();
-          rotas.navTo("ListaUsuarios", {}, true);
-        }
       },
       aoClicarEmEditar: function (event) {
         let idUsuario = event.getSource().getModel("usuario").getData().id;
-        let rotas = this.getOwnerComponent().getRouter();
 
         rotas.navTo("Editar", {
           caminhoDaListaDeUsuarios: window.encodeURIComponent(idUsuario),
@@ -47,15 +36,16 @@ sap.ui.define([
             dialog.open();
           })
       },
-      confirmarDialog: function(event) {
-        let idUsuario = event.getSource().getModel("usuario").getData().id;
-
-        fetch(`https://localhost:7150/api/Usuario/${idUsuario}`, {
-          method: "DELETE",
-        }).then(() => {
-          let rotas = this.getOwnerComponent().getRouter();
-          rotas.navTo("ListaUsuarios", {}, true);
-        }).catch(err => console.log(err))
+      confirmarDialog: async function(event) {
+        try {
+          let idUsuario = event.getSource().getModel("usuario").getData().id;
+          
+          let respostaHttp = await UsuarioRepositorio.deletar(idUsuario);
+          
+          respostaHttp.ok ? rotas.navTo("ListaUsuarios", {}, true) :  mensagensDeErro.mensagensDeErro(err)
+        } catch(err) {
+          MessageToast.show(err);
+        }
       },
       fecharDialog: function() {
         this.byId("dialogParaConfirmacao").close();
@@ -64,14 +54,12 @@ sap.ui.define([
         try {
           let idUsuario = event.getParameters().arguments.caminhoDaListaDeUsuarios;
 
-          let respostaHttp = await fetch(`https://localhost:7150/api/Usuario/${idUsuario}`, {method: "GET"});
-          let respostaBody = await respostaHttp.json();
+          let usuario = await UsuarioRepositorio.obterPorId(idUsuario);
 
-          respostaBody.dataCriacao = DateFormat.getDateInstance().format(new Date(respostaBody.dataCriacao));
-          if (respostaBody.dataNascimento) respostaBody.dataNascimento = new Date(respostaBody.dataNascimento);
+          usuario.dataCriacao = new Date(usuario.dataCriacao);
+          if (usuario.dataNascimento) usuario.dataNascimento = new Date(usuario.dataNascimento);
 
-          let usuario = new JSONModel(respostaBody);
-          this.getView().setModel(usuario, "usuario");
+          this.criaModelo(usuario, "usuario");
         } catch (err) {
           MessageToast.show(err.message);
         }
