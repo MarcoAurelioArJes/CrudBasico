@@ -9,7 +9,7 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb
     {
         static private ConnectionStringSettings _stringConexao = 
             new ConnectionStringSettings("CrudBasico",
-                                         "Server=localhost\\SQLEXPRESS;Database=CrudBasico;User Id=sa;Password=AAASDSDsds@sdadsa@sdasds;Encrypt=false;",
+                                         "Server=localhost\\B1;Database=CrudBasico;User Id=sa;Password=AAASDSDsds@sdadsa@sdasds;Encrypt=false;",
                                          ProviderName.SqlServer);
         
         public DbCrudBasico() : base(_stringConexao.ProviderName, _stringConexao.ConnectionString) {

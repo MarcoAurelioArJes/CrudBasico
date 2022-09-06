@@ -40,6 +40,7 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb
             {
                 var query = from usuarios
                             in _dbCrudBasico.Usuarios
+                            orderby usuarios.Id descending
                             select usuarios;
 
                 return query.ToList();
@@ -113,6 +114,7 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb
         {
             try
             {
+                ObterPorId(id);
                 _dbCrudBasico.Usuarios
                     .Where(usuario => usuario.Id == id)
                     .Delete();
@@ -142,6 +144,27 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio.LinqToDb
             catch (Exception erro)
             {
                 throw new Exception($"Ocorreu um erro ao verificar o email do usuário com id {id}\n", erro);
+            }
+            finally
+            {
+                _dbCrudBasico.Close();
+            }
+        }
+
+        public List<Usuario> ObterPesquisa(string consulta)
+        {
+            try
+            {
+                var query = from usuarios
+                            in _dbCrudBasico.Usuarios
+                            where usuarios.Nome.Contains(consulta) || usuarios.Email.Contains(consulta)
+                            select usuarios;
+
+                return query.ToList();
+            }
+            catch (Exception erro)
+            {
+                throw new Exception($"Ocorreu um erro ao pesquisar usuarios\n", erro);
             }
             finally
             {

@@ -1,0 +1,21 @@
+<core:FragmentDefinition
+   xmlns="sap.m"
+   xmlns:core="sap.ui.core" >
+   <Dialog id="dialogParaConfirmacao" icon="sap-icon://message-warning" title="Remover usuário">
+      <content>
+         <Title class="sapUiResponsiveMargin" text="{i18n>PerguntaDialogConfirmacao}" />
+      </content>
+      <beginButton>
+         <Button
+            text="{i18n>BotaoCancelar}"
+            press=".fecharDialog"
+            type="Ghost"/>
+      </beginButton>
+      <endButton>
+         <Button
+            text="{i18n>BotaoConfirmar}"
+            press=".confirmarDialog"
+            type="Emphasized" />
+      </endButton>
+   </Dialog>
+</core:FragmentDefinition>

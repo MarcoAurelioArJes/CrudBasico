@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudWindowsForm.Dominio", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudWindowsForm.Infraestrutura", "CrudWindowsForm.Infraestrutura\CrudWindowsForm.Infraestrutura.csproj", "{58AD221D-92CC-44FB-9CD3-825BA1B0C7DD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrudWindowsForm.API", "CrudWindowsForm.API\CrudWindowsForm.API.csproj", "{E5F1A8BC-1692-4DE0-9BC2-683726ED7268}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{58AD221D-92CC-44FB-9CD3-825BA1B0C7DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58AD221D-92CC-44FB-9CD3-825BA1B0C7DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58AD221D-92CC-44FB-9CD3-825BA1B0C7DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5F1A8BC-1692-4DE0-9BC2-683726ED7268}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5F1A8BC-1692-4DE0-9BC2-683726ED7268}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5F1A8BC-1692-4DE0-9BC2-683726ED7268}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5F1A8BC-1692-4DE0-9BC2-683726ED7268}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

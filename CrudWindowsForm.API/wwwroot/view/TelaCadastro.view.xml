@@ -1,0 +1,65 @@
+<mvc:View
+	controllerName="crudBasico.controller.TelaCadastro"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+	<Page id="paginaCadastro">
+		<headerContent>
+			<Button type="Back" 
+                    press=".aoClicarEmVoltar"
+                    class="sapUiMediumMarginBegin" />
+            <Title id="tituloPaginaCadastro" 
+				   text="{i18n>TituloTelaCadastrar}" />
+            <ToolbarSpacer />
+			<Button id="btnCadastrar" 
+					visible="false" 
+					type="Emphasized" 
+					text="{i18n>BotaoCadastrar}" 
+					press=".botaoCadastrar" />
+			<Button id="btnEditar" 
+					visible="false" 
+					type="Emphasized" 
+					text="{i18n>BotaoEditar}" 
+					press=".botaoEditar" />
+			<Button id="btnCancelar" 
+					type="Ghost" 
+					text="{i18n>BotaoCancelar}" 
+					press=".aoClicarEmCancelar"
+					class="sapUiMediumMarginEnd" />
+		</headerContent>
+		
+		<VBox class="sapUiSmallMargin" alignItems="Start">
+			<f:SimpleForm 
+				id="CadastroUsuario"
+				editable="true"
+				layout="ResponsiveGridLayout"
+				singleContainerFullSize="false">
+				<f:content>
+					<Label text="{i18n>TextoNome}" />
+					<Input name="Nome" value="{usuario>/nome}" 
+						placeholder="{i18n>PlaceholderCampoNome}" id="campoNome"/>
+					
+					<Label text="{i18n>TextoEmail}" />
+					<Input name="Email" type="Email" value="{usuario>/email}" 
+						placeholder="{i18n>PlaceholderCampoEmail}" id="campoEmail"/>
+					
+					<Label text="{i18n>TextoSenha}" />
+					<Input name="Senha" type="Password" value="{usuario>/senha}" placeholder="{i18n>PlaceholderCampoSenha}" 
+					id="campoSenha"/>
+					
+					<Label text="{i18n>TextoDataNascimento}" />
+					<DatePicker
+						name="DataNascimento"
+						displayFormat="short"
+						change="handleChange"
+						class="sapUiSmallMarginBottom"
+						valueFormat="yyyy-MM-dd"
+						id="campoDataNascimento"
+						value="{usuario>/dataNascimento}"/>
+				</f:content>
+			</f:SimpleForm>
+		</VBox>
+	</Page>
+</mvc:View>

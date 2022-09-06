@@ -19,5 +19,10 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio
         public abstract void Atualizar(T entidade);
 
         public abstract void Deletar(int id);
+
+        public List<T> ObterPesquisa(string consulta)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

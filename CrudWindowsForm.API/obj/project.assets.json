@@ -1,0 +1,103 @@
+{
+  "version": 3,
+  "targets": {
+    "net6.0": {
+      "CrudWindowsForm.Dominio/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/CrudWindowsForm.Dominio.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CrudWindowsForm.Dominio.dll": {}
+        }
+      },
+      "CrudWindowsForm.Infraestrutura/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "CrudWindowsForm.Dominio": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/CrudWindowsForm.Infraestrutura.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CrudWindowsForm.Infraestrutura.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CrudWindowsForm.Dominio/1.0.0": {
+      "type": "project",
+      "path": "../CrudWindowsForm.Dominio/CrudWindowsForm.Dominio.csproj",
+      "msbuildProject": "../CrudWindowsForm.Dominio/CrudWindowsForm.Dominio.csproj"
+    },
+    "CrudWindowsForm.Infraestrutura/1.0.0": {
+      "type": "project",
+      "path": "../CrudWindowsForm.Infraestrutura/CrudWindowsForm.Infraestrutura.csproj",
+      "msbuildProject": "../CrudWindowsForm.Infraestrutura/CrudWindowsForm.Infraestrutura.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net6.0": [
+      "CrudWindowsForm.Infraestrutura >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Usuario\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.API\\CrudWindowsForm.API.csproj",
+      "projectName": "CrudWindowsForm.API",
+      "projectPath": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.API\\CrudWindowsForm.API.csproj",
+      "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.API\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net6.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "projectReferences": {
+            "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\CrudWindowsForm.Infraestrutura.csproj": {
+              "projectPath": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\CrudWindowsForm.Infraestrutura.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net6.0": {
+        "targetAlias": "net6.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.411\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

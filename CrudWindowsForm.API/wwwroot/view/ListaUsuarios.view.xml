@@ -1,0 +1,43 @@
+<mvc:View
+    controllerName="crudBasico.controller.ListaUsuarios"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc">
+
+    <Page>
+        <headerContent width="100%">
+            <Title text="{i18n>TituloListaUsuario}"
+                class="sapUiSmallMarginBegin" />
+            <ToolbarSpacer />
+            <SearchField width="auto" search=".pesquisarUsuario"/>
+            <Button class="sapUiSmallMarginEnd" icon="sap-icon://add" text="{i18n>BotaoNovoUsuario}" press=".aoClicarEmCadastrar" type="Emphasized"/>
+        </headerContent>
+        <Table 
+            id="listaDeUsuarios"
+            width="auto"
+            items="{usuarios>/}"
+            class="alinhaTexto"
+            alternateRowColors="true"
+            growing="true" 
+            growingThreshold="5"
+            noData="{i18n>ListaUsuarios.NaoHaUsuariosCadastrados}">
+        <columns>
+            <Column hAlign="Begin" width="10rem">
+                
+                <Text text="{i18n>TextoId}"/>
+            </Column>
+            <Column hAlign="Begin">
+                
+                <Text text="{i18n>TextoNome}"/>
+            </Column>
+        </columns>
+        <items>
+            <ColumnListItem type="Navigation" press=".aoClicarNoItemDaLista">
+                <cells>
+                    <ObjectIdentifier title="{usuarios>id}" />
+                    <ObjectIdentifier title="{usuarios>nome}" text="{usuarios>email}"/>
+                </cells>
+            </ColumnListItem>
+		</items>
+    </Table>
+    </Page>
+</mvc:View>

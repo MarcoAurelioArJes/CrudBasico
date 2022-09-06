@@ -10,6 +10,7 @@ namespace CrudWindowsForm.Dominio.Interfaces
     {
         public void Criar(T entidade);
         public List<T> ObterTodos();
+        public List<T> ObterPesquisa(string consulta);
         public T ObterPorId(int id);
         public void Atualizar(T entidade);
         public void Deletar(int id);

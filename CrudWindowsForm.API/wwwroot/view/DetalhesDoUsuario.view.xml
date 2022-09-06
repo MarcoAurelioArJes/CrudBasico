@@ -1,0 +1,64 @@
+<mvc:View
+	controllerName="crudBasico.controller.DetalhesDoUsuario"
+	xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.ui.layout.form"
+	xmlns="sap.m">
+	<Page>
+		<headerContent>
+            <Button type="Back" 
+                    press=".aoClicarEmVoltar"
+                    class="sapUiSmallMarginBegin"/>
+            <Title text="{i18n>TituloDetalhesUsuario}" />
+            <ToolbarSpacer />
+            <Button icon="sap-icon://edit" 
+                    text="{i18n>BotaoEditar}" 
+                    type="Emphasized"
+                    press=".aoClicarEmEditar"
+            />
+            <Button icon="sap-icon://delete" 
+                    text="{i18n>BotaoDeletar}" 
+                    type="Emphasized" 
+                    press=".aoClicarEmDeletar"
+                    class="sapUiSmallMarginEnd" />
+        </headerContent>
+        <VBox backgroundDesign="Solid" class="sapUiSmallMargin" width="97.4%" height="12rem" alignItems="Start">
+                <VBox class="sapUiSmallMargin" alignItems="Center" width="20rem">
+                    <Title text="{i18n>TituloInformacoesUsuario}" titleStyle="H2" />       
+                </VBox>
+                <HBox width="20rem">
+                    <HBox justifyContent="End" width="100%" class="sapUiSmallMarginEnd">
+                        <Label text="{i18n>TextoNome}:" />
+                    </HBox>
+                    <HBox justifyContent="Start" width="100%">
+                        <Text id="nameText" text="{usuario>/nome}" />
+                    </HBox>
+                </HBox>
+                <HBox class="sapUiTinyMarginTop" justifyContent="End" width="20rem">
+                    <HBox justifyContent="End" width="100%" class="sapUiSmallMarginEnd">
+                        <Label text="{i18n>TextoEmail}:" />
+                    </HBox>
+                    <HBox justifyContent="Start" width="100%">
+                        <Text text="{usuario>/email}" />
+                    </HBox>
+                </HBox>
+                <HBox class="sapUiTinyMarginTop" justifyContent="SpaceAround" width="20rem">
+                    <HBox justifyContent="End" width="100%" class="sapUiSmallMarginEnd">
+                        <Label text="{i18n>TextoDataNascimento}:" />
+                    </HBox>
+                    <HBox justifyContent="Start" width="100%">
+                        <Text text="{= ${usuario>/dataNascimento} !== null ? ${path: 'usuario>/dataNascimento', 
+                                                                                type:'sap.ui.model.type.Date'} 
+                                                                                : ${i18n>PlaceholderAvisoDataNascimentoEditar}}" />
+                    </HBox>
+                </HBox>
+                <HBox class="sapUiTinyMarginTop"  width="20rem">
+                    <HBox justifyContent="End" class="sapUiSmallMarginEnd" width="100%">
+                        <Label text="{i18n>TextoDataCriacao}:" />
+                    </HBox>
+                    <HBox justifyContent="Start" width="100%">
+                        <Text text="{path: 'usuario>/dataCriacao', type: 'sap.ui.model.type.Date'}" />
+                    </HBox>
+                </HBox>
+		</VBox>
+	</Page>
+</mvc:View>

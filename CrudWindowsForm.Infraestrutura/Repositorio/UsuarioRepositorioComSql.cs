@@ -71,7 +71,7 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio
 
         public List<Usuario> ObterTodos()
         {
-            string consulta = "SELECT * FROM Usuarios;";
+            string consulta = "SELECT * FROM Usuario;";
 
             using (SqlConnection conexao = new SqlConnection(_stringConexao))
             {
@@ -161,6 +161,11 @@ namespace CrudWindowsForm.Infraestrutura.Repositorio
             }
 
             return listaUsuario;
+        }
+
+        public List<Usuario> ObterPesquisa(string consulta)
+        {
+            throw new NotImplementedException();
         }
     }
 }

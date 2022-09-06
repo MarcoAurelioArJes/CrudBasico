@@ -7,7 +7,7 @@ namespace CrudWindowsForm.Infraestrutura.Migrations
     public class RealizaMigracoes
     {
         static private ConnectionStringSettings _stringDeConexao = new ConnectionStringSettings("CrudBasico",
-                                                             "Server=localhost\\SQLEXPRESS;Database=CrudBasico;User Id=sa;Password=AAASDSDsds@sdadsa@sdasds;Encrypt=false;",
+                                                             "Server=localhost\\B1;Database=CrudBasico;User Id=sa;Password=AAASDSDsds@sdadsa@sdasds;Encrypt=false;",
                                                              "SqlServer");
         public RealizaMigracoes()
         {
@@ -26,7 +26,7 @@ namespace CrudWindowsForm.Infraestrutura.Migrations
                 .ConfigureRunner(runnerBuilder => 
                     runnerBuilder.AddSqlServer()
                     .WithGlobalConnectionString(_stringDeConexao.ConnectionString)
-                    .ScanIn(typeof(_20220812_AddTabelaUsuario).Assembly).For.Migrations())
+                    .ScanIn(typeof(_20220825_AddTabelaUsuario).Assembly).For.Migrations())
                     .AddLogging(loginBuilder => loginBuilder.AddFluentMigratorConsole())
                     .BuildServiceProvider(false);
         }

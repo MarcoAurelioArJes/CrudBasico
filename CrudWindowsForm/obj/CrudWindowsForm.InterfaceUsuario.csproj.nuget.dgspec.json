@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm\\CrudWindowsForm.InterfaceUsuario.csproj": {}
+    "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm\\CrudWindowsForm.InterfaceUsuario.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm.Dominio\\CrudWindowsForm.Dominio.csproj": {
+    "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.Dominio\\CrudWindowsForm.Dominio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm.Dominio\\CrudWindowsForm.Dominio.csproj",
+        "projectUniqueName": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.Dominio\\CrudWindowsForm.Dominio.csproj",
         "projectName": "CrudWindowsForm.Dominio",
-        "projectPath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm.Dominio\\CrudWindowsForm.Dominio.csproj",
+        "projectPath": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.Dominio\\CrudWindowsForm.Dominio.csproj",
         "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm.Dominio\\obj\\",
+        "outputPath": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.Dominio\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -39,16 +39,6 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "dependencies": {
-            "FluentValidation": {
-              "target": "Package",
-              "version": "[11.2.0, )"
-            },
-            "linq2db": {
-              "target": "Package",
-              "version": "[4.1.1, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -59,23 +49,18 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.411\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\CrudWindowsForm.Infraestrutura.csproj": {
+    "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\CrudWindowsForm.Infraestrutura.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\CrudWindowsForm.Infraestrutura.csproj",
+        "projectUniqueName": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\CrudWindowsForm.Infraestrutura.csproj",
         "projectName": "CrudWindowsForm.Infraestrutura",
-        "projectPath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\CrudWindowsForm.Infraestrutura.csproj",
+        "projectPath": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\CrudWindowsForm.Infraestrutura.csproj",
         "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\obj\\",
+        "outputPath": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -92,8 +77,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm.Dominio\\CrudWindowsForm.Dominio.csproj": {
-                "projectPath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm.Dominio\\CrudWindowsForm.Dominio.csproj"
+              "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.Dominio\\CrudWindowsForm.Dominio.csproj": {
+                "projectPath": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.Dominio\\CrudWindowsForm.Dominio.csproj"
               }
             }
           }
@@ -107,36 +92,6 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "dependencies": {
-            "FluentMigrator": {
-              "target": "Package",
-              "version": "[3.3.2, )"
-            },
-            "FluentMigrator.Runner": {
-              "target": "Package",
-              "version": "[3.3.2, )"
-            },
-            "FluentMigrator.Runner.SqlServer": {
-              "target": "Package",
-              "version": "[3.3.2, )"
-            },
-            "Microsoft.Data.SqlClient": {
-              "target": "Package",
-              "version": "[5.0.0, )"
-            },
-            "System.Configuration.ConfigurationManager": {
-              "target": "Package",
-              "version": "[6.0.0, )"
-            },
-            "System.Data.SqlClient": {
-              "target": "Package",
-              "version": "[4.8.3, )"
-            },
-            "linq2db": {
-              "target": "Package",
-              "version": "[4.1.1, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -147,23 +102,18 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.411\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm\\CrudWindowsForm.InterfaceUsuario.csproj": {
+    "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm\\CrudWindowsForm.InterfaceUsuario.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm\\CrudWindowsForm.InterfaceUsuario.csproj",
+        "projectUniqueName": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm\\CrudWindowsForm.InterfaceUsuario.csproj",
         "projectName": "CrudWindowsForm.InterfaceUsuario",
-        "projectPath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm\\CrudWindowsForm.InterfaceUsuario.csproj",
+        "projectPath": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm\\CrudWindowsForm.InterfaceUsuario.csproj",
         "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm\\obj\\",
+        "outputPath": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -180,11 +130,11 @@
           "net6.0-windows7.0": {
             "targetAlias": "net6.0-windows",
             "projectReferences": {
-              "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm.Dominio\\CrudWindowsForm.Dominio.csproj": {
-                "projectPath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm.Dominio\\CrudWindowsForm.Dominio.csproj"
+              "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.Dominio\\CrudWindowsForm.Dominio.csproj": {
+                "projectPath": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.Dominio\\CrudWindowsForm.Dominio.csproj"
               },
-              "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\CrudWindowsForm.Infraestrutura.csproj": {
-                "projectPath": "C:\\Users\\Usuario\\workspace-vs-code\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\CrudWindowsForm.Infraestrutura.csproj"
+              "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\CrudWindowsForm.Infraestrutura.csproj": {
+                "projectPath": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.Infraestrutura\\CrudWindowsForm.Infraestrutura.csproj"
               }
             }
           }
@@ -198,20 +148,6 @@
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
-          "dependencies": {
-            "FluentValidation": {
-              "target": "Package",
-              "version": "[11.2.0, )"
-            },
-            "Microsoft.Extensions.DependencyInjection": {
-              "target": "Package",
-              "version": "[6.0.0, )"
-            },
-            "Microsoft.Extensions.Hosting": {
-              "target": "Package",
-              "version": "[6.0.1, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -222,15 +158,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            },
-            "Microsoft.WindowsDesktop.App.WindowsForms": {
-              "privateAssets": "none"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.411\\RuntimeIdentifierGraph.json"
         }
       }
     }
