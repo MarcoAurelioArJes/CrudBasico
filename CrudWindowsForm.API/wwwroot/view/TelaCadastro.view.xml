@@ -5,12 +5,29 @@
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:core="sap.ui.core"
 	xmlns="sap.m">
-	<Page id="paginaCadastro" showNavButton="true" title="{i18n>TituloTelaCadastrar}" 
-		navButtonPress=".aoClicarEmVoltar" titleAlignment="Start">
+	<Page id="paginaCadastro">
 		<headerContent>
-			<Button id="btnCadastrar" visible="false" type="Emphasized" text="{i18n>BotaoCadastrar}" press=".botaoCadastrar" />
-			<Button id="btnEditar" visible="false" type="Emphasized" text="{i18n>BotaoEditar}" press=".botaoEditar" />
-			<Button id="btnCancelar" type="Ghost" text="{i18n>BotaoCancelar}" press=".aoClicarEmCancelar" />
+			<Button type="Back" 
+                    press=".aoClicarEmVoltar"
+                    class="sapUiMediumMarginBegin" />
+            <Title id="tituloPaginaCadastro" 
+				   text="{i18n>TituloTelaCadastrar}" />
+            <ToolbarSpacer />
+			<Button id="btnCadastrar" 
+					visible="false" 
+					type="Emphasized" 
+					text="{i18n>BotaoCadastrar}" 
+					press=".botaoCadastrar" />
+			<Button id="btnEditar" 
+					visible="false" 
+					type="Emphasized" 
+					text="{i18n>BotaoEditar}" 
+					press=".botaoEditar" />
+			<Button id="btnCancelar" 
+					type="Ghost" 
+					text="{i18n>BotaoCancelar}" 
+					press=".aoClicarEmCancelar"
+					class="sapUiMediumMarginEnd" />
 		</headerContent>
 		
 		<VBox class="sapUiSmallMargin" alignItems="Start">

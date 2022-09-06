@@ -1,136 +1,11 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {
-      "FluentValidation/11.2.1": {
-        "type": "package",
-        "compile": {
-          "lib/net6.0/FluentValidation.dll": {}
-        },
-        "runtime": {
-          "lib/net6.0/FluentValidation.dll": {}
-        }
-      },
-      "FluentValidation.DependencyInjectionExtensions/11.2.1": {
-        "type": "package",
-        "dependencies": {
-          "FluentValidation": "11.2.1",
-          "Microsoft.Extensions.Dependencyinjection.Abstractions": "2.1.0"
-        },
-        "compile": {
-          "lib/netstandard2.1/FluentValidation.DependencyInjectionExtensions.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.1/FluentValidation.DependencyInjectionExtensions.dll": {}
-        }
-      },
-      "linq2db/4.1.1": {
-        "type": "package",
-        "compile": {
-          "lib/net6.0/linq2db.dll": {}
-        },
-        "runtime": {
-          "lib/net6.0/linq2db.dll": {}
-        }
-      },
-      "Microsoft.Extensions.DependencyInjection.Abstractions/2.1.0": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {}
-        }
-      }
-    }
+    "net6.0": {}
   },
-  "libraries": {
-    "FluentValidation/11.2.1": {
-      "sha512": "ZrQD0TGd0mHqf/zErZOEaba8cBeInaJj02nqinO+0La3uE08sJ5ScTYqsCbdx9fLHsX8rh+5KH5RtL2eOUS+OA==",
-      "type": "package",
-      "path": "fluentvalidation/11.2.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "README.md",
-        "fluent-validation-icon.png",
-        "fluentvalidation.11.2.1.nupkg.sha512",
-        "fluentvalidation.nuspec",
-        "lib/net5.0/FluentValidation.dll",
-        "lib/net5.0/FluentValidation.xml",
-        "lib/net6.0/FluentValidation.dll",
-        "lib/net6.0/FluentValidation.xml",
-        "lib/netstandard2.0/FluentValidation.dll",
-        "lib/netstandard2.0/FluentValidation.xml",
-        "lib/netstandard2.1/FluentValidation.dll",
-        "lib/netstandard2.1/FluentValidation.xml"
-      ]
-    },
-    "FluentValidation.DependencyInjectionExtensions/11.2.1": {
-      "sha512": "WqR2kt0OidUCg9xS+YOoiDmdCu7EnYLLgQb/bX+5fTTVor+90dWmr1OdJaWlLZvg2nbwV9EfxA9FZp91+JmQtg==",
-      "type": "package",
-      "path": "fluentvalidation.dependencyinjectionextensions/11.2.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "README.md",
-        "fluent-validation-icon.png",
-        "fluentvalidation.dependencyinjectionextensions.11.2.1.nupkg.sha512",
-        "fluentvalidation.dependencyinjectionextensions.nuspec",
-        "lib/netstandard2.0/FluentValidation.DependencyInjectionExtensions.dll",
-        "lib/netstandard2.0/FluentValidation.DependencyInjectionExtensions.xml",
-        "lib/netstandard2.1/FluentValidation.DependencyInjectionExtensions.dll",
-        "lib/netstandard2.1/FluentValidation.DependencyInjectionExtensions.xml"
-      ]
-    },
-    "linq2db/4.1.1": {
-      "sha512": "s0/kByoS3qgQn/OHu8htt7m1plsAsRxNgXhYfXBRedy+SsRv0xuHA6w8X5J1WLWjXUjANRWtTNjCyD1lWZD69Q==",
-      "type": "package",
-      "path": "linq2db/4.1.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "MIT-LICENSE.txt",
-        "README.md",
-        "images/icon.png",
-        "lib/net45/linq2db.dll",
-        "lib/net45/linq2db.xml",
-        "lib/net46/linq2db.dll",
-        "lib/net46/linq2db.xml",
-        "lib/net472/linq2db.dll",
-        "lib/net472/linq2db.xml",
-        "lib/net6.0/linq2db.dll",
-        "lib/net6.0/linq2db.xml",
-        "lib/netcoreapp3.1/linq2db.dll",
-        "lib/netcoreapp3.1/linq2db.xml",
-        "lib/netstandard2.0/linq2db.dll",
-        "lib/netstandard2.0/linq2db.xml",
-        "lib/netstandard2.1/linq2db.dll",
-        "lib/netstandard2.1/linq2db.xml",
-        "linq2db.4.1.1.nupkg.sha512",
-        "linq2db.nuspec"
-      ]
-    },
-    "Microsoft.Extensions.DependencyInjection.Abstractions/2.1.0": {
-      "sha512": "8/CtASu80UIoyG+r8FstrmZW5GLtXxzoYpjj3jV0FKZCL5CiFgSH3pAmqut/dC68mu7N1bU6v0UtKKL3gCUQGQ==",
-      "type": "package",
-      "path": "microsoft.extensions.dependencyinjection.abstractions/2.1.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
-        "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
-        "microsoft.extensions.dependencyinjection.abstractions.2.1.0.nupkg.sha512",
-        "microsoft.extensions.dependencyinjection.abstractions.nuspec"
-      ]
-    }
-  },
+  "libraries": {},
   "projectFileDependencyGroups": {
-    "net6.0": [
-      "FluentValidation >= 11.2.1",
-      "FluentValidation.DependencyInjectionExtensions >= 11.2.1",
-      "linq2db >= 4.1.1"
-    ]
+    "net6.0": []
   },
   "packageFolders": {
     "C:\\Users\\Usuario\\.nuget\\packages\\": {}
@@ -170,20 +45,6 @@
     "frameworks": {
       "net6.0": {
         "targetAlias": "net6.0",
-        "dependencies": {
-          "FluentValidation": {
-            "target": "Package",
-            "version": "[11.2.1, )"
-          },
-          "FluentValidation.DependencyInjectionExtensions": {
-            "target": "Package",
-            "version": "[11.2.1, )"
-          },
-          "linq2db": {
-            "target": "Package",
-            "version": "[4.1.1, )"
-          }
-        },
         "imports": [
           "net461",
           "net462",
@@ -194,12 +55,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "frameworkReferences": {
-          "Microsoft.NETCore.App": {
-            "privateAssets": "all"
-          }
-        },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.411\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,13 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "uYQzOFAH3S1z3HPPr/UHemNTu4mlO5AQvzfn7yrSzxnGMHAU/l4MwK3xFtuM8ubQx2I2YokYDwl2ODBTHGE1UQ==",
+  "dgSpecHash": "/XGB8F4UVyufgwOMQkM0xSfltD4eKnr8tzaD+3ijZ6STYR2L5s319b9uT8zCgAFOhXt12MRXuwtfMGOMkB2swQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Usuario\\workspace\\CrudWindowsForm\\CrudWindowsForm.Dominio\\CrudWindowsForm.Dominio.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\Usuario\\.nuget\\packages\\fluentvalidation\\11.2.1\\fluentvalidation.11.2.1.nupkg.sha512",
-    "C:\\Users\\Usuario\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.2.1\\fluentvalidation.dependencyinjectionextensions.11.2.1.nupkg.sha512",
-    "C:\\Users\\Usuario\\.nuget\\packages\\linq2db\\4.1.1\\linq2db.4.1.1.nupkg.sha512",
-    "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\2.1.0\\microsoft.extensions.dependencyinjection.abstractions.2.1.0.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }

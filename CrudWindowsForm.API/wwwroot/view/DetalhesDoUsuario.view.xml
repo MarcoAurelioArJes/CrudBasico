@@ -3,17 +3,25 @@
 	xmlns:mvc="sap.ui.core.mvc"
     xmlns:f="sap.ui.layout.form"
 	xmlns="sap.m">
-	<Page title="{i18n>TituloDetalhesUsuario}" titleAlignment="Start" showNavButton="true" navButtonPress=".aoClicarEmVoltar">
+	<Page>
 		<headerContent>
+            <Button type="Back" 
+                    press=".aoClicarEmVoltar"
+                    class="sapUiSmallMarginBegin"/>
+            <Title text="{i18n>TituloDetalhesUsuario}" />
+            <ToolbarSpacer />
             <Button icon="sap-icon://edit" 
                     text="{i18n>BotaoEditar}" 
                     type="Emphasized"
                     press=".aoClicarEmEditar"
             />
             <Button icon="sap-icon://delete" 
-                    text="{i18n>BotaoDeletar}" type="Emphasized" press=".aoClicarEmDeletar"/>
+                    text="{i18n>BotaoDeletar}" 
+                    type="Emphasized" 
+                    press=".aoClicarEmDeletar"
+                    class="sapUiSmallMarginEnd" />
         </headerContent>
-        <VBox backgroundDesign="Solid" class="sapUiSmallMargin" height="12rem" alignItems="Start">
+        <VBox backgroundDesign="Solid" class="sapUiSmallMargin" width="97.4%" height="12rem" alignItems="Start">
                 <VBox class="sapUiSmallMargin" alignItems="Center" width="20rem">
                     <Title text="{i18n>TituloInformacoesUsuario}" titleStyle="H2" />       
                 </VBox>

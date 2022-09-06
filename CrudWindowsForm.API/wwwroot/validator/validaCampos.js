@@ -52,6 +52,9 @@ sap.ui.define([
         if (valorDoInput.length === 0 || valorDoInput === undefined) {
           mensagensDeErro.mensagensDeErroParaOsCampos.bind(this)({input, mensagem: `${nomeInput} ${i18n.getText("AvisoCampoGenerico")}`});
         }
+        if (valorDoInput.length < 8 && nomeInput === 'Senha') {
+          mensagensDeErro.mensagensDeErroParaOsCampos.bind(this)({input, mensagem: `${nomeInput} ${i18n.getText("AvisoCampoSenha")}`});
+        }
 
         input.setValueState("None");
         return valorDoInput;

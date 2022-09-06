@@ -3,22 +3,22 @@ sap.ui.define([
     "sap/ui/core/syncStyleClass",
     "sap/m/MessageToast",
     "../validator/mensagensDeErro",
-    "../repo/UsuarioRepositorio",
-    "../model/formataData"
-], function(BaseController, syncStyleClass, MessageToast, mensagensDeErro, UsuarioRepositorio, formataData) {
+    "../repo/UsuarioRepositorio"
+], function(BaseController, syncStyleClass, MessageToast, mensagensDeErro, UsuarioRepositorio) {
     "use strict";
 
     let rotas;
+    let nomeModelo = "usuario";
     return BaseController.extend("crudBasico.controller.DetalhesDoUsuario", {
       onInit: function () {
         rotas = this.getOwnerComponent().getRouter();
-        rotas.getRoute("Detalhes").attachPatternMatched(this.pegaUsuarioPorId, this);
+        rotas.getRoute(this.constanteRotas.ROTA_DETALHES).attachPatternMatched(this.pegaUsuarioPorId, this);
       },
       aoClicarEmEditar: function (event) {
-        let idUsuario = event.getSource().getModel("usuario").getData().id;
+        let idUsuario = event.getSource().getModel(nomeModelo).getData().id;
 
-        rotas.navTo("Editar", {
-          caminhoDaListaDeUsuarios: window.encodeURIComponent(idUsuario),
+        rotas.navTo(this.constanteRotas.ROTA_EDITAR, {
+          id: window.encodeURIComponent(idUsuario),
         });
       },
       aoClicarEmDeletar: function() {
@@ -38,13 +38,22 @@ sap.ui.define([
       },
       confirmarDialog: async function(event) {
         try {
-          let idUsuario = event.getSource().getModel("usuario").getData().id;
+          let i18n = this.getView().getModel("i18n").getResourceBundle();
+
+          let idUsuario = event.getSource().getModel(nomeModelo).getData().id;
           
           let respostaHttp = await UsuarioRepositorio.deletar(idUsuario);
           
-          respostaHttp.ok ? rotas.navTo("ListaUsuarios", {}, true) :  mensagensDeErro.mensagensDeErro(err)
+          if (respostaHttp.ok) {
+            MessageToast.show(i18n.getText("Mensagem.UsuarioRemovidoComSucesso"), this.objetoDeOpcoesMessageToast);
+            this.fecharDialog();
+            rotas.navTo(this.constanteRotas.ROTA_LISTAR, {}, true);
+          } else {
+            mensagensDeErro.mensagensDeErro(err)
+          }
+
         } catch(err) {
-          MessageToast.show(err);
+          MessageToast.show(err, this.objetoDeOpcoesMessageToast);
         }
       },
       fecharDialog: function() {
@@ -52,16 +61,16 @@ sap.ui.define([
       },
       pegaUsuarioPorId: async function (event) {
         try {
-          let idUsuario = event.getParameters().arguments.caminhoDaListaDeUsuarios;
+          let idUsuario = event.getParameters().arguments.id;
 
           let usuario = await UsuarioRepositorio.obterPorId(idUsuario);
 
           usuario.dataCriacao = new Date(usuario.dataCriacao);
           if (usuario.dataNascimento) usuario.dataNascimento = new Date(usuario.dataNascimento);
 
-          this.criaModelo(usuario, "usuario");
+          this.criaModelo(usuario, nomeModelo);
         } catch (err) {
-          MessageToast.show(err.message);
+          MessageToast.show(err.message, this.objetoDeOpcoesMessageToast);
         }
       },
     });

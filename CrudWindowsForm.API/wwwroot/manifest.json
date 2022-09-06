@@ -57,37 +57,37 @@
         "routes": [
           {
             "pattern": "",
-            "name": "ListaUsuarios",
+            "name": "listaUsuarios",
             "target": "listaUsuarios"
           },
           {
             "pattern": "cadastro",
-            "name": "Cadastrar",
+            "name": "cadastrar",
             "target": "cadastroDoUsuario"
           },
           {
-            "pattern": "editar/{caminhoDaListaDeUsuarios}",
-            "name": "Editar",
+            "pattern": "editar/{id}",
+            "name": "editar",
             "target": "cadastroDoUsuario"
           },
           {
-            "pattern": "detalhesUsuario/{caminhoDaListaDeUsuarios}",
-            "name": "Detalhes",
+            "pattern": "detalhesUsuario/{id}",
+            "name": "detalhes",
             "target": "detalhesDoUsuario"
           }
         ],
         "targets": {
           "listaUsuarios": {
             "id": "listaUsuarios",
-            "name": "ListaUsuarios"
+            "name": "listaUsuarios"
           },
           "cadastroDoUsuario": {
             "id": "cadastro",
-            "name": "TelaCadastro"
+            "name": "telaCadastro"
           },
           "detalhesDoUsuario": {
               "id": "detalhesDoUsuario",
-              "name": "DetalhesDoUsuario"  
+              "name": "detalhesDoUsuario"  
           }
         }
       },

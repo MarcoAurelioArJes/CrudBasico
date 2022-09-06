@@ -6,17 +6,19 @@ sap.ui.define([
     "../repo/UsuarioRepositorio"
 ], function(BaseController, MessageToast, formataData, validaCampos, UsuarioRepositorio) {
     "use strict";
+  
     let rotas;
+    let nomeModelo = "usuario";
 
     return BaseController.extend("crudBasico.controller.TelaCadastro", {
       onInit: function () {
         rotas = this.getOwnerComponent().getRouter();
         
         rotas
-          .getRoute("Cadastrar")
+          .getRoute(this.constanteRotas.ROTA_CADASTRAR)
           .attachPatternMatched(this._alteracoesParaRotaDeCadastrar, this);
         rotas
-          .getRoute("Editar")
+          .getRoute(this.constanteRotas.ROTA_EDITAR)
           .attachPatternMatched(this.criaModeloParaRotaEditar, this);
       },
       retornaArrayDeCampos: function() {
@@ -41,7 +43,7 @@ sap.ui.define([
         
         this.byId("campoDataNascimento").setPlaceholder(i18n.getText("PlaceholderDataNascimentoCadastrar"));
         
-        this.byId("paginaCadastro").setTitle(i18n.getText("TituloTelaCadastrar"));
+        this.byId("tituloPaginaCadastro").setText(i18n.getText("TituloTelaCadastrar"));
         
         this.byId("campoEmail").setEnabled(true);
 
@@ -49,12 +51,12 @@ sap.ui.define([
 
         this.limpaErrosDosCampos();
       
-        this.criaModelo({}, "usuario");
+        this.criaModelo({}, nomeModelo);
       },
       _alteracoesParaRotaDeEditar: function () {
         let i18n = this.getView().getModel("i18n").getResourceBundle();
 
-        this.byId("paginaCadastro").setTitle(i18n.getText("TituloTelaEditar"));
+        this.byId("tituloPaginaCadastro").setText(i18n.getText("TituloTelaEditar"));
 
         this.byId("btnEditar").setVisible(true);
         
@@ -69,7 +71,7 @@ sap.ui.define([
       criaModeloParaRotaEditar: async function (event) {
         let i18n = this.getView().getModel("i18n").getResourceBundle();
         try {
-          let idUsuario = event.getParameters().arguments.caminhoDaListaDeUsuarios;
+          let idUsuario = event.getParameters().arguments.id;
           let dadosRetornados = await UsuarioRepositorio.obterPorId(idUsuario);
 
           if (dadosRetornados.dataNascimento !== null) {
@@ -79,18 +81,18 @@ sap.ui.define([
             .setPlaceholder(i18n.getText("PlaceholderAvisoDataNascimentoEditar"));
           }
 
-          this.criaModelo(dadosRetornados, "usuario")
+          this.criaModelo(dadosRetornados, nomeModelo)
 
           this._alteracoesParaRotaDeEditar();
         } catch (err) {
-          MessageToast.show(i18n.getText("Mensagem.OcorreuUmErro"));
+          MessageToast.show(i18n.getText("Mensagem.OcorreuUmErro"), this.objetoDeOpcoesMessageToast);
         }
       },
       botaoCadastrar: function() {
         this.servicoParaCadastrarEAtualizar();
       },
       botaoEditar: function(event) {
-        let idUsuario = event.getSource().getModel("usuario").getData().id
+        let idUsuario = event.getSource().getModel(nomeModelo).getData().id
         this.servicoParaCadastrarEAtualizar(idUsuario);
       },
       aoClicarEmCancelar: function() {
@@ -113,11 +115,11 @@ sap.ui.define([
           }
           
           let i18n = this.getView().getModel("i18n").getResourceBundle();
-          MessageToast.show(i18n.getText("MensagemDeSucessoAoCadastrar"));
+          MessageToast.show(i18n.getText("MensagemDeSucessoAoCadastrar"), this.objetoDeOpcoesMessageToast);
                 
-          rotas.navTo("ListaUsuarios", {}, true);
+          rotas.navTo(this.constanteRotas.ROTA_LISTAR, {}, true);
         } catch (err) {
-          MessageToast.show(err.message)
+          MessageToast.show(err.message, this.objetoDeOpcoesMessageToast)
         }
       }
     });

@@ -3,13 +3,18 @@ sap.ui.define([
     "sap/ui/core/routing/History",
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageToast",
-], function(Controller, History, JSONModel, MessageToast) {
+    "../constantes/constantesDeRotas"
+], function(Controller, History, JSONModel, MessageToast, constantesDeRotas) {
     "use strict";
 
     return Controller.extend("crudBasico.controller.BaseController", {
-        onInit: function() {
-          
+        constanteRotas: constantesDeRotas,
+        
+        objetoDeOpcoesMessageToast: {
+            animationDuration: 5000,
+            closeOnBrowserNavigation: false
         },
+        
         aoClicarEmVoltar: function () {
             let historico = History.getInstance();
             let rotaAnterior = historico.getPreviousHash();
@@ -18,7 +23,7 @@ sap.ui.define([
               window.history.go(-1);
             } else {
               let rotas = this.getOwnerComponent().getRouter();
-              rotas.navTo("ListaUsuarios", {}, true);
+              rotas.navTo(this.constanteRotas.ROTA_LISTAR, {}, true);
             }
         },
         criaModelo: async function(modelo, nome) {
